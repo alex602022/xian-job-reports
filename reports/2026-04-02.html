@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>刘世豪求职日报 · 2026-04-02</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f0f2f5; color: #222; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 60%, #0a1628 100%);
+    color: white; padding: 36px 40px 28px;
+  }
+  .header h1 { font-size: 26px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+  .header .subtitle { font-size: 14px; opacity: 0.75; margin-bottom: 18px; }
+  .header-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+  .meta-badge {
+    background: rgba(255,255,255,0.12); border-radius: 20px;
+    padding: 5px 14px; font-size: 13px; display: flex; align-items: center; gap: 6px;
+  }
+  .meta-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; }
+
+  /* Candidate Card */
+  .section { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+  .candidate-card {
+    background: white; border-radius: 12px; padding: 24px 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07); margin-bottom: 28px;
+    border-left: 5px solid #0f3460;
+  }
+  .candidate-card h2 { font-size: 17px; color: #0f3460; margin-bottom: 14px; font-weight: 700; }
+  .profile-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+  .profile-item { font-size: 13.5px; color: #444; line-height: 1.6; }
+  .profile-item strong { color: #0f3460; }
+
+  /* Score legend */
+  .score-legend {
+    background: white; border-radius: 12px; padding: 20px 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07); margin-bottom: 32px;
+  }
+  .score-legend h2 { font-size: 15px; color: #555; margin-bottom: 14px; font-weight: 600; }
+  .legend-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .legend-item {
+    font-size: 12px; padding: 4px 12px; border-radius: 12px;
+    background: #f0f4ff; color: #0f3460; border: 1px solid #dde5ff;
+  }
+
+  /* Section headers */
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-header h2 {
+    font-size: 20px; font-weight: 700; color: #0f3460;
+  }
+  .section-header .count-badge {
+    background: #0f3460; color: white; border-radius: 12px;
+    padding: 2px 12px; font-size: 13px;
+  }
+
+  /* Job Cards */
+  .job-card {
+    background: white; border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    margin-bottom: 20px; overflow: hidden;
+    border-left: 5px solid #cbd5e1; transition: box-shadow 0.2s;
+  }
+  .job-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+  .job-card.top3 { border-left-color: #f59e0b; }
+  .job-card.foreign { border-left-color: #22c55e; }
+  .job-card.top3.foreign { border-left-color: #22c55e; }
+
+  .job-card-header {
+    padding: 18px 22px 14px;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  }
+  .job-title-block { flex: 1; }
+  .job-title-block h3 { font-size: 17px; font-weight: 700; margin-bottom: 5px; }
+  .job-title-block h3 a { color: #0f3460; text-decoration: none; }
+  .job-title-block h3 a:hover { text-decoration: underline; color: #1e5fa8; }
+  .job-meta { font-size: 13px; color: #666; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .platform-badge {
+    display: inline-flex; align-items: center;
+    font-size: 11.5px; padding: 2px 9px; border-radius: 10px; font-weight: 600;
+  }
+  .platform-boss { background: #fff3e0; color: #e65100; }
+  .platform-liepin { background: #fff8e1; color: #f57c00; }
+  .platform-linkedin { background: #e8f4fd; color: #0077b5; }
+  .salary-tag { font-size: 13.5px; font-weight: 700; color: #16a34a; }
+  .badge-foreign { background: #dcfce7; color: #16a34a; border-radius: 10px; padding: 2px 9px; font-size: 11.5px; font-weight: 700; }
+  .badge-top { background: #fef3c7; color: #d97706; border-radius: 10px; padding: 2px 9px; font-size: 11.5px; font-weight: 700; }
+
+  /* Score Badge */
+  .score-block { text-align: center; min-width: 64px; }
+  .score-number {
+    font-size: 36px; font-weight: 800; line-height: 1;
+  }
+  .score-number.red { color: #dc2626; }
+  .score-number.orange { color: #ea580c; }
+  .score-number.green { color: #16a34a; }
+  .score-label { font-size: 10px; color: #888; margin-top: 2px; }
+
+  /* Score Bars */
+  .score-bars { padding: 0 22px 14px; }
+  .score-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .score-bar-label { font-size: 11.5px; color: #555; width: 100px; flex-shrink: 0; }
+  .score-bar-track { flex: 1; background: #e5e7eb; border-radius: 4px; height: 8px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #3b82f6, #0f3460); }
+  .score-bar-val { font-size: 11.5px; color: #666; width: 38px; text-align: right; flex-shrink: 0; }
+
+  /* Reason */
+  .job-reason {
+    background: #f8faff; border-top: 1px solid #e8edf8;
+    padding: 12px 22px; font-size: 13px; color: #444; line-height: 1.7;
+  }
+
+  /* CTA Button */
+  .job-cta { padding: 14px 22px 16px; display: flex; align-items: center; justify-content: flex-end; }
+  .btn-apply {
+    background: #0f3460; color: white; text-decoration: none;
+    padding: 8px 18px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    transition: background 0.2s; display: inline-block;
+  }
+  .btn-apply:hover { background: #1e5fa8; }
+
+  /* Divider */
+  .divider { height: 1px; background: #e2e8f0; margin: 0 22px; }
+
+  /* Stretch Section */
+  .stretch-section-header {
+    background: linear-gradient(135deg, #6c3483, #1a5276);
+    border-radius: 12px 12px 0 0; padding: 24px 28px; color: white;
+  }
+  .stretch-section-header h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+  .stretch-section-header p { font-size: 13.5px; opacity: 0.88; line-height: 1.6; }
+
+  .stretch-wrapper {
+    background: white; border-radius: 0 0 12px 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.09); margin-bottom: 28px;
+  }
+
+  .stretch-card { padding: 20px 24px; border-bottom: 1px solid #ece8f5; }
+  .stretch-card:last-child { border-bottom: none; }
+
+  .stretch-title-row {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px;
+  }
+  .stretch-badge {
+    background: linear-gradient(135deg, #7d3c98, #1a5276); color: white;
+    border-radius: 10px; padding: 3px 11px; font-size: 11.5px; font-weight: 700;
+  }
+  .stretch-why {
+    background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 8px;
+    padding: 12px 16px; font-size: 13px; color: #444; line-height: 1.7; margin-top: 10px;
+  }
+  .stretch-why ul { list-style: none; padding: 0; }
+  .stretch-why li { padding: 3px 0; }
+  .stretch-why li::before { margin-right: 6px; }
+
+  .btn-stretch {
+    background: #6c3483; color: white; text-decoration: none;
+    padding: 8px 18px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    transition: background 0.2s; display: inline-block; margin-top: 12px;
+  }
+  .btn-stretch:hover { background: #7d3c98; }
+
+  /* Tips */
+  .tips-box {
+    background: linear-gradient(135deg, #fffbeb, #fef3c7);
+    border: 1px solid #f59e0b; border-radius: 12px; padding: 22px 28px;
+    margin-bottom: 20px;
+  }
+  .tips-box h3 { font-size: 16px; color: #92400e; margin-bottom: 14px; font-weight: 700; }
+  .tips-box ol { padding-left: 18px; font-size: 13.5px; color: #555; line-height: 2; }
+
+  /* Footer */
+  .report-footer { text-align: center; padding: 20px; font-size: 12px; color: #999; }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>🎯 刘世豪 · 西安求职日报</h1>
+  <div class="subtitle">每日智能岗位扫描 · AI 匹配评分 · 精准推荐</div>
+  <div class="header-meta">
+    <div class="meta-badge"><span class="dot"></span>生成日期：2026年04月02日（周四）</div>
+    <div class="meta-badge">📋 扫描平台：Boss直聘 / 猎聘 / LinkedIn</div>
+    <div class="meta-badge">🔍 搜索词：售前·通信 / 解决方案经理 / 售前架构师 / BDM</div>
+    <div class="meta-badge">📊 发现岗位总计：112 个 → 精选 10 + 4 个</div>
+  </div>
+</div>
+
+<div class="section">
+
+  <!-- ===== CANDIDATE PROFILE ===== -->
+  <div class="candidate-card">
+    <h2>👤 候选人画像</h2>
+    <div class="profile-grid">
+      <div class="profile-item"><strong>姓名：</strong>刘世豪（Liu Shihao）</div>
+      <div class="profile-item"><strong>工作年限：</strong>8年 ICT/通信行业</div>
+      <div class="profile-item"><strong>当前职位：</strong>诺基亚 BDM 西北区（电信运营商 + 国网 PON/OLT/iHGU）</div>
+      <div class="profile-item"><strong>上一家：</strong>华三通信 高级商务经理（SDN·光网络·AI算力）</div>
+      <div class="profile-item"><strong>再上一家：</strong>锐捷网络 售前/行业架构师（SOE·企业网）</div>
+      <div class="profile-item"><strong>教育背景：</strong>哈工程（211）· 计算机科学 · 专业前5%</div>
+      <div class="profile-item"><strong>认证：</strong>阿里云专家级</div>
+      <div class="profile-item"><strong>目标城市：</strong>西安（首选 外企）</div>
+      <div class="profile-item"><strong>目标薪资：</strong>25-50K / 月</div>
+    </div>
+  </div>
+
+  <!-- ===== SCORING LEGEND ===== -->
+  <div class="score-legend">
+    <h2>📐 评分维度（满分100）</h2>
+    <div class="legend-grid">
+      <span class="legend-item">🎯 岗位匹配度 /30 — 与BDM/售前/解决方案/行业拓展的契合</span>
+      <span class="legend-item">🏭 行业吻合度 /25 — ICT/通信/云/SDN/5G/网络相关度</span>
+      <span class="legend-item">🏢 公司吸引力 /20 — 外企=20分，知名上市=15-18分</span>
+      <span class="legend-item">💰 薪资竞争力 /15 — 25-50K区间得分最高</span>
+      <span class="legend-item">📈 发展潜力 /10 — 职级层次与职业路径</span>
+    </div>
+  </div>
+
+  <!-- ===== SECTION: TOP 10 ===== -->
+  <div class="section-header">
+    <h2>🏆 主推职位 Top 10</h2>
+    <span class="count-badge">高度匹配 ≥ 75分</span>
+  </div>
+
+  <!-- JOB 1 -->
+  <div class="job-card top3">
+    <div class="job-card-header">
+      <div class="job-title-block">
+        <h3><a href="https://www.liepin.com/job/1980527907.shtml" target="_blank">泛互行业解决方案架构师 — 火山引擎（西安）</a></h3>
+        <div class="job-meta">
+          <span class="platform-badge platform-liepin">猎聘</span>
+          <span>字节跳动 / 火山引擎</span>
+          <span>·</span>
+          <span>西安</span>
+          <span>·</span>
+          <span class="salary-tag">25-55K · 18薪</span>
+          <span class="badge-top">🔥 TOP 1</span>
+        </div>
+      </div>
+      <div class="score-block">
+        <div class="score-number red">95</div>
+        <div class="score-label">综合评分</div>
+      </div>
+    </div>
+    <div class="score-bars">
+      <div class="score-bar-row"><span class="score-bar-label">岗位匹配度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:93%"></div></div><span class="score-bar-val">28/30</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">行业吻合度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-val">25/25</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">公司吸引力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:90%"></div></div><span class="score-bar-val">18/20</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">薪资竞争力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-val">15/15</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">发展潜力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:90%"></div></div><span class="score-bar-val">9/10</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="job-reason">💡 <strong>推荐理由：</strong>字节跳动旗下火山引擎面向政府与互联网客户的解决方案架构师，与刘世豪现有的SDN、光网络、AI算力中心架构经验高度契合。薪资天花板（55K·18薪）在西安稀缺，字节品牌对未来跳槽估值极有帮助。泛互行业客群与国网/运营商项目交付经验可直接迁移。</div>
+    <div class="job-cta"><a class="btn-apply" href="https://www.liepin.com/job/1980527907.shtml" target="_blank">立即查看职位 →</a></div>
+  </div>
+
+  <!-- JOB 2 -->
+  <div class="job-card top3">
+    <div class="job-card-header">
+      <div class="job-title-block">
+        <h3><a href="https://www.zhipin.com/job_detail/217347a0e36dbe7b0nZ-3tS8ElVT.html" target="_blank">【云智】AI产品解决方案架构师（西安）</a></h3>
+        <div class="job-meta">
+          <span class="platform-badge platform-boss">Boss直聘</span>
+          <span>腾讯</span>
+          <span>·</span>
+          <span>西安·雁塔区</span>
+          <span>·</span>
+          <span class="salary-tag">面议（市场竞争力水平）</span>
+          <span class="badge-top">🔥 TOP 2</span>
+        </div>
+      </div>
+      <div class="score-block">
+        <div class="score-number red">93</div>
+        <div class="score-label">综合评分</div>
+      </div>
+    </div>
+    <div class="score-bars">
+      <div class="score-bar-row"><span class="score-bar-label">岗位匹配度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:93%"></div></div><span class="score-bar-val">28/30</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">行业吻合度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-val">25/25</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">公司吸引力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:90%"></div></div><span class="score-bar-val">18/20</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">薪资竞争力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:80%"></div></div><span class="score-bar-val">12/15</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">发展潜力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-val">10/10</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="job-reason">💡 <strong>推荐理由：</strong>腾讯云智（CSIG）西安办AI产品解决方案架构师，聚焦AI数据中心行业架构输出。刘世豪在H3C期间积累的RoCE网络与AI算力中心经验，加上阿里云专家认证，形成差异化优势。腾讯品牌背书与职级体系有助于长期职业价值提升。</div>
+    <div class="job-cta"><a class="btn-apply" href="https://www.zhipin.com/job_detail/217347a0e36dbe7b0nZ-3tS8ElVT.html" target="_blank">立即查看职位 →</a></div>
+  </div>
+
+  <!-- JOB 3 -->
+  <div class="job-card top3">
+    <div class="job-card-header">
+      <div class="job-title-block">
+        <h3><a href="https://www.zhipin.com/job_detail/95f0a911e5cf49c203N-3di-F1pY.html" target="_blank">售前架构师</a></h3>
+        <div class="job-meta">
+          <span class="platform-badge platform-boss">Boss直聘</span>
+          <span>腾讯云</span>
+          <span>·</span>
+          <span>西安·雁塔区·枫林绿洲</span>
+          <span>·</span>
+          <span class="salary-tag">面议</span>
+          <span class="badge-top">🔥 TOP 3</span>
+        </div>
+      </div>
+      <div class="score-block">
+        <div class="score-number red">91</div>
+        <div class="score-label">综合评分</div>
+      </div>
+    </div>
+    <div class="score-bars">
+      <div class="score-bar-row"><span class="score-bar-label">岗位匹配度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:97%"></div></div><span class="score-bar-val">29/30</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">行业吻合度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:96%"></div></div><span class="score-bar-val">24/25</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">公司吸引力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:90%"></div></div><span class="score-bar-val">18/20</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">薪资竞争力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:73%"></div></div><span class="score-bar-val">11/15</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">发展潜力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:90%"></div></div><span class="score-bar-val">9/10</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="job-reason">💡 <strong>推荐理由：</strong>腾讯云西安团队的售前架构师岗，岗位名称与刘世豪职业目标精准对齐。云计算售前架构师是从BDM向高价值技术型销售升级的黄金通道，腾讯云在政务云、金融云领域的西安市场正在扩张，入职时机好。</div>
+    <div class="job-cta"><a class="btn-apply" href="https://www.zhipin.com/job_detail/95f0a911e5cf49c203N-3di-F1pY.html" target="_blank">立即查看职位 →</a></div>
+  </div>
+
+  <!-- JOB 4 -->
+  <div class="job-card">
+    <div class="job-card-header">
+      <div class="job-title-block">
+        <h3><a href="https://www.liepin.com/job/1978760857.shtml" target="_blank">基站售前解决方案专家</a></h3>
+        <div class="job-meta">
+          <span class="platform-badge platform-liepin">猎聘</span>
+          <span>Baicells 佰才邦</span>
+          <span>·</span>
+          <span>西安·高新区</span>
+          <span>·</span>
+          <span class="salary-tag">25-50K · 14薪</span>
+        </div>
+      </div>
+      <div class="score-block">
+        <div class="score-number orange">89</div>
+        <div class="score-label">综合评分</div>
+      </div>
+    </div>
+    <div class="score-bars">
+      <div class="score-bar-row"><span class="score-bar-label">岗位匹配度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:93%"></div></div><span class="score-bar-val">28/30</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">行业吻合度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-val">25/25</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">公司吸引力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:75%"></div></div><span class="score-bar-val">15/20</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">薪资竞争力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:93%"></div></div><span class="score-bar-val">14/15</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">发展潜力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:70%"></div></div><span class="score-bar-val">7/10</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="job-reason">💡 <strong>推荐理由：</strong>Baicells（佰才邦）是全球领先的小基站（私有LTE/5G）厂商，在西安高新区设有研发销售团队。岗位为基站解决方案售前专家，与刘世豪诺基亚期间PON/OLT + 运营商接入网经验高度匹配，薪资区间（25-50K·14薪）在西安极具竞争力。</div>
+    <div class="job-cta"><a class="btn-apply" href="https://www.liepin.com/job/1978760857.shtml" target="_blank">立即查看职位 →</a></div>
+  </div>
+
+  <!-- JOB 5 -->
+  <div class="job-card foreign">
+    <div class="job-card-header">
+      <div class="job-title-block">
+        <h3><a href="https://www.zhipin.com/job_detail/dd55785e80dcff8503Z52dy9EFZQ.html" target="_blank">售前技术支持（压缩机业务）</a></h3>
+        <div class="job-meta">
+          <span class="platform-badge platform-boss">Boss直聘</span>
+          <span>西门子能源有限公司</span>
+          <span>·</span>
+          <span>西安·雁塔区·电子城</span>
+          <span>·</span>
+          <span class="salary-tag">面议</span>
+          <span class="badge-foreign">🌐 外企</span>
+        </div>
+      </div>
+      <div class="score-block">
+        <div class="score-number orange">83</div>
+        <div class="score-label">综合评分</div>
+      </div>
+    </div>
+    <div class="score-bars">
+      <div class="score-bar-row"><span class="score-bar-label">岗位匹配度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:73%"></div></div><span class="score-bar-val">22/30</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">行业吻合度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:72%"></div></div><span class="score-bar-val">18/25</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">公司吸引力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-val">20/20</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">薪资竞争力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:73%"></div></div><span class="score-bar-val">13/15</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">发展潜力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-val">10/10</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="job-reason">💡 <strong>推荐理由：</strong>西门子能源（Siemens Energy SE，DAX上市外企）是刘世豪最重要的外企机会之一。售前技术支持虽面向工业压缩机业务，但西门子能源在西北区有大量电力基础设施项目，与刘世豪的国网渠道背景可产生协同。外企工作经历对未来薪资谈判和背景背书价值极高。</div>
+    <div class="job-cta"><a class="btn-apply" href="https://www.zhipin.com/job_detail/dd55785e80dcff8503Z52dy9EFZQ.html" target="_blank">立即查看职位 →</a></div>
+  </div>
+
+  <!-- JOB 6 -->
+  <div class="job-card">
+    <div class="job-card-header">
+      <div class="job-title-block">
+        <h3><a href="https://www.zhipin.com/job_detail/1ae759a609cc9d2f0nV72dm7ElZS.html" target="_blank">解决方案专家（西安）</a></h3>
+        <div class="job-meta">
+          <span class="platform-badge platform-boss">Boss直聘</span>
+          <span>360集团</span>
+          <span>·</span>
+          <span>西安·雁塔区·高新软件园</span>
+          <span>·</span>
+          <span class="salary-tag">面议</span>
+        </div>
+      </div>
+      <div class="score-block">
+        <div class="score-number orange">84</div>
+        <div class="score-label">综合评分</div>
+      </div>
+    </div>
+    <div class="score-bars">
+      <div class="score-bar-row"><span class="score-bar-label">岗位匹配度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:90%"></div></div><span class="score-bar-val">27/30</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">行业吻合度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:92%"></div></div><span class="score-bar-val">23/25</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">公司吸引力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:80%"></div></div><span class="score-bar-val">16/20</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">薪资竞争力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:73%"></div></div><span class="score-bar-val">11/15</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">发展潜力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:70%"></div></div><span class="score-bar-val">7/10</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="job-reason">💡 <strong>推荐理由：</strong>360集团（奇虎360）在政企网络安全领域是中国头部玩家，西安高新软件园团队负责政府、能源、交通行业的安全解决方案。刘世豪在SDN、企业网架构方面的经验，以及对国网、运营商客群的熟悉，与360在西北政企市场的拓展需求契合。</div>
+    <div class="job-cta"><a class="btn-apply" href="https://www.zhipin.com/job_detail/1ae759a609cc9d2f0nV72dm7ElZS.html" target="_blank">立即查看职位 →</a></div>
+  </div>
+
+  <!-- JOB 7 -->
+  <div class="job-card">
+    <div class="job-card-header">
+      <div class="job-title-block">
+        <h3><a href="https://www.liepin.com/job/1981145845.shtml" target="_blank">高级客户经理（解决方案）</a></h3>
+        <div class="job-meta">
+          <span class="platform-badge platform-liepin">猎聘</span>
+          <span>西安</span>
+          <span>·</span>
+          <span class="salary-tag">30-45K</span>
+        </div>
+      </div>
+      <div class="score-block">
+        <div class="score-number orange">83</div>
+        <div class="score-label">综合评分</div>
+      </div>
+    </div>
+    <div class="score-bars">
+      <div class="score-bar-row"><span class="score-bar-label">岗位匹配度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:87%"></div></div><span class="score-bar-val">26/30</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">行业吻合度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:88%"></div></div><span class="score-bar-val">22/25</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">公司吸引力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:75%"></div></div><span class="score-bar-val">15/20</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">薪资竞争力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:93%"></div></div><span class="score-bar-val">14/15</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">发展潜力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:60%"></div></div><span class="score-bar-val">6/10</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="job-reason">💡 <strong>推荐理由：</strong>猎聘高端猎头岗位，岗位名称为高级客户经理（解决方案方向），薪资区间30-45K在西安属于高水平。具体公司为猎头保密，但凭借刘世豪的1000万+项目交付履历与通信行业深度，此类岗位谈判底气充足，值得联系猎头了解详情。</div>
+    <div class="job-cta"><a class="btn-apply" href="https://www.liepin.com/job/1981145845.shtml" target="_blank">立即查看职位 →</a></div>
+  </div>
+
+  <!-- JOB 8 -->
+  <div class="job-card">
+    <div class="job-card-header">
+      <div class="job-title-block">
+        <h3><a href="https://www.zhipin.com/job_detail/1977522d18faab290nR-39u9F1BX.html" target="_blank">解决方案（AIDC行业）— J13443</a></h3>
+        <div class="job-meta">
+          <span class="platform-badge platform-boss">Boss直聘</span>
+          <span>北京四方继保股份</span>
+          <span>·</span>
+          <span>西安·碑林区·西安交大</span>
+          <span>·</span>
+          <span class="salary-tag">面议</span>
+        </div>
+      </div>
+      <div class="score-block">
+        <div class="score-number green">79</div>
+        <div class="score-label">综合评分</div>
+      </div>
+    </div>
+    <div class="score-bars">
+      <div class="score-bar-row"><span class="score-bar-label">岗位匹配度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:83%"></div></div><span class="score-bar-val">25/30</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">行业吻合度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:96%"></div></div><span class="score-bar-val">24/25</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">公司吸引力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:80%"></div></div><span class="score-bar-val">16/20</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">薪资竞争力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:73%"></div></div><span class="score-bar-val">11/15</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">发展潜力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:30%"></div></div><span class="score-bar-val">3/10</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="job-reason">💡 <strong>推荐理由：</strong>北京四方继保（SZ:300428，上市公司）是电力自动化和继电保护领域龙头，AIDC行业解决方案岗位聚焦AI数据中心电力基础设施。刘世豪对国网配网与接入层（PON/OLT）的深度认知，在此岗位上是少见的差异化优势。</div>
+    <div class="job-cta"><a class="btn-apply" href="https://www.zhipin.com/job_detail/1977522d18faab290nR-39u9F1BX.html" target="_blank">立即查看职位 →</a></div>
+  </div>
+
+  <!-- JOB 9 -->
+  <div class="job-card">
+    <div class="job-card-header">
+      <div class="job-title-block">
+        <h3><a href="https://www.liepin.com/job/1981166013.shtml" target="_blank">产品解决方案高级经理</a></h3>
+        <div class="job-meta">
+          <span class="platform-badge platform-liepin">猎聘</span>
+          <span>西安</span>
+          <span>·</span>
+          <span class="salary-tag">30-40K · 15薪</span>
+        </div>
+      </div>
+      <div class="score-block">
+        <div class="score-number green">78</div>
+        <div class="score-label">综合评分</div>
+      </div>
+    </div>
+    <div class="score-bars">
+      <div class="score-bar-row"><span class="score-bar-label">岗位匹配度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:83%"></div></div><span class="score-bar-val">25/30</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">行业吻合度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:88%"></div></div><span class="score-bar-val">22/25</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">公司吸引力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:70%"></div></div><span class="score-bar-val">14/20</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">薪资竞争力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:93%"></div></div><span class="score-bar-val">14/15</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">发展潜力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:30%"></div></div><span class="score-bar-val">3/10</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="job-reason">💡 <strong>推荐理由：</strong>猎聘高端猎头岗位（产品解决方案高级经理），30-40K·15薪在西安属高端薪资。此类岗位通常来自规模较大的ICT企业，适合已有产品方向思考的BDM转型，刘世豪从诺基亚BDM积累的产品商业化推广经验可直接匹配。</div>
+    <div class="job-cta"><a class="btn-apply" href="https://www.liepin.com/job/1981166013.shtml" target="_blank">立即查看职位 →</a></div>
+  </div>
+
+  <!-- JOB 10 -->
+  <div class="job-card">
+    <div class="job-card-header">
+      <div class="job-title-block">
+        <h3><a href="https://www.liepin.com/job/1981243503.shtml" target="_blank">售前 / 解决方案经理</a></h3>
+        <div class="job-meta">
+          <span class="platform-badge platform-liepin">猎聘</span>
+          <span>智城数创（西安）科技有限公司</span>
+          <span>·</span>
+          <span>西安·高新区</span>
+          <span>·</span>
+          <span class="salary-tag">17-30K · 13薪</span>
+        </div>
+      </div>
+      <div class="score-block">
+        <div class="score-number green">75</div>
+        <div class="score-label">综合评分</div>
+      </div>
+    </div>
+    <div class="score-bars">
+      <div class="score-bar-row"><span class="score-bar-label">岗位匹配度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:93%"></div></div><span class="score-bar-val">28/30</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">行业吻合度</span><div class="score-bar-track"><div class="score-bar-fill" style="width:80%"></div></div><span class="score-bar-val">20/25</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">公司吸引力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:55%"></div></div><span class="score-bar-val">11/20</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">薪资竞争力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:67%"></div></div><span class="score-bar-val">10/15</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">发展潜力</span><div class="score-bar-track"><div class="score-bar-fill" style="width:60%"></div></div><span class="score-bar-val">6/10</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="job-reason">💡 <strong>推荐理由：</strong>西安本地科技公司的售前/解决方案经理职位，岗位名称与刘世豪目标直接对齐。公司规模较小（100-499人），但作为西安本地备选，薪资范围（最高30K·13薪）在底线可接受范围内，适合作为压底仓储备。</div>
+    <div class="job-cta"><a class="btn-apply" href="https://www.liepin.com/job/1981243503.shtml" target="_blank">立即查看职位 →</a></div>
+  </div>
+
+  <!-- ===== SECTION: STRETCH ===== -->
+  <div class="section-header" style="margin-top: 40px;">
+    <h2>🚀 值得一试：跨界机会</h2>
+    <span class="count-badge" style="background:#6c3483;">精选 4 个</span>
+  </div>
+
+  <div style="border-radius:12px; overflow:hidden; box-shadow: 0 4px 20px rgba(108,52,131,0.15); margin-bottom: 28px;">
+    <div class="stretch-section-header">
+      <h2>🚀 值得一试：跨界机会</h2>
+      <p>以下职位可能不在你的传统赛道内，但因公司品牌、发展前景或薪资天花板突出，值得主动了解。你的售前 / 解决方案 / BDM能力具备良好的迁移性。</p>
+    </div>
+    <div class="stretch-wrapper" style="border-radius:0; box-shadow:none;">
+
+      <!-- STRETCH 1 -->
+      <div class="stretch-card">
+        <div class="stretch-title-row">
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <span class="stretch-badge">🚀 值得一试</span>
+              <span class="badge-foreign">🌐 外企</span>
+            </div>
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:4px;">
+              <a href="https://www.linkedin.com/jobs/view/3743125338/" target="_blank" style="color:#6c3483; text-decoration:none;">Business Development Manager</a>
+            </h3>
+            <div style="font-size:13px; color:#666; display:flex; gap:10px; flex-wrap:wrap;">
+              <span class="platform-badge platform-linkedin">LinkedIn</span>
+              <span>cargo-partner（奥地利跨国物流集团）</span>
+              <span>·</span>
+              <span>西安（On-site）</span>
+            </div>
+          </div>
+        </div>
+        <div class="stretch-why">
+          <ul>
+            <li>① <strong>公司/岗位亮点：</strong>cargo-partner是奥地利跨国物流集团，在中国设有多个办公室，属于真外企（欧资）。岗位名称Business Development Manager与刘世豪现有title完全一致，有极大的简历匹配优势，且外企经历对职业估值有长远加成。</li>
+            <li>② <strong>你的可迁移技能：</strong>BDM方法论、大客户拓展、千万级项目谈判、解决方案包装——这些核心能力在行业间高度可迁移。刘世豪面向国网与运营商的大B销售经验，与物流行业企业级解决方案销售本质相同。</li>
+            <li>③ <strong>主要挑战与建议：</strong>物流/供应链行业专业知识积累需要时间。建议投递前快速了解cargo-partner在中国的主要产品线（航空货运、海运、项目物流），并在简历中强化"方案销售"和"大客户开发"经历。</li>
+          </ul>
+        </div>
+        <a class="btn-stretch" href="https://www.linkedin.com/jobs/view/3743125338/" target="_blank">了解这个机会 →</a>
+      </div>
+
+      <!-- STRETCH 2 -->
+      <div class="stretch-card">
+        <div class="stretch-title-row">
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <span class="stretch-badge">🚀 值得一试</span>
+              <span class="badge-foreign">🌐 外企</span>
+            </div>
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:4px;">
+              <a href="https://www.linkedin.com/jobs/view/4381272163/" target="_blank" style="color:#6c3483; text-decoration:none;">New Energy BDM</a>
+            </h3>
+            <div style="font-size:13px; color:#666; display:flex; gap:10px; flex-wrap:wrap;">
+              <span class="platform-badge platform-linkedin">LinkedIn</span>
+              <span>MSA - The Safety Company（美国NYSE上市，安全设备）</span>
+              <span>·</span>
+              <span>西安</span>
+            </div>
+          </div>
+        </div>
+        <div class="stretch-why">
+          <ul>
+            <li>① <strong>公司/岗位亮点：</strong>MSA Safety（纽交所上市，MSA.US）是全球工业安全设备龙头，进入新能源赛道是公司战略重点。岗位名称New Energy BDM，方向明确、薪资天花板高、外企环境好，在西安稀缺。</li>
+            <li>② <strong>你的可迁移技能：</strong>刘世豪在国网接入网项目（国网电力基础设施）中积累的电力行业政企关系，与MSA在新能源/储能/光伏电站领域的客户群体有大量重叠。BDM打法与大项目谈判能力完全匹配。</li>
+            <li>③ <strong>主要挑战与建议：</strong>需要快速了解光伏、储能、风电场景下的安全设备需求逻辑。建议在面试前研究MSA在中国的新能源客户案例，并将国网/电力系统项目履历重点呈现。</li>
+          </ul>
+        </div>
+        <a class="btn-stretch" href="https://www.linkedin.com/jobs/view/4381272163/" target="_blank">了解这个机会 →</a>
+      </div>
+
+      <!-- STRETCH 3 -->
+      <div class="stretch-card">
+        <div class="stretch-title-row">
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <span class="stretch-badge">🚀 值得一试</span>
+            </div>
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:4px;">
+              <a href="https://www.liepin.com/job/1979345865.shtml" target="_blank" style="color:#6c3483; text-decoration:none;">解决方案总监（新能源/绿氢方向）</a>
+            </h3>
+            <div style="font-size:13px; color:#666; display:flex; gap:10px; flex-wrap:wrap;">
+              <span class="platform-badge platform-liepin">猎聘</span>
+              <span>西安</span>
+              <span>·</span>
+              <span class="salary-tag" style="color:#6c3483;">18-25K</span>
+              <span>（总监级 · 上升空间大）</span>
+            </div>
+          </div>
+        </div>
+        <div class="stretch-why">
+          <ul>
+            <li>① <strong>公司/岗位亮点：</strong>新能源/绿氢是2026年最炙热的政策驱动赛道，解决方案总监属于核心商务技术职能，有望快速在这一高增长行业积累稀缺资历，长期薪资天花板显著高于传统通信行业。</li>
+            <li>② <strong>你的可迁移技能：</strong>大型项目解决方案输出经验、客户架构方案能力、政企采购流程理解（国网渠道），这些是新能源To B业务最需要的能力组合。</li>
+            <li>③ <strong>主要挑战与建议：</strong>当前薪资较保守（18-25K），需在谈判中争取绩效激励或股权补偿。建议先了解绿氢产业链基本逻辑（制氢→储氢→应用），再评估具体公司背景。</li>
+          </ul>
+        </div>
+        <a class="btn-stretch" href="https://www.liepin.com/job/1979345865.shtml" target="_blank">了解这个机会 →</a>
+      </div>
+
+      <!-- STRETCH 4 -->
+      <div class="stretch-card">
+        <div class="stretch-title-row">
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <span class="stretch-badge">🚀 值得一试</span>
+            </div>
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:4px;">
+              <a href="https://www.liepin.com/job/1980937393.shtml" target="_blank" style="color:#6c3483; text-decoration:none;">高级解决方案经理（西安）</a>
+            </h3>
+            <div style="font-size:13px; color:#666; display:flex; gap:10px; flex-wrap:wrap;">
+              <span class="platform-badge platform-liepin">猎聘</span>
+              <span>西安</span>
+              <span>·</span>
+              <span class="salary-tag" style="color:#6c3483;">20-26K</span>
+            </div>
+          </div>
+        </div>
+        <div class="stretch-why">
+          <ul>
+            <li>① <strong>公司/岗位亮点：</strong>猎头保密公司（高新区），岗位为高级解决方案经理，经验要求5-10年且学历本科以上，与刘世豪背景精准匹配。猎头渠道岗位通常意味着企业有较强的外招意愿和一定的预算灵活性。</li>
+            <li>② <strong>你的可迁移技能：</strong>解决方案包装、行业架构输出、大客户全周期管理——这三项是刘世豪从H3C到诺基亚积累的核心竞争力，几乎可适配任何行业的B端解决方案岗位。</li>
+            <li>③ <strong>主要挑战与建议：</strong>薪资起点20-26K略低于期望，但猎头岗位通常有协商空间。建议主动联系猎头，了解具体公司与补偿结构（奖金、股票、福利），再决定是否深入推进。</li>
+          </ul>
+        </div>
+        <a class="btn-stretch" href="https://www.liepin.com/job/1980937393.shtml" target="_blank">了解这个机会 →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== ACTION TIPS ===== -->
+  <div class="tips-box">
+    <h3>📋 今日行动建议</h3>
+    <ol>
+      <li><strong>优先沟通3个重磅岗：</strong>今日内在Boss直聘向腾讯云（售前架构师）、腾讯（AI解决方案架构师）发送打招呼消息，同时在猎聘申请火山引擎解决方案架构师。</li>
+      <li><strong>外企机会不要拖：</strong>LinkedIn上的 cargo-partner BDM 和 MSA New Energy BDM 都是西安稀缺外企岗位，今天就更新LinkedIn简历并投递，外企岗位流程慢，越早越好。</li>
+      <li><strong>西门子能源需差异化简历：</strong>投递前，在简历中突出国网电力基础设施项目经历，弱化ICT/通信话术，将自己包装成"具备ICT数字化背景的能源行业技术销售"。</li>
+      <li><strong>猎聘猎头跟进：</strong>基站售前解决方案专家（Baicells）、高级客户经理（解决方案）这两个猎聘岗位，主动联系猎头HR，提供简历并询问是否可安排初步沟通。</li>
+      <li><strong>明日追踪：</strong>记录今日所有投递状态，明天上午优先跟进已查看未回复的Boss直聘岗位，保持活跃状态以提升曝光。</li>
+    </ol>
+  </div>
+
+  <div class="report-footer">
+    本报告由 AI 自动生成 · 数据来源：Boss直聘 / 猎聘 / LinkedIn · 生成时间：2026-04-02<br>
+    岗位信息实时变化，建议点击链接核实最新状态
+  </div>
+</div>
+</body>
+</html>
