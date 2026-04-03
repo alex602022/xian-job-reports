@@ -1,6 +1,13 @@
 {
   "reports": [
     {
+      "date": "2026-04-03",
+      "jobCount": 12,
+      "stretchCount": 3,
+      "hasForeign": true,
+      "topSalary": "40K+ (外企)"
+    },
+    {
       "date": "2026-04-02",
       "jobCount": 10,
       "stretchCount": 4,
