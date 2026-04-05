@@ -1,6 +1,13 @@
 {
   "reports": [
     {
+      "date": "2026-04-05",
+      "jobCount": 11,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "25-50K · 14薪"
+    },
+    {
       "date": "2026-04-04",
       "jobCount": 10,
       "stretchCount": 3,
