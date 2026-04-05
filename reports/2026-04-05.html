@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西安求职日报 · 2026-04-05</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif; background: #f0f4f8; color: #222; }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0a2342 0%, #1a3a6b 60%, #1e5aab 100%);
+    color: #fff; padding: 32px 40px; position: relative; overflow: hidden;
+  }
+  .header::after {
+    content: ''; position: absolute; right: -60px; top: -60px;
+    width: 260px; height: 260px; border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .header h1 { font-size: 26px; font-weight: 700; letter-spacing: 1px; }
+  .header .subtitle { font-size: 14px; color: #a8c4f0; margin-top: 4px; }
+  .header .meta { margin-top: 18px; display: flex; gap: 24px; flex-wrap: wrap; }
+  .meta-item { background: rgba(255,255,255,0.12); border-radius: 8px; padding: 8px 16px; }
+  .meta-item .label { font-size: 11px; color: #a8c4f0; text-transform: uppercase; letter-spacing: 1px; }
+  .meta-item .value { font-size: 18px; font-weight: 700; margin-top: 2px; }
+  .meta-item .value small { font-size: 12px; font-weight: 400; opacity: .8; }
+  .date-badge {
+    position: absolute; right: 40px; top: 32px;
+    background: rgba(255,255,255,0.15); border-radius: 10px;
+    padding: 10px 18px; text-align: center;
+  }
+  .date-badge .date-num { font-size: 32px; font-weight: 800; line-height: 1; }
+  .date-badge .date-label { font-size: 11px; color: #a8c4f0; margin-top: 2px; }
+
+  /* LEGEND */
+  .legend { background: #fff; margin: 20px 40px; border-radius: 12px; padding: 16px 20px; display: flex; gap: 16px; flex-wrap: wrap; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* SECTION */
+  .section { margin: 0 40px 32px; }
+  .section-title {
+    font-size: 18px; font-weight: 700; color: #0a2342;
+    margin-bottom: 16px; padding-bottom: 8px;
+    border-bottom: 3px solid #1e5aab; display: flex; align-items: center; gap: 8px;
+  }
+
+  /* JOB CARD */
+  .job-card {
+    background: #fff; border-radius: 14px; padding: 20px 24px; margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06); border-left: 5px solid #1e5aab;
+    transition: box-shadow .2s;
+  }
+  .job-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.12); }
+  .job-card.score-90 { border-left-color: #e63946; }
+  .job-card.score-80 { border-left-color: #e07b00; }
+  .job-card.score-70 { border-left-color: #2b9348; }
+  .job-card.score-60 { border-left-color: #1e5aab; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+  .job-title { font-size: 17px; font-weight: 700; color: #0a2342; }
+  .job-title a { color: inherit; text-decoration: none; }
+  .job-title a:hover { color: #1e5aab; text-decoration: underline; }
+  .score-badge {
+    min-width: 54px; height: 54px; border-radius: 50%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; font-size: 18px; font-weight: 800;
+    color: #fff; flex-shrink: 0;
+  }
+  .score-badge small { font-size: 10px; font-weight: 400; }
+  .score-90 .score-badge { background: linear-gradient(135deg, #e63946, #c1121f); }
+  .score-80 .score-badge { background: linear-gradient(135deg, #e07b00, #b85c00); }
+  .score-70 .score-badge { background: linear-gradient(135deg, #2b9348, #1a6630); }
+  .score-60 .score-badge { background: linear-gradient(135deg, #1e5aab, #0d3b7a); }
+
+  .card-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .tag { font-size: 12px; padding: 3px 10px; border-radius: 20px; }
+  .tag-company { background: #e8f0fe; color: #1e5aab; }
+  .tag-salary { background: #fef3e2; color: #b85c00; font-weight: 600; }
+  .tag-location { background: #e8f5e9; color: #2b7a3b; }
+  .tag-source { background: #f3e8fd; color: #6b21a8; }
+
+  /* PROGRESS BARS */
+  .score-bars { margin-top: 14px; }
+  .score-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; font-size: 12px; }
+  .score-label { width: 90px; color: #666; flex-shrink: 0; }
+  .score-bar-bg { flex: 1; background: #eee; border-radius: 4px; height: 8px; overflow: hidden; }
+  .score-bar { height: 8px; border-radius: 4px; transition: width .3s; }
+  .score-val { width: 30px; text-align: right; color: #333; font-weight: 600; }
+
+  /* CTA BUTTON */
+  .card-footer { margin-top: 14px; display: flex; justify-content: flex-end; }
+  .btn-apply {
+    background: linear-gradient(135deg, #1e5aab, #0d3b7a);
+    color: #fff; border: none; padding: 8px 20px; border-radius: 8px;
+    font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn-apply:hover { background: linear-gradient(135deg, #2a6fc4, #1a5296); }
+
+  /* STRETCH SECTION */
+  .stretch-card {
+    background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+    border: 2px solid #c084fc; border-radius: 14px; padding: 20px 24px;
+    margin-bottom: 16px; box-shadow: 0 2px 8px rgba(168, 85, 247, .12);
+  }
+  .stretch-title { font-size: 15px; font-weight: 700; color: #6b21a8; margin-bottom: 8px; }
+  .stretch-title a { color: inherit; text-decoration: none; }
+  .stretch-title a:hover { text-decoration: underline; }
+  .stretch-body { font-size: 13px; color: #4a1a7a; line-height: 1.7; }
+  .stretch-row { display: flex; gap: 10px; margin-bottom: 6px; align-items: flex-start; }
+  .stretch-icon { flex-shrink: 0; }
+
+  /* ADVICE */
+  .advice-card {
+    background: #fff; border-radius: 14px; padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+  .advice-item { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; align-items: flex-start; }
+  .advice-item:last-child { border-bottom: none; }
+  .advice-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: linear-gradient(135deg, #1e5aab, #0d3b7a);
+    color: #fff; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .advice-text { font-size: 13px; color: #333; line-height: 1.6; padding-top: 4px; }
+
+  /* FOOTER */
+  .footer { text-align: center; padding: 24px; color: #aaa; font-size: 12px; }
+
+  @media (max-width: 600px) {
+    .header { padding: 24px 20px; }
+    .section { margin: 0 16px 24px; }
+    .legend { margin: 16px 16px; }
+    .date-badge { position: static; margin-top: 16px; display: inline-block; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="date-badge">
+    <div class="date-num">05</div>
+    <div class="date-label">APR 2026</div>
+  </div>
+  <h1>📡 西安每日求职日报</h1>
+  <div class="subtitle">候选人：刘世豪 · ICT/通信行业 · 售前 / 解决方案架构师 / BDM / 技术支持</div>
+  <div class="meta">
+    <div class="meta-item">
+      <div class="label">Boss直聘</div>
+      <div class="value">15 <small>条</small></div>
+    </div>
+    <div class="meta-item">
+      <div class="label">猎聘</div>
+      <div class="value">28 <small>条</small></div>
+    </div>
+    <div class="meta-item">
+      <div class="label">LinkedIn</div>
+      <div class="value">— <small>不可用</small></div>
+    </div>
+    <div class="meta-item">
+      <div class="label">Top推荐</div>
+      <div class="value">10 <small>个职位</small></div>
+    </div>
+    <div class="meta-item">
+      <div class="label">期望薪资</div>
+      <div class="value">25K<small>~55K</small></div>
+    </div>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <strong style="font-size:12px;color:#333;margin-right:4px;">评分维度：</strong>
+  <div class="legend-item"><div class="legend-dot" style="background:#e63946"></div>岗位匹配度 (30分)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#e07b00"></div>行业吻合度 (25分)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2b9348"></div>公司吸引力 (20分)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#1e5aab"></div>薪资竞争力 (15分)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#9333ea"></div>发展潜力 (10分)</div>
+</div>
+
+<!-- TOP 10 -->
+<div class="section">
+  <div class="section-title">🏆 Top 10 推荐职位</div>
+
+  <!-- #1 基站售前解决方案专家 94分 -->
+  <div class="job-card score-90">
+    <div class="card-top">
+      <div>
+        <div class="job-title">
+          <a href="https://www.liepin.com/job/1978760857.shtml" target="_blank">基站售前解决方案专家</a>
+        </div>
+        <div class="card-meta">
+          <span class="tag tag-company">📦 通信设备企业（猎聘保密）</span>
+          <span class="tag tag-salary">💰 25-50K · 14薪</span>
+          <span class="tag tag-location">📍 西安</span>
+          <span class="tag tag-source">猎聘</span>
+        </div>
+      </div>
+      <div class="score-badge score-90">94<small>分</small></div>
+    </div>
+    <div class="score-bars">
+      <div class="score-row">
+        <div class="score-label">岗位匹配度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#e63946"></div></div>
+        <div class="score-val">30/30</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">行业吻合度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#e07b00"></div></div>
+        <div class="score-val">25/25</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">公司吸引力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:70%;background:#2b9348"></div></div>
+        <div class="score-val">14/20</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">薪资竞争力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#1e5aab"></div></div>
+        <div class="score-val">15/15</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">发展潜力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#9333ea"></div></div>
+        <div class="score-val">10/10</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-apply" href="https://www.liepin.com/job/1978760857.shtml" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #2 火山引擎 解决方案架构师 92分 -->
+  <div class="job-card score-90">
+    <div class="card-top">
+      <div>
+        <div class="job-title">
+          <a href="https://www.liepin.com/job/1980527907.shtml" target="_blank">泛互行业解决方案架构师（西安）</a>
+        </div>
+        <div class="card-meta">
+          <span class="tag tag-company">📦 字节跳动 · 火山引擎</span>
+          <span class="tag tag-salary">💰 25-55K · 18薪</span>
+          <span class="tag tag-location">📍 西安</span>
+          <span class="tag tag-source">猎聘</span>
+        </div>
+      </div>
+      <div class="score-badge score-90">92<small>分</small></div>
+    </div>
+    <div class="score-bars">
+      <div class="score-row">
+        <div class="score-label">岗位匹配度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#e63946"></div></div>
+        <div class="score-val">30/30</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">行业吻合度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:80%;background:#e07b00"></div></div>
+        <div class="score-val">20/25</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">公司吸引力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:85%;background:#2b9348"></div></div>
+        <div class="score-val">17/20</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">薪资竞争力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#1e5aab"></div></div>
+        <div class="score-val">15/15</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">发展潜力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#9333ea"></div></div>
+        <div class="score-val">10/10</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-apply" href="https://www.liepin.com/job/1980527907.shtml" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #3 AIDC行业解决方案 86分 -->
+  <div class="job-card score-80">
+    <div class="card-top">
+      <div>
+        <div class="job-title">
+          <a href="https://www.liepin.com/job/1979328567.shtml" target="_blank">解决方案（AIDC行业）</a>
+        </div>
+        <div class="card-meta">
+          <span class="tag tag-company">📦 AIDC领域科技企业</span>
+          <span class="tag tag-salary">💰 25-40K · 14薪</span>
+          <span class="tag tag-location">📍 西安</span>
+          <span class="tag tag-source">猎聘</span>
+        </div>
+      </div>
+      <div class="score-badge score-80">86<small>分</small></div>
+    </div>
+    <div class="score-bars">
+      <div class="score-row">
+        <div class="score-label">岗位匹配度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#e63946"></div></div>
+        <div class="score-val">30/30</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">行业吻合度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:80%;background:#e07b00"></div></div>
+        <div class="score-val">20/25</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">公司吸引力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:70%;background:#2b9348"></div></div>
+        <div class="score-val">14/20</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">薪资竞争力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:80%;background:#1e5aab"></div></div>
+        <div class="score-val">12/15</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">发展潜力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#9333ea"></div></div>
+        <div class="score-val">10/10</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-apply" href="https://www.liepin.com/job/1979328567.shtml" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #4 央企解决方案架构师 78分 -->
+  <div class="job-card score-70">
+    <div class="card-top">
+      <div>
+        <div class="job-title">
+          <a href="https://www.liepin.com/job/1980088005.shtml" target="_blank">央企解决方案架构师（西安）</a>
+        </div>
+        <div class="card-meta">
+          <span class="tag tag-company">📦 JG装备央企集团（保密）</span>
+          <span class="tag tag-salary">💰 30-40K · 14薪</span>
+          <span class="tag tag-location">📍 西安</span>
+          <span class="tag tag-source">猎聘</span>
+        </div>
+      </div>
+      <div class="score-badge score-70">78<small>分</small></div>
+    </div>
+    <div class="score-bars">
+      <div class="score-row">
+        <div class="score-label">岗位匹配度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#e63946"></div></div>
+        <div class="score-val">30/30</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">行业吻合度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:60%;background:#e07b00"></div></div>
+        <div class="score-val">15/25</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">公司吸引力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:70%;background:#2b9348"></div></div>
+        <div class="score-val">14/20</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">薪资竞争力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:80%;background:#1e5aab"></div></div>
+        <div class="score-val">12/15</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">发展潜力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:70%;background:#9333ea"></div></div>
+        <div class="score-val">7/10</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-apply" href="https://www.liepin.com/job/1980088005.shtml" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #5 售前技术顾问 78分 -->
+  <div class="job-card score-70">
+    <div class="card-top">
+      <div>
+        <div class="job-title">
+          <a href="https://www.liepin.com/job/1968777381.shtml" target="_blank">售前技术顾问</a>
+        </div>
+        <div class="card-meta">
+          <span class="tag tag-company">📦 科技企业（统招本科）</span>
+          <span class="tag tag-salary">💰 20-40K</span>
+          <span class="tag tag-location">📍 西安</span>
+          <span class="tag tag-source">猎聘</span>
+        </div>
+      </div>
+      <div class="score-badge score-70">78<small>分</small></div>
+    </div>
+    <div class="score-bars">
+      <div class="score-row">
+        <div class="score-label">岗位匹配度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#e63946"></div></div>
+        <div class="score-val">30/30</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">行业吻合度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:60%;background:#e07b00"></div></div>
+        <div class="score-val">15/25</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">公司吸引力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:70%;background:#2b9348"></div></div>
+        <div class="score-val">14/20</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">薪资竞争力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:80%;background:#1e5aab"></div></div>
+        <div class="score-val">12/15</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">发展潜力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:70%;background:#9333ea"></div></div>
+        <div class="score-val">7/10</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-apply" href="https://www.liepin.com/job/1968777381.shtml" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #6 西安售前经理 74分 -->
+  <div class="job-card score-70">
+    <div class="card-top">
+      <div>
+        <div class="job-title">
+          <a href="https://www.liepin.com/job/1974088571.shtml" target="_blank">西安售前经理</a>
+        </div>
+        <div class="card-meta">
+          <span class="tag tag-company">📦 科技企业（保密）</span>
+          <span class="tag tag-salary">💰 17-35K</span>
+          <span class="tag tag-location">📍 西安</span>
+          <span class="tag tag-source">猎聘</span>
+        </div>
+      </div>
+      <div class="score-badge score-70">74<small>分</small></div>
+    </div>
+    <div class="score-bars">
+      <div class="score-row">
+        <div class="score-label">岗位匹配度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#e63946"></div></div>
+        <div class="score-val">30/30</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">行业吻合度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:60%;background:#e07b00"></div></div>
+        <div class="score-val">15/25</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">公司吸引力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:50%;background:#2b9348"></div></div>
+        <div class="score-val">10/20</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">薪资竞争力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:80%;background:#1e5aab"></div></div>
+        <div class="score-val">12/15</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">发展潜力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:70%;background:#9333ea"></div></div>
+        <div class="score-val">7/10</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-apply" href="https://www.liepin.com/job/1974088571.shtml" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #7 西安开驰曼 解决方案架构师 70分 -->
+  <div class="job-card score-70">
+    <div class="card-top">
+      <div>
+        <div class="job-title">
+          <a href="https://www.zhipin.com/job_detail/63765cffde95005d03R63Nm0EVpX.html" target="_blank">解决方案架构师</a>
+        </div>
+        <div class="card-meta">
+          <span class="tag tag-company">📦 西安开驰曼</span>
+          <span class="tag tag-salary">💰 面议</span>
+          <span class="tag tag-location">📍 西安·雁塔区·高新路</span>
+          <span class="tag tag-source">Boss直聘</span>
+        </div>
+      </div>
+      <div class="score-badge score-70">70<small>分</small></div>
+    </div>
+    <div class="score-bars">
+      <div class="score-row">
+        <div class="score-label">岗位匹配度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#e63946"></div></div>
+        <div class="score-val">30/30</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">行业吻合度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:60%;background:#e07b00"></div></div>
+        <div class="score-val">15/25</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">公司吸引力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:50%;background:#2b9348"></div></div>
+        <div class="score-val">10/20</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">薪资竞争力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:53%;background:#1e5aab"></div></div>
+        <div class="score-val">8/15</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">发展潜力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:70%;background:#9333ea"></div></div>
+        <div class="score-val">7/10</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-apply" href="https://www.zhipin.com/job_detail/63765cffde95005d03R63Nm0EVpX.html" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #8 产品解决方案高级经理 69分 -->
+  <div class="job-card score-60">
+    <div class="card-top">
+      <div>
+        <div class="job-title">
+          <a href="https://www.liepin.com/job/1981166013.shtml" target="_blank">产品解决方案高级经理</a>
+        </div>
+        <div class="card-meta">
+          <span class="tag tag-company">📦 科技企业（保密）</span>
+          <span class="tag tag-salary">💰 30-40K · 15薪</span>
+          <span class="tag tag-location">📍 西安</span>
+          <span class="tag tag-source">猎聘</span>
+        </div>
+      </div>
+      <div class="score-badge score-60">69<small>分</small></div>
+    </div>
+    <div class="score-bars">
+      <div class="score-row">
+        <div class="score-label">岗位匹配度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:83%;background:#e63946"></div></div>
+        <div class="score-val">25/30</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">行业吻合度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:60%;background:#e07b00"></div></div>
+        <div class="score-val">15/25</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">公司吸引力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:50%;background:#2b9348"></div></div>
+        <div class="score-val">10/20</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">薪资竞争力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:80%;background:#1e5aab"></div></div>
+        <div class="score-val">12/15</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">发展潜力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:70%;background:#9333ea"></div></div>
+        <div class="score-val">7/10</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-apply" href="https://www.liepin.com/job/1981166013.shtml" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #9 高级解决方案经理 68分 -->
+  <div class="job-card score-60">
+    <div class="card-top">
+      <div>
+        <div class="job-title">
+          <a href="https://www.liepin.com/job/1980937393.shtml" target="_blank">高级解决方案经理（西安）</a>
+        </div>
+        <div class="card-meta">
+          <span class="tag tag-company">📦 科技企业（保密）</span>
+          <span class="tag tag-salary">💰 20-26K</span>
+          <span class="tag tag-location">📍 西安</span>
+          <span class="tag tag-source">猎聘</span>
+        </div>
+      </div>
+      <div class="score-badge score-60">68<small>分</small></div>
+    </div>
+    <div class="score-bars">
+      <div class="score-row">
+        <div class="score-label">岗位匹配度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#e63946"></div></div>
+        <div class="score-val">30/30</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">行业吻合度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:60%;background:#e07b00"></div></div>
+        <div class="score-val">15/25</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">公司吸引力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:50%;background:#2b9348"></div></div>
+        <div class="score-val">10/20</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">薪资竞争力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:40%;background:#1e5aab"></div></div>
+        <div class="score-val">6/15</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">发展潜力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:70%;background:#9333ea"></div></div>
+        <div class="score-val">7/10</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-apply" href="https://www.liepin.com/job/1980937393.shtml" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #10 政府行业售前总监 68分 -->
+  <div class="job-card score-60">
+    <div class="card-top">
+      <div>
+        <div class="job-title">
+          <a href="https://www.liepin.com/job/1979302303.shtml" target="_blank">政府行业售前总监（公安、人社）</a>
+        </div>
+        <div class="card-meta">
+          <span class="tag tag-company">📦 政务IT企业（保密）</span>
+          <span class="tag tag-salary">💰 15-25K</span>
+          <span class="tag tag-location">📍 西安</span>
+          <span class="tag tag-source">猎聘</span>
+        </div>
+      </div>
+      <div class="score-badge score-60">68<small>分</small></div>
+    </div>
+    <div class="score-bars">
+      <div class="score-row">
+        <div class="score-label">岗位匹配度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:100%;background:#e63946"></div></div>
+        <div class="score-val">30/30</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">行业吻合度</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:60%;background:#e07b00"></div></div>
+        <div class="score-val">15/25</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">公司吸引力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:50%;background:#2b9348"></div></div>
+        <div class="score-val">10/20</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">薪资竞争力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:40%;background:#1e5aab"></div></div>
+        <div class="score-val">6/15</div>
+      </div>
+      <div class="score-row">
+        <div class="score-label">发展潜力</div>
+        <div class="score-bar-bg"><div class="score-bar" style="width:70%;background:#9333ea"></div></div>
+        <div class="score-val">7/10</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-apply" href="https://www.liepin.com/job/1979302303.shtml" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- STRETCH OPPORTUNITIES -->
+<div class="section">
+  <div class="section-title">🚀 跨界机会（大厂 / 高潜力赛道）</div>
+
+  <!-- Tencent -->
+  <div class="stretch-card">
+    <div class="stretch-title">
+      <a href="https://www.zhipin.com/job_detail/62be9160f4346d5c1nx43Nm7E1dT.html" target="_blank">🏢 腾讯 · 解决方案架构师（上海·漕河泾）</a>
+    </div>
+    <div class="stretch-body">
+      <div class="stretch-row"><span class="stretch-icon">💡</span>腾讯To B/云业务高速扩张期，上海是核心枢纽，架构师岗位影响力大，薪酬市场化空间突出。</div>
+      <div class="stretch-row"><span class="stretch-icon">🔄</span><strong>技能迁移：</strong>ICT售前方案设计、政企客户沟通、5G/云融合架构经验可直接平移至腾讯云行业解决方案。</div>
+      <div class="stretch-row"><span class="stretch-icon">⚠️</span><strong>主要挑战：</strong>需适应互联网节奏与腾讯内部复杂生态；地点不在西安，需确认是否接受外派/搬迁。</div>
+    </div>
+  </div>
+
+  <!-- Alibaba Cloud -->
+  <div class="stretch-card">
+    <div class="stretch-title">
+      <a href="https://www.zhipin.com/job_detail/928db31e613c29e81HB-2dq-F1FV.html" target="_blank">☁️ 阿里云 · 解决方案架构师（南京·建邺）</a>
+    </div>
+    <div class="stretch-body">
+      <div class="stretch-row"><span class="stretch-icon">💡</span>阿里云在政企/运营商云市场份额领先，南京为华东核心区域，跻身阿里云平台意味着顶级品牌背书。</div>
+      <div class="stretch-row"><span class="stretch-icon">🔄</span><strong>技能迁移：</strong>通信/5G云化背景、物联网与边缘计算方案能力与阿里云政务云需求高度契合。</div>
+      <div class="stretch-row"><span class="stretch-icon">⚠️</span><strong>主要挑战：</strong>阿里云竞争异常激烈，内部文化KPI压力大；需展现差异化的垂直行业深度（如政务、运营商）。</div>
+    </div>
+  </div>
+
+  <!-- Alibaba Group -->
+  <div class="stretch-card">
+    <div class="stretch-title">
+      <a href="https://www.zhipin.com/job_detail/413202359f6d02300HRy3Nm1EFU~.html" target="_blank">🌐 阿里巴巴集团 · 解决方案架构师（杭州·未来科技城）</a>
+    </div>
+    <div class="stretch-body">
+      <div class="stretch-row"><span class="stretch-icon">💡</span>世界500强平台，集团级解决方案架构师覆盖多BU协同，职业天花板高，薪资结构含RSU期权。</div>
+      <div class="stretch-row"><span class="stretch-icon">🔄</span><strong>技能迁移：</strong>大规模政企方案经验、ICT全栈架构能力、行业vertical理解（5G/物联网）均是加分项。</div>
+      <div class="stretch-row"><span class="stretch-icon">⚠️</span><strong>主要挑战：</strong>要求有顶级项目落地案例；杭州地点需搬迁意愿；阿里文化磨合成本较高。</div>
+    </div>
+  </div>
+
+  <!-- 运营商售前 -->
+  <div class="stretch-card">
+    <div class="stretch-title">
+      <a href="https://www.liepin.com/job/1979839187.shtml" target="_blank">📡 运营商售前及解决方案工程师（上海）— 25-30K · 15薪</a>
+    </div>
+    <div class="stretch-body">
+      <div class="stretch-row"><span class="stretch-icon">💡</span>纯通信/运营商赛道，完美匹配ICT背景；15薪结构使总包可观；上海外资/头部通信企业环境较好。</div>
+      <div class="stretch-row"><span class="stretch-icon">🔄</span><strong>技能迁移：</strong>5G、物联网、政企解决方案能力100%匹配，几乎零门槛过渡。</div>
+      <div class="stretch-row"><span class="stretch-icon">⚠️</span><strong>主要挑战：</strong>地点在上海，需考量生活成本与西安的权衡；25-30K基本在期望区间下沿。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTION ADVICE -->
+<div class="section">
+  <div class="section-title">📋 今日求职行动建议</div>
+  <div class="advice-card">
+    <div class="advice-item">
+      <div class="advice-num">1</div>
+      <div class="advice-text">
+        <strong>优先投递 Top 2：基站售前解决方案专家（94分）和火山引擎解决方案架构师（92分）。</strong>两者均在西安、薪资匹配期望上限，且高度契合5G/ICT/云背景，今日内完成简历定制投递。
+      </div>
+    </div>
+    <div class="advice-item">
+      <div class="advice-num">2</div>
+      <div class="advice-text">
+        <strong>针对AIDC行业职位（86分）深度研究。</strong>AIDC（AI Data Center）是2025-2027年资本风口，需补充GPU集群、液冷网络等基础设施解决方案知识，用ICT背景类比阐述迁移价值。
+      </div>
+    </div>
+    <div class="advice-item">
+      <div class="advice-num">3</div>
+      <div class="advice-text">
+        <strong>Boss直聘搜索参数优化：</strong>当日检索结果中西安本地职位偏少，建议直接在Boss直聘搜索栏输入「售前 5G 西安」「解决方案 通信 西安」并开启"同城优先"，可覆盖更多本地中小企业岗位。
+      </div>
+    </div>
+    <div class="advice-item">
+      <div class="advice-num">4</div>
+      <div class="advice-text">
+        <strong>猎聘平台保密职位需主动触达猎头。</strong>多个高薪西安职位（央企架构师、基站售前）为猎头保密招聘，建议在猎聘上完善「ICT · 售前 · 5G · 政企」标签，等待猎头主动联系，同时可主动检索MJ编号职位联系对应猎头。
+      </div>
+    </div>
+    <div class="advice-item">
+      <div class="advice-num">5</div>
+      <div class="advice-text">
+        <strong>LinkedIn今日不可用，建议手动访问补充。</strong>通信行业外资企业（爱立信、诺基亚、思科等）在西安的岗位主要通过LinkedIn招聘，建议手动搜索「presales telecom Xi'an」「solution architect 5G Xi'an」，这类职位往往薪资最符合25-55K目标区间。
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  📊 西安求职日报 · 自动生成于 2026-04-05 · 数据来源：Boss直聘、猎聘 · 职位信息仅供参考，请以平台实时发布为准
+</div>
+
+</body>
+</html>
