@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西安每日求职日报 · 2026-04-07</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f0f2f5; color: #222; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0d2354 0%, #1a3a7a 60%, #1565c0 100%);
+    color: #fff; padding: 32px 40px; position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 220px; height: 220px; border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header::after {
+    content: ''; position: absolute; bottom: -80px; right: 80px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .header h1 { font-size: 26px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+  .header .subtitle { font-size: 14px; opacity: 0.8; margin-bottom: 20px; }
+  .header-stats { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 16px; }
+  .stat-item { text-align: center; }
+  .stat-num { font-size: 28px; font-weight: 700; color: #64b5f6; }
+  .stat-label { font-size: 11px; opacity: 0.75; margin-top: 2px; }
+  .candidate-info { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 4px; }
+  .candidate-info span { font-size: 13px; opacity: 0.9; }
+  .candidate-info span strong { color: #90caf9; }
+
+  /* Legend */
+  .legend {
+    background: #fff; margin: 20px 20px 0; border-radius: 12px;
+    padding: 16px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .legend h3 { font-size: 13px; color: #555; margin-bottom: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .legend-items { display: flex; gap: 20px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #666; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Section titles */
+  .section-title {
+    font-size: 16px; font-weight: 700; color: #0d2354;
+    margin: 24px 20px 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, #1565c0 0%, transparent 100%);
+  }
+
+  /* Job Cards Grid */
+  .cards-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px; padding: 0 20px;
+  }
+
+  /* Job Card */
+  .job-card {
+    background: #fff; border-radius: 14px; padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08); border: 1px solid #eee;
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: flex; flex-direction: column;
+  }
+  .job-card:hover { box-shadow: 0 6px 20px rgba(13,35,84,0.15); transform: translateY(-2px); }
+  .job-card.top3 { border-left: 4px solid #1565c0; }
+
+  .card-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+  .card-rank {
+    width: 28px; height: 28px; border-radius: 50%; background: #e8edf8;
+    color: #1565c0; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .card-rank.gold { background: #fff3cd; color: #b8860b; }
+  .card-rank.silver { background: #e8e8e8; color: #777; }
+  .card-rank.bronze { background: #fde8d8; color: #c0522f; }
+
+  .card-title-wrap { flex: 1; min-width: 0; }
+  .card-title {
+    font-size: 15px; font-weight: 700; color: #0d2354;
+    text-decoration: none; line-height: 1.3;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .card-title:hover { color: #1565c0; text-decoration: underline; }
+  .card-company { font-size: 12px; color: #666; margin-top: 3px; }
+
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .badge {
+    font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600;
+  }
+  .badge-fresh { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+  .badge-source-boss { background: #e3f2fd; color: #1565c0; }
+  .badge-source-liepin { background: #f3e5f5; color: #7b1fa2; }
+  .badge-source-linkedin { background: #e0f4ff; color: #0077b5; }
+  .badge-location { background: #fff8e1; color: #f57f17; }
+  .badge-salary { background: #fce4ec; color: #c62828; font-weight: 700; }
+  .badge-remote { background: #e8f5e9; color: #1b5e20; }
+
+  .card-meta { font-size: 12px; color: #888; margin-bottom: 12px; }
+
+  /* Score bar */
+  .score-section { margin-bottom: 12px; }
+  .score-total-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .score-total-label { font-size: 12px; color: #555; font-weight: 600; }
+  .score-total-num { font-size: 18px; font-weight: 800; color: #1565c0; }
+  .score-bar-bg { height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+  .score-bar-fill {
+    height: 100%; border-radius: 4px;
+    background: linear-gradient(90deg, #1565c0, #42a5f5);
+  }
+  .score-bar-fill.high { background: linear-gradient(90deg, #1b5e20, #43a047); }
+  .score-bar-fill.mid { background: linear-gradient(90deg, #e65100, #ffa726); }
+
+  .score-details { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .score-dim { display: flex; justify-content: space-between; font-size: 11px; color: #777; }
+  .score-dim span:last-child { font-weight: 600; color: #444; }
+
+  .card-footer { margin-top: auto; padding-top: 12px; }
+  .btn-view {
+    display: block; text-align: center; background: linear-gradient(90deg, #1565c0, #1976d2);
+    color: #fff; text-decoration: none; padding: 9px 16px;
+    border-radius: 8px; font-size: 13px; font-weight: 600;
+    transition: opacity 0.2s;
+  }
+  .btn-view:hover { opacity: 0.88; }
+
+  /* Stretch / cross-border section */
+  .stretch-section { padding: 0 20px 20px; }
+  .stretch-card {
+    background: linear-gradient(135deg, #f3e5f5 0%, #ede7f6 100%);
+    border: 1px solid #ce93d8; border-radius: 14px; padding: 20px;
+    margin-bottom: 14px; box-shadow: 0 2px 8px rgba(106,27,154,0.1);
+  }
+  .stretch-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .stretch-icon { font-size: 22px; }
+  .stretch-title-wrap { flex: 1; }
+  .stretch-title { font-size: 15px; font-weight: 700; color: #4a148c; }
+  .stretch-company { font-size: 12px; color: #7b1fa2; margin-top: 2px; }
+  .stretch-body { font-size: 13px; color: #4a148c; line-height: 1.7; }
+  .stretch-body strong { color: #6a1b9a; }
+  .stretch-btn {
+    display: inline-block; margin-top: 10px; padding: 7px 16px;
+    background: #7b1fa2; color: #fff; border-radius: 8px;
+    text-decoration: none; font-size: 12px; font-weight: 600;
+  }
+
+  /* Action section */
+  .action-section { background: #fff; margin: 0 20px 32px; border-radius: 14px; padding: 20px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .action-section h3 { font-size: 15px; font-weight: 700; color: #0d2354; margin-bottom: 14px; }
+  .action-item { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .action-num {
+    width: 24px; height: 24px; border-radius: 50%; background: #1565c0;
+    color: #fff; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  }
+  .action-text { font-size: 13px; color: #444; line-height: 1.6; }
+
+  /* Footer */
+  .footer { text-align: center; padding: 16px; font-size: 11px; color: #aaa; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>🔍 西安每日求职日报 · 扩展检索版</h1>
+  <div class="subtitle">2026年04月07日 · 自动生成 · 三平台多词检索</div>
+  <div class="candidate-info">
+    <span>👤 <strong>刘世豪</strong></span>
+    <span>🎯 <strong>售前/解决方案架构师/BDM/技术销售</strong></span>
+    <span>📍 <strong>西安</strong></span>
+    <span>💰 <strong>25K–55K</strong></span>
+  </div>
+  <div class="header-stats">
+    <div class="stat-item">
+      <div class="stat-num">60</div>
+      <div class="stat-label">Boss直聘采集</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">0</div>
+      <div class="stat-label">猎聘有效（西安稀少）</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2</div>
+      <div class="stat-label">LinkedIn匹配</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">12</div>
+      <div class="stat-label">过滤后精选</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">7</div>
+      <div class="stat-label">西安在地职位</div>
+    </div>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <h3>📊 评分维度说明</h3>
+  <div class="legend-items">
+    <div class="legend-item"><div class="legend-dot" style="background:#1565c0"></div>岗位匹配 30分（售前/解决方案架构师满分）</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1b5e20"></div>行业吻合 25分（ICT/通信/5G满分）</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e65100"></div>公司吸引力 20分（外企/世界500强满分）</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#c62828"></div>薪资竞争力 15分（40K+满分）</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#7b1fa2"></div>发展潜力 10分（AI/5G赛道满分）</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2e7d32"></div>🟢 新鲜徽章 = 近7天活跃 +3分</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#888"></div>非西安职位总分 ×0.9折算</div>
+  </div>
+</div>
+
+<!-- TOP 12 -->
+<div class="section-title">🏆 Top 12 精选职位</div>
+<div class="cards-grid">
+
+  <!-- #1 -->
+  <div class="job-card top3">
+    <div class="card-header">
+      <div class="card-rank gold">1</div>
+      <div class="card-title-wrap">
+        <a class="card-title" href="https://www.linkedin.com/jobs/view/4376495102/" target="_blank">Solution Architect</a>
+        <div class="card-company">LotusFlare · 外资科技（前 Nokia 系）</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-source-linkedin">LinkedIn</span>
+      <span class="badge badge-location">📍 西安·线下</span>
+      <span class="badge badge-salary">面议</span>
+    </div>
+    <div class="card-meta">通信/5G核心网解决方案 · 在地职位 · 外资背景</div>
+    <div class="score-section">
+      <div class="score-total-row">
+        <span class="score-total-label">综合评分</span>
+        <span class="score-total-num">90</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill high" style="width:87%"></div></div>
+      <div class="score-details">
+        <div class="score-dim"><span>岗位匹配</span><span>30/30</span></div>
+        <div class="score-dim"><span>行业吻合</span><span>25/25</span></div>
+        <div class="score-dim"><span>公司吸引力</span><span>17/20</span></div>
+        <div class="score-dim"><span>薪资竞争力</span><span>8/15</span></div>
+        <div class="score-dim"><span>发展潜力</span><span>10/10</span></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-view" href="https://www.linkedin.com/jobs/view/4376495102/" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #2 -->
+  <div class="job-card top3">
+    <div class="card-header">
+      <div class="card-rank gold">2</div>
+      <div class="card-title-wrap">
+        <a class="card-title" href="https://www.zhipin.com/job_detail/217347a0e36dbe7b0nZ-3tS8ElVT.html" target="_blank">【云智】AI产品解决方案架构师(西安)</a>
+        <div class="card-company">腾讯 · 世界500强大厂</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-source-boss">Boss直聘</span>
+      <span class="badge badge-location">📍 西安·雁塔区·沣惠南路</span>
+      <span class="badge badge-salary">面议</span>
+    </div>
+    <div class="card-meta">AI/云智方向 · 解决方案架构师 · 西安在地 · 五险一金+免费早晚餐+住房补贴</div>
+    <div class="score-section">
+      <div class="score-total-row">
+        <span class="score-total-label">综合评分</span>
+        <span class="score-total-num">88</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill high" style="width:85%"></div></div>
+      <div class="score-details">
+        <div class="score-dim"><span>岗位匹配</span><span>30/30</span></div>
+        <div class="score-dim"><span>行业吻合</span><span>20/25</span></div>
+        <div class="score-dim"><span>公司吸引力</span><span>20/20</span></div>
+        <div class="score-dim"><span>薪资竞争力</span><span>8/15</span></div>
+        <div class="score-dim"><span>发展潜力</span><span>10/10</span></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-view" href="https://www.zhipin.com/job_detail/217347a0e36dbe7b0nZ-3tS8ElVT.html" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #3 -->
+  <div class="job-card top3">
+    <div class="card-header">
+      <div class="card-rank gold">3</div>
+      <div class="card-title-wrap">
+        <a class="card-title" href="https://www.zhipin.com/job_detail/57a33919a81d80911HN72dS0EVtU.html" target="_blank">阿里云智能·公共云解决方案架构师（西安）</a>
+        <div class="card-company">阿里云 · 世界500强大厂</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-source-boss">Boss直聘</span>
+      <span class="badge badge-location">📍 西安·雁塔区·鱼化寨</span>
+      <span class="badge badge-salary">面议</span>
+    </div>
+    <div class="card-meta">公共云方向 · 解决方案架构师 · 西安在地 · 五险一金+年终奖+定期体检</div>
+    <div class="score-section">
+      <div class="score-total-row">
+        <span class="score-total-label">综合评分</span>
+        <span class="score-total-num">88</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill high" style="width:85%"></div></div>
+      <div class="score-details">
+        <div class="score-dim"><span>岗位匹配</span><span>30/30</span></div>
+        <div class="score-dim"><span>行业吻合</span><span>20/25</span></div>
+        <div class="score-dim"><span>公司吸引力</span><span>20/20</span></div>
+        <div class="score-dim"><span>薪资竞争力</span><span>8/15</span></div>
+        <div class="score-dim"><span>发展潜力</span><span>10/10</span></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-view" href="https://www.zhipin.com/job_detail/57a33919a81d80911HN72dS0EVtU.html" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #4 -->
+  <div class="job-card">
+    <div class="card-header">
+      <div class="card-rank silver">4</div>
+      <div class="card-title-wrap">
+        <a class="card-title" href="https://www.zhipin.com/job_detail/24204f667f2dfb9403J729q-EVVT.html" target="_blank">解决方案经理</a>
+        <div class="card-company">西安华为技术有限公司 · 世界500强</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-source-boss">Boss直聘</span>
+      <span class="badge badge-location">📍 商洛（西安周边）</span>
+      <span class="badge badge-salary">面议</span>
+    </div>
+    <div class="card-meta">华为西安公司 · 政企/运营商解决方案 · 股票期权+绩效奖金+完整福利</div>
+    <div class="score-section">
+      <div class="score-total-row">
+        <span class="score-total-label">综合评分</span>
+        <span class="score-total-num">85</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill high" style="width:82%"></div></div>
+      <div class="score-details">
+        <div class="score-dim"><span>岗位匹配</span><span>30/30</span></div>
+        <div class="score-dim"><span>行业吻合</span><span>25/25</span></div>
+        <div class="score-dim"><span>公司吸引力</span><span>20/20</span></div>
+        <div class="score-dim"><span>薪资竞争力</span><span>8/15</span></div>
+        <div class="score-dim"><span>发展潜力</span><span>10/10</span></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-view" href="https://www.zhipin.com/job_detail/24204f667f2dfb9403J729q-EVVT.html" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #5 -->
+  <div class="job-card">
+    <div class="card-header">
+      <div class="card-rank silver">5</div>
+      <div class="card-title-wrap">
+        <a class="card-title" href="https://www.zhipin.com/job_detail/a4a8a769ed23a3190nR43ti9GVpT.html" target="_blank">解决方案架构师</a>
+        <div class="card-company">字节跳动 · 大厂</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-source-boss">Boss直聘</span>
+      <span class="badge badge-location">📍 西安·未央区·三桥</span>
+      <span class="badge badge-salary">面议</span>
+    </div>
+    <div class="card-meta">西安在地 · AI/大模型方向 · 股票期权+家庭关爱假+就近租房补贴</div>
+    <div class="score-section">
+      <div class="score-total-row">
+        <span class="score-total-label">综合评分</span>
+        <span class="score-total-num">83</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:80%"></div></div>
+      <div class="score-details">
+        <div class="score-dim"><span>岗位匹配</span><span>30/30</span></div>
+        <div class="score-dim"><span>行业吻合</span><span>15/25</span></div>
+        <div class="score-dim"><span>公司吸引力</span><span>20/20</span></div>
+        <div class="score-dim"><span>薪资竞争力</span><span>8/15</span></div>
+        <div class="score-dim"><span>发展潜力</span><span>10/10</span></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-view" href="https://www.zhipin.com/job_detail/a4a8a769ed23a3190nR43ti9GVpT.html" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #6 -->
+  <div class="job-card">
+    <div class="card-header">
+      <div class="card-rank silver">6</div>
+      <div class="card-title-wrap">
+        <a class="card-title" href="https://www.linkedin.com/jobs/view/4382322932/" target="_blank">Senior Solutions Architect, Enterprise</a>
+        <div class="card-company">Mapbox · 外资科技</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-source-linkedin">LinkedIn</span>
+      <span class="badge badge-remote">🌐 全国远程</span>
+      <span class="badge badge-salary">面议</span>
+    </div>
+    <div class="card-meta">企业级解决方案架构师 · 全国远程 · 15名校友在职 · 英文工作环境</div>
+    <div class="score-section">
+      <div class="score-total-row">
+        <span class="score-total-label">综合评分</span>
+        <span class="score-total-num">80</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:77%"></div></div>
+      <div class="score-details">
+        <div class="score-dim"><span>岗位匹配</span><span>30/30</span></div>
+        <div class="score-dim"><span>行业吻合</span><span>15/25</span></div>
+        <div class="score-dim"><span>公司吸引力</span><span>20/20</span></div>
+        <div class="score-dim"><span>薪资竞争力</span><span>8/15</span></div>
+        <div class="score-dim"><span>发展潜力</span><span>7/10</span></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-view" href="https://www.linkedin.com/jobs/view/4382322932/" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #7 -->
+  <div class="job-card">
+    <div class="card-header">
+      <div class="card-rank bronze">7</div>
+      <div class="card-title-wrap">
+        <a class="card-title" href="https://www.zhipin.com/job_detail/f4d2d46cdcf8124f0nVy09S6EVBU.html" target="_blank">卫星通信专家（售前）</a>
+        <div class="card-company">亚信科技 · 知名上市</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-source-boss">Boss直聘</span>
+      <span class="badge badge-location">📍 上海（关注西安分支）</span>
+      <span class="badge badge-salary">面议</span>
+    </div>
+    <div class="card-meta">通信/5G/卫星 · 售前专家岗 · 亚信科技上市 · 五险一金+年终奖（非西安0.9折）</div>
+    <div class="score-section">
+      <div class="score-total-row">
+        <span class="score-total-label">综合评分</span>
+        <span class="score-total-num">81</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:79%"></div></div>
+      <div class="score-details">
+        <div class="score-dim"><span>岗位匹配</span><span>30/30</span></div>
+        <div class="score-dim"><span>行业吻合</span><span>25/25</span></div>
+        <div class="score-dim"><span>公司吸引力</span><span>17/20</span></div>
+        <div class="score-dim"><span>薪资竞争力</span><span>8/15</span></div>
+        <div class="score-dim"><span>发展潜力</span><span>10/10</span></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-view" href="https://www.zhipin.com/job_detail/f4d2d46cdcf8124f0nVy09S6EVBU.html" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #8 -->
+  <div class="job-card">
+    <div class="card-header">
+      <div class="card-rank bronze">8</div>
+      <div class="card-title-wrap">
+        <a class="card-title" href="https://www.zhipin.com/job_detail/fdcede3dbbbf33420nZ909q5FFRW.html" target="_blank">售前解决方案经理</a>
+        <div class="card-company">新华三 · 知名ICT科技</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-source-boss">Boss直聘</span>
+      <span class="badge badge-location">📍 唐山（询问西安岗）</span>
+      <span class="badge badge-salary">面议</span>
+    </div>
+    <div class="card-meta">ICT售前 · 新华三成熟体系 · 14薪+股票+免费班车（非西安0.9折）</div>
+    <div class="score-section">
+      <div class="score-total-row">
+        <span class="score-total-label">综合评分</span>
+        <span class="score-total-num">78</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:75%"></div></div>
+      <div class="score-details">
+        <div class="score-dim"><span>岗位匹配</span><span>30/30</span></div>
+        <div class="score-dim"><span>行业吻合</span><span>25/25</span></div>
+        <div class="score-dim"><span>公司吸引力</span><span>17/20</span></div>
+        <div class="score-dim"><span>薪资竞争力</span><span>8/15</span></div>
+        <div class="score-dim"><span>发展潜力</span><span>7/10</span></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-view" href="https://www.zhipin.com/job_detail/fdcede3dbbbf33420nZ909q5FFRW.html" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #9 -->
+  <div class="job-card">
+    <div class="card-header">
+      <div class="card-rank">9</div>
+      <div class="card-title-wrap">
+        <a class="card-title" href="https://www.zhipin.com/job_detail/c2bc7d2a38a4bdb01XNy3dq9GVJT.html" target="_blank">ICT售前工程师</a>
+        <div class="card-company">中移铁通 · 央企</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-source-boss">Boss直聘</span>
+      <span class="badge badge-location">📍 株洲（央企西安有岗）</span>
+      <span class="badge badge-salary">面议</span>
+    </div>
+    <div class="card-meta">中国移动旗下 · ICT售前 · 央企背景 · 通讯补贴+年终奖+五险一金（非西安0.9折）</div>
+    <div class="score-section">
+      <div class="score-total-row">
+        <span class="score-total-label">综合评分</span>
+        <span class="score-total-num">76</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:73%"></div></div>
+      <div class="score-details">
+        <div class="score-dim"><span>岗位匹配</span><span>30/30</span></div>
+        <div class="score-dim"><span>行业吻合</span><span>25/25</span></div>
+        <div class="score-dim"><span>公司吸引力</span><span>14/20</span></div>
+        <div class="score-dim"><span>薪资竞争力</span><span>8/15</span></div>
+        <div class="score-dim"><span>发展潜力</span><span>7/10</span></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-view" href="https://www.zhipin.com/job_detail/c2bc7d2a38a4bdb01XNy3dq9GVJT.html" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #10 -->
+  <div class="job-card">
+    <div class="card-header">
+      <div class="card-rank">10</div>
+      <div class="card-title-wrap">
+        <a class="card-title" href="https://www.zhipin.com/job_detail/5f4436f04e1cadf41HNy3t-4FFNQ.html" target="_blank">售前技术支持</a>
+        <div class="card-company">国网电科院 · 国企/上市</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-source-boss">Boss直聘</span>
+      <span class="badge badge-location">📍 西安·雁塔区·鱼化寨</span>
+      <span class="badge badge-salary">面议</span>
+    </div>
+    <div class="card-meta">国家电网旗下 · 西安在地 · 通讯补贴+补充医疗+免费班车+企业年金</div>
+    <div class="score-section">
+      <div class="score-total-row">
+        <span class="score-total-label">综合评分</span>
+        <span class="score-total-num">69</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill mid" style="width:67%"></div></div>
+      <div class="score-details">
+        <div class="score-dim"><span>岗位匹配</span><span>15/30</span></div>
+        <div class="score-dim"><span>行业吻合</span><span>25/25</span></div>
+        <div class="score-dim"><span>公司吸引力</span><span>14/20</span></div>
+        <div class="score-dim"><span>薪资竞争力</span><span>8/15</span></div>
+        <div class="score-dim"><span>发展潜力</span><span>7/10</span></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-view" href="https://www.zhipin.com/job_detail/5f4436f04e1cadf41HNy3t-4FFNQ.html" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #11 -->
+  <div class="job-card">
+    <div class="card-header">
+      <div class="card-rank">11</div>
+      <div class="card-title-wrap">
+        <a class="card-title" href="https://www.zhipin.com/job_detail/923003a2751bedc71nZz2Nu-EVFS.html" target="_blank">售前产品经理</a>
+        <div class="card-company">深信服科技 · 知名网络安全上市</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-source-boss">Boss直聘</span>
+      <span class="badge badge-location">📍 成都（询问西安岗）</span>
+      <span class="badge badge-salary">面议</span>
+    </div>
+    <div class="card-meta">网络安全/SD-WAN · 售前产品方向 · 股票+零食+重大疾病保障（非西安0.9折）</div>
+    <div class="score-section">
+      <div class="score-total-row">
+        <span class="score-total-label">综合评分</span>
+        <span class="score-total-num">67</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill mid" style="width:65%"></div></div>
+      <div class="score-details">
+        <div class="score-dim"><span>岗位匹配</span><span>22/30</span></div>
+        <div class="score-dim"><span>行业吻合</span><span>20/25</span></div>
+        <div class="score-dim"><span>公司吸引力</span><span>17/20</span></div>
+        <div class="score-dim"><span>薪资竞争力</span><span>8/15</span></div>
+        <div class="score-dim"><span>发展潜力</span><span>7/10</span></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-view" href="https://www.zhipin.com/job_detail/923003a2751bedc71nZz2Nu-EVFS.html" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+  <!-- #12 -->
+  <div class="job-card">
+    <div class="card-header">
+      <div class="card-rank">12</div>
+      <div class="card-title-wrap">
+        <a class="card-title" href="https://www.zhipin.com/job_detail/d4ea09fd97fd72d30nZ83dS_E1tY.html" target="_blank">大客户销售经理（城市生命线/市政）</a>
+        <div class="card-company">数字政通 · A股上市</div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge badge-source-boss">Boss直聘</span>
+      <span class="badge badge-location">📍 西安·未央区·文景路</span>
+      <span class="badge badge-salary">面议</span>
+    </div>
+    <div class="card-meta">智慧城市/城市生命线 · 大客户方向 · 西安在地 · 股票+双休+五险一金+年终奖</div>
+    <div class="score-section">
+      <div class="score-total-row">
+        <span class="score-total-label">综合评分</span>
+        <span class="score-total-num">66</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill mid" style="width:64%"></div></div>
+      <div class="score-details">
+        <div class="score-dim"><span>岗位匹配</span><span>22/30</span></div>
+        <div class="score-dim"><span>行业吻合</span><span>15/25</span></div>
+        <div class="score-dim"><span>公司吸引力</span><span>14/20</span></div>
+        <div class="score-dim"><span>薪资竞争力</span><span>8/15</span></div>
+        <div class="score-dim"><span>发展潜力</span><span>7/10</span></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-view" href="https://www.zhipin.com/job_detail/d4ea09fd97fd72d30nZ83dS_E1tY.html" target="_blank">立即查看职位 →</a>
+    </div>
+  </div>
+
+</div><!-- end cards-grid -->
+
+<!-- CROSS-BORDER OPPORTUNITIES -->
+<div class="section-title">🚀 跨界机会（大厂/外资重点关注）</div>
+<div class="stretch-section">
+
+  <div class="stretch-card">
+    <div class="stretch-header">
+      <div class="stretch-icon">⚡</div>
+      <div class="stretch-title-wrap">
+        <div class="stretch-title">腾讯云·阿里云 西安解决方案架构师</div>
+        <div class="stretch-company">腾讯 / 阿里云 · 世界500强 · 西安在地</div>
+      </div>
+    </div>
+    <div class="stretch-body">
+      <strong>亮点：</strong>西安本地大厂云岗位，薪资天花板高，品牌背书强，项目资源充足。<br>
+      <strong>技能迁移：</strong>5G/IoT售前经验可直接嫁接至云+AI解决方案，政企大客户资源同样适用。<br>
+      <strong>挑战建议：</strong>重点强化云原生/AIDC相关技术术语，准备2-3个政企数字化成功案例，突出业务价值量化指标。
+    </div>
+    <a class="stretch-btn" href="https://www.zhipin.com/job_detail/217347a0e36dbe7b0nZ-3tS8ElVT.html" target="_blank">查看腾讯职位 →</a>
+    &nbsp;&nbsp;
+    <a class="stretch-btn" href="https://www.zhipin.com/job_detail/57a33919a81d80911HN72dS0EVtU.html" target="_blank">查看阿里云职位 →</a>
+  </div>
+
+  <div class="stretch-card">
+    <div class="stretch-header">
+      <div class="stretch-icon">📡</div>
+      <div class="stretch-title-wrap">
+        <div class="stretch-title">LotusFlare · Solution Architect（西安线下）</div>
+        <div class="stretch-company">LotusFlare · 外资 · 前Nokia/AT&T系 · 通信云化</div>
+      </div>
+    </div>
+    <div class="stretch-body">
+      <strong>亮点：</strong>全球通信SaaS独角兽，专注5G核心网云化（Cloud-Native）和数字BSS，在西安少见的高质量外资通信岗。<br>
+      <strong>技能迁移：</strong>ICT/5G/运营商背景高度契合，售前方案能力可直接发挥，英文能力是加分项。<br>
+      <strong>挑战建议：</strong>深入了解Cloud Core/NFV概念，准备英文面试材料，突出运营商客户成功案例。
+    </div>
+    <a class="stretch-btn" href="https://www.linkedin.com/jobs/view/4376495102/" target="_blank">LinkedIn查看职位 →</a>
+  </div>
+
+  <div class="stretch-card">
+    <div class="stretch-header">
+      <div class="stretch-icon">🏢</div>
+      <div class="stretch-title-wrap">
+        <div class="stretch-title">华为西安 · 解决方案经理</div>
+        <div class="stretch-company">华为 · 世界500强 · ICT领军企业</div>
+      </div>
+    </div>
+    <div class="stretch-body">
+      <strong>亮点：</strong>华为西安公司招募，ICT生态最完整，平台资源最强，薪资福利体系成熟（14-16薪+股票+年金）。<br>
+      <strong>技能迁移：</strong>通信行业背景直接匹配，5G+政企项目经验高度吻合华为解决方案体系。<br>
+      <strong>挑战建议：</strong>了解华为eNSP、CloudCampus等主流解决方案框架；准备政企大客户拓展复盘案例；注意工作地点在商洛，需确认驻场要求。
+    </div>
+    <a class="stretch-btn" href="https://www.zhipin.com/job_detail/24204f667f2dfb9403J729q-EVVT.html" target="_blank">查看职位 →</a>
+  </div>
+
+</div>
+
+<!-- ACTION SECTION -->
+<div class="action-section">
+  <h3>📋 今日求职行动建议</h3>
+
+  <div class="action-item">
+    <div class="action-num">1</div>
+    <div class="action-text"><strong>优先突击Top 3（今日必投）：</strong>LotusFlare西安Solution Architect、腾讯云AI解决方案架构师、阿里云解决方案架构师——三者均为西安在地、岗位匹配度最高，今日即可提交申请，避免错过黄金窗口期。</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-num">2</div>
+    <div class="action-text"><strong>西安市场现状研判：</strong>今日猎聘西安ICT售前岗位几乎为零，Boss直聘西安在地精准匹配岗位约7个，整体供给偏少。建议同步关注可远程或弹性驻场的全国性岗位（如Mapbox Remote、亚信科技），以扩大选择面。</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-num">3</div>
+    <div class="action-text"><strong>向非西安岗位主动问询：</strong>新华三（唐山）、中移铁通（株洲）等央企/大厂均为全国性招聘，建议主动在Boss直聘聊天中询问是否有西安或西北区域岗位，成功率较高。</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-num">4</div>
+    <div class="action-text"><strong>LinkedIn补充搜索：</strong>今日LinkedIn西安通信方向仅2个结果，建议手动搜索 "pre-sales Xian" / "solution architect 西安" / "ICT account manager Shaanxi" 扩展范围，同时主动联系在华为、中兴、爱立信西安分支工作的校友/前同事，获取内推机会。</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-num">5</div>
+    <div class="action-text"><strong>简历针对性优化：</strong>当前岗位集中在"解决方案架构师"方向，建议在简历中突出：①客户场景分析与方案输出能力 ②政企大客户成功交付案例（含规模/ROI） ③5G/物联网/云计算技术关键词（AIDC/CloudCore/NFV加分）。</div>
+  </div>
+</div>
+
+<div class="footer">
+  西安每日求职日报 · 扩展检索版 v2 · 2026-04-07 自动生成<br>
+  数据来源：Boss直聘 / 猎聘 / LinkedIn · 仅供求职参考
+</div>
+
+</body>
+</html>
