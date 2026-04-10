@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西安求职日报 · CDP版 2026-04-10</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; color: #2d3748; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #1a365d 0%, #2b4c8c 60%, #1e3a8a 100%); color: #fff; padding: 32px 40px; }
+  .header h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; }
+  .header .subtitle { font-size: 14px; opacity: 0.85; margin-bottom: 16px; }
+  .header-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+  .stat-box { background: rgba(255,255,255,0.12); border-radius: 10px; padding: 12px 20px; text-align: center; }
+  .stat-box .num { font-size: 28px; font-weight: 800; }
+  .stat-box .label { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+  .platform-tags { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .ptag { background: rgba(255,255,255,0.18); border-radius: 20px; padding: 4px 14px; font-size: 13px; }
+
+  /* Legend */
+  .legend { background: #fff; margin: 20px 40px; border-radius: 12px; padding: 18px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .legend h3 { font-size: 14px; color: #4a5568; margin-bottom: 10px; font-weight: 600; }
+  .legend-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .legend-item { font-size: 12px; color: #718096; display: flex; align-items: center; gap: 6px; }
+  .dim-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Main grid */
+  .section-title { font-size: 18px; font-weight: 700; color: #2d3748; margin: 24px 40px 12px; display: flex; align-items: center; gap: 8px; }
+  .jobs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; padding: 0 40px; }
+
+  /* Job Card */
+  .job-card { background: #fff; border-radius: 14px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border: 1.5px solid #e2e8f0; transition: box-shadow 0.2s, transform 0.15s; position: relative; }
+  .job-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.12); transform: translateY(-2px); }
+  .job-card.top3 { border-color: #4c51bf; }
+
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .rank-badge { background: #e8eaf6; color: #3730a3; font-size: 11px; font-weight: 700; border-radius: 6px; padding: 2px 8px; white-space: nowrap; }
+  .rank-badge.gold { background: #fef3c7; color: #b45309; }
+  .rank-badge.silver { background: #f1f5f9; color: #475569; }
+  .rank-badge.bronze { background: #fff7ed; color: #c2410c; }
+
+  .job-title { font-size: 16px; font-weight: 700; color: #1e3a8a; text-decoration: none; line-height: 1.3; }
+  .job-title:hover { text-decoration: underline; }
+  .company { font-size: 13px; color: #4a5568; margin-top: 4px; font-weight: 500; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .meta-tag { font-size: 12px; background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 2px 8px; color: #718096; }
+  .meta-tag.salary { background: #f0fff4; border-color: #9ae6b4; color: #276749; font-weight: 600; }
+  .meta-tag.source-boss { background: #fff5f5; border-color: #feb2b2; color: #c53030; }
+  .meta-tag.source-liepin { background: #fffaf0; border-color: #fbd38d; color: #c05621; }
+  .meta-tag.source-linkedin { background: #ebf8ff; border-color: #90cdf4; color: #2b6cb0; }
+  .fresh-badge { display: inline-flex; align-items: center; gap: 4px; background: #f0fff4; border: 1px solid #68d391; border-radius: 12px; padding: 3px 10px; font-size: 12px; color: #276749; font-weight: 600; }
+  .fresh-dot { width: 8px; height: 8px; background: #48bb78; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  /* Score bar */
+  .score-section { margin-top: 14px; }
+  .score-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .score-label { font-size: 12px; color: #718096; }
+  .score-total { font-size: 20px; font-weight: 800; color: #3730a3; }
+  .score-bar-wrap { background: #edf2f7; border-radius: 8px; height: 8px; margin-bottom: 8px; }
+  .score-bar { height: 8px; border-radius: 8px; background: linear-gradient(90deg, #4c51bf, #667eea); transition: width 0.5s; }
+  .dim-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+  .dim-bar-row { display: flex; align-items: center; gap: 6px; }
+  .dim-bar-label { font-size: 11px; color: #a0aec0; width: 70px; flex-shrink: 0; }
+  .dim-bar-track { flex: 1; background: #edf2f7; border-radius: 4px; height: 5px; }
+  .dim-bar-fill { height: 5px; border-radius: 4px; }
+
+  /* CTA Button */
+  .cta-btn { display: block; text-align: center; margin-top: 14px; padding: 10px; background: linear-gradient(90deg, #3730a3, #4c51bf); color: #fff; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; transition: opacity 0.2s; }
+  .cta-btn:hover { opacity: 0.88; }
+
+  /* Stretch section */
+  .stretch-section { margin: 30px 40px; background: linear-gradient(135deg, #f3e8ff, #fdf4ff); border: 1.5px solid #d6bcfa; border-radius: 14px; padding: 22px 26px; }
+  .stretch-section h2 { color: #6b21a8; font-size: 17px; margin-bottom: 16px; }
+  .stretch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .stretch-card { background: rgba(255,255,255,0.7); border-radius: 10px; padding: 16px; border: 1px solid #e9d5ff; }
+  .stretch-card h4 { color: #6b21a8; font-size: 14px; margin-bottom: 8px; }
+  .stretch-card p { font-size: 12px; color: #4a5568; line-height: 1.6; }
+
+  /* Action box */
+  .action-section { margin: 24px 40px; background: #fff; border-radius: 14px; padding: 22px 26px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .action-section h2 { font-size: 17px; color: #2d3748; margin-bottom: 14px; }
+  .action-list { list-style: none; }
+  .action-list li { padding: 10px 0; border-bottom: 1px solid #f7fafc; font-size: 13px; color: #4a5568; display: flex; gap: 10px; }
+  .action-list li:last-child { border-bottom: none; }
+  .action-num { background: #ebf8ff; color: #2b6cb0; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+
+  /* Fix note */
+  .fix-note { margin: 20px 40px 0; background: #fffbeb; border: 1.5px solid #f6e05e; border-radius: 10px; padding: 14px 20px; font-size: 13px; color: #744210; }
+  .fix-note strong { color: #b45309; }
+
+  footer { text-align: center; padding: 30px; color: #a0aec0; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>🎯 西安求职日报 · CDP版</h1>
+  <div class="subtitle">候选人：刘世豪 · 目标：ICT/通信行业售前工程师 / 解决方案架构师 / BDM · 期望薪资：25K–55K</div>
+  <div class="header-stats">
+    <div class="stat-box"><div class="num">31</div><div class="label">三平台检索</div></div>
+    <div class="stat-box"><div class="num">22</div><div class="label">相关性过滤后</div></div>
+    <div class="stat-box"><div class="num">12</div><div class="label">今日主推</div></div>
+    <div class="stat-box"><div class="num">10</div><div class="label">近7天活跃</div></div>
+  </div>
+  <div class="platform-tags">
+    <span class="ptag">Boss直聘 · 15条</span>
+    <span class="ptag">猎聘 · 4条</span>
+    <span class="ptag">LinkedIn · 12条</span>
+    <span class="ptag">📅 2026-04-10</span>
+  </div>
+</div>
+
+<!-- FIX NOTE -->
+<div class="fix-note">
+  ⚠️ <strong>Chrome远程调试未开启</strong>：今日任务通过Chrome扩展备用模式运行，CDP代理暂不可用。请运行 <code>fix_chrome_remote_debug.sh</code>（已保存至输出文件夹）以修复，或在Chrome中访问 <code>chrome://inspect/#remote-debugging</code> 勾选"Allow remote debugging"后重启Chrome。
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <h3>📊 评分图例（满分103分）</h3>
+  <div class="legend-grid">
+    <div class="legend-item"><span class="dim-dot" style="background:#4c51bf"></span>岗位匹配度 30分（售前/架构师=30，BDM=22，技术支持=15）</div>
+    <div class="legend-item"><span class="dim-dot" style="background:#38a169"></span>行业吻合度 25分（ICT/通信/5G=25，AI/IoT/云=20）</div>
+    <div class="legend-item"><span class="dim-dot" style="background:#d97706"></span>公司吸引力 20分（外企500强=20，大厂=17，上市/国企=14）</div>
+    <div class="legend-item"><span class="dim-dot" style="background:#e53e3e"></span>薪资竞争力 15分（40K+=15，30-40K=12，25-30K=9）</div>
+    <div class="legend-item"><span class="dim-dot" style="background:#805ad5"></span>发展潜力 10分（AI/5G强赛道=10，稳定平台=7）</div>
+    <div class="legend-item"><span class="dim-dot" style="background:#48bb78"></span>🟢新鲜加权 +3分（近7天活跃）</div>
+  </div>
+</div>
+
+<!-- TOP 12 -->
+<div class="section-title">⭐ Top 12 推荐职位</div>
+<div class="jobs-grid">
+
+  <!-- #1 LotusFlare Solution Architect -->
+  <div class="job-card top3">
+    <div class="card-top">
+      <span class="rank-badge gold">🥇 #1</span>
+      <span class="fresh-badge"><span class="fresh-dot"></span>近7天·活跃</span>
+    </div>
+    <a class="job-title" href="https://www.linkedin.com/jobs/view/4376495102" target="_blank">Solution Architect</a>
+    <div class="company">🏢 LotusFlare · 电信云SaaS独角兽</div>
+    <div class="meta-row">
+      <span class="meta-tag">📍 西安 / 远程</span>
+      <span class="meta-tag salary">💰 面议（外资高端）</span>
+      <span class="meta-tag source-linkedin">LinkedIn</span>
+      <span class="meta-tag">近30天发布</span>
+    </div>
+    <div class="score-section">
+      <div class="score-header"><span class="score-label">综合评分</span><span class="score-total">93</span></div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:90%"></div></div>
+      <div class="dim-bars">
+        <div class="dim-bar-row"><span class="dim-bar-label">岗位匹配</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#4c51bf"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">行业吻合</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#38a169"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">公司吸引</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:85%;background:#d97706"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">发展潜力</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#805ad5"></div></div></div>
+      </div>
+    </div>
+    <a class="cta-btn" href="https://www.linkedin.com/jobs/view/4376495102" target="_blank">立即查看职位 →</a>
+  </div>
+
+  <!-- #2 Canonical Solutions Architect -->
+  <div class="job-card top3">
+    <div class="card-top">
+      <span class="rank-badge silver">🥈 #2</span>
+      <span class="fresh-badge"><span class="fresh-dot"></span>近7天·活跃</span>
+    </div>
+    <a class="job-title" href="https://www.linkedin.com/jobs/view/4399278649" target="_blank">Solutions Architect for Automotive</a>
+    <div class="company">🏢 Canonical · Ubuntu母公司，全球云基础设施</div>
+    <div class="meta-row">
+      <span class="meta-tag">📍 APJ远程</span>
+      <span class="meta-tag salary">💰 面议（外资竞争力强）</span>
+      <span class="meta-tag source-linkedin">LinkedIn</span>
+      <span class="meta-tag">近30天发布</span>
+    </div>
+    <div class="score-section">
+      <div class="score-header"><span class="score-label">综合评分</span><span class="score-total">88</span></div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:85%"></div></div>
+      <div class="dim-bars">
+        <div class="dim-bar-row"><span class="dim-bar-label">岗位匹配</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#4c51bf"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">行业吻合</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:80%;background:#38a169"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">公司吸引</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:85%;background:#d97706"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">发展潜力</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#805ad5"></div></div></div>
+      </div>
+    </div>
+    <a class="cta-btn" href="https://www.linkedin.com/jobs/view/4399278649" target="_blank">立即查看职位 →</a>
+  </div>
+
+  <!-- #3 科大讯飞 -->
+  <div class="job-card top3">
+    <div class="card-top">
+      <span class="rank-badge bronze">🥉 #3</span>
+    </div>
+    <a class="job-title" href="https://www.zhipin.com/job_detail/ab9fa4b640c942530nV-29q0ElVZ.html" target="_blank">售前咨询经理（高校产业学院方向）</a>
+    <div class="company">🏢 科大讯飞 · AI语音领域A股龙头</div>
+    <div class="meta-row">
+      <span class="meta-tag">📍 西安·雁塔区</span>
+      <span class="meta-tag salary">💰 面议（大厂级别）</span>
+      <span class="meta-tag source-boss">Boss直聘</span>
+    </div>
+    <div class="score-section">
+      <div class="score-header"><span class="score-label">综合评分</span><span class="score-total">85</span></div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:82%"></div></div>
+      <div class="dim-bars">
+        <div class="dim-bar-row"><span class="dim-bar-label">岗位匹配</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#4c51bf"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">行业吻合</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:80%;background:#38a169"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">公司吸引</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:85%;background:#d97706"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">发展潜力</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#805ad5"></div></div></div>
+      </div>
+    </div>
+    <a class="cta-btn" href="https://www.zhipin.com/job_detail/ab9fa4b640c942530nV-29q0ElVZ.html" target="_blank">立即查看职位 →</a>
+  </div>
+
+  <!-- #4 烽火云谷 商务售前 -->
+  <div class="job-card">
+    <div class="card-top">
+      <span class="rank-badge">#4</span>
+    </div>
+    <a class="job-title" href="https://www.zhipin.com/job_detail/725187a1d6b96f0e1HF92du-GVpR.html" target="_blank">商务售前</a>
+    <div class="company">🏢 烽火云谷 · 烽火通信旗下，ICT行业</div>
+    <div class="meta-row">
+      <span class="meta-tag">📍 西安·雁塔区</span>
+      <span class="meta-tag salary">💰 面议</span>
+      <span class="meta-tag source-boss">Boss直聘</span>
+    </div>
+    <div class="score-section">
+      <div class="score-header"><span class="score-label">综合评分</span><span class="score-total">84</span></div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:81%"></div></div>
+      <div class="dim-bars">
+        <div class="dim-bar-row"><span class="dim-bar-label">岗位匹配</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#4c51bf"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">行业吻合</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#38a169"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">公司吸引</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:70%;background:#d97706"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">发展潜力</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:70%;background:#805ad5"></div></div></div>
+      </div>
+    </div>
+    <a class="cta-btn" href="https://www.zhipin.com/job_detail/725187a1d6b96f0e1HF92du-GVpR.html" target="_blank">立即查看职位 →</a>
+  </div>
+
+  <!-- #5 Mapbox -->
+  <div class="job-card">
+    <div class="card-top">
+      <span class="rank-badge">#5</span>
+      <span class="fresh-badge"><span class="fresh-dot"></span>近7天·活跃</span>
+    </div>
+    <a class="job-title" href="https://www.linkedin.com/jobs/view/4382322932" target="_blank">Senior Solutions Architect, Enterprise</a>
+    <div class="company">🏢 Mapbox · 地图/空间数据平台，美国知名科技</div>
+    <div class="meta-row">
+      <span class="meta-tag">📍 中国区远程</span>
+      <span class="meta-tag salary">💰 面议（外资竞争力强）</span>
+      <span class="meta-tag source-linkedin">LinkedIn</span>
+    </div>
+    <div class="score-section">
+      <div class="score-header"><span class="score-label">综合评分</span><span class="score-total">80</span></div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:77%"></div></div>
+      <div class="dim-bars">
+        <div class="dim-bar-row"><span class="dim-bar-label">岗位匹配</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#4c51bf"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">行业吻合</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:60%;background:#38a169"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">公司吸引</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:85%;background:#d97706"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">发展潜力</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:70%;background:#805ad5"></div></div></div>
+      </div>
+    </div>
+    <a class="cta-btn" href="https://www.linkedin.com/jobs/view/4382322932" target="_blank">立即查看职位 →</a>
+  </div>
+
+  <!-- #6 Sumsub -->
+  <div class="job-card">
+    <div class="card-top">
+      <span class="rank-badge">#6</span>
+      <span class="fresh-badge"><span class="fresh-dot"></span>近7天·活跃</span>
+    </div>
+    <a class="job-title" href="https://www.linkedin.com/jobs/search/?keywords=Post-Sales+Solution+Architect+Sumsub" target="_blank">Post-Sales Solution Architect (APAC)</a>
+    <div class="company">🏢 Sumsub · KYC/身份验证SaaS，全球增速快</div>
+    <div class="meta-row">
+      <span class="meta-tag">📍 APAC远程</span>
+      <span class="meta-tag salary">💰 面议</span>
+      <span class="meta-tag source-linkedin">LinkedIn</span>
+    </div>
+    <div class="score-section">
+      <div class="score-header"><span class="score-label">综合评分</span><span class="score-total">80</span></div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:77%"></div></div>
+      <div class="dim-bars">
+        <div class="dim-bar-row"><span class="dim-bar-label">岗位匹配</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#4c51bf"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">行业吻合</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:60%;background:#38a169"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">公司吸引</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:85%;background:#d97706"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">发展潜力</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:70%;background:#805ad5"></div></div></div>
+      </div>
+    </div>
+    <a class="cta-btn" href="https://www.linkedin.com/jobs/search/?keywords=Post-Sales+Solution+Architect+Sumsub+APAC" target="_blank">立即查看职位 →</a>
+  </div>
+
+  <!-- #7 深睿博联 -->
+  <div class="job-card">
+    <div class="card-top">
+      <span class="rank-badge">#7</span>
+      <span class="fresh-badge"><span class="fresh-dot"></span>近7天·活跃</span>
+    </div>
+    <a class="job-title" href="https://www.liepin.com/job/1975959213.shtml" target="_blank">售前支持/解决方案经理</a>
+    <div class="company">🏢 北京深睿博联科技 · 医疗AI独角兽</div>
+    <div class="meta-row">
+      <span class="meta-tag">📍 西安·碑林区</span>
+      <span class="meta-tag salary">💰 15-25K</span>
+      <span class="meta-tag source-liepin">猎聘</span>
+      <span class="meta-tag">14分钟前更新</span>
+    </div>
+    <div class="score-section">
+      <div class="score-header"><span class="score-label">综合评分</span><span class="score-total">79</span></div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:76%"></div></div>
+      <div class="dim-bars">
+        <div class="dim-bar-row"><span class="dim-bar-label">岗位匹配</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#4c51bf"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">行业吻合</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:80%;background:#38a169"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">公司吸引</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:50%;background:#d97706"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">发展潜力</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#805ad5"></div></div></div>
+      </div>
+    </div>
+    <a class="cta-btn" href="https://www.liepin.com/job/1975959213.shtml" target="_blank">立即查看职位 →</a>
+  </div>
+
+  <!-- #8 人工智能售前 诺君安 -->
+  <div class="job-card">
+    <div class="card-top">
+      <span class="rank-badge">#8</span>
+    </div>
+    <a class="job-title" href="https://www.zhipin.com/job_detail/d9d9a73389e35bf503J82N-8GVFU.html" target="_blank">人工智能售前（西安）</a>
+    <div class="company">🏢 诺君安 · AI解决方案提供商</div>
+    <div class="meta-row">
+      <span class="meta-tag">📍 西安·雁塔区</span>
+      <span class="meta-tag salary">💰 面议</span>
+      <span class="meta-tag source-boss">Boss直聘</span>
+    </div>
+    <div class="score-section">
+      <div class="score-header"><span class="score-label">综合评分</span><span class="score-total">78</span></div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:75%"></div></div>
+      <div class="dim-bars">
+        <div class="dim-bar-row"><span class="dim-bar-label">岗位匹配</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#4c51bf"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">行业吻合</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:80%;background:#38a169"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">公司吸引</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:50%;background:#d97706"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">发展潜力</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#805ad5"></div></div></div>
+      </div>
+    </div>
+    <a class="cta-btn" href="https://www.zhipin.com/job_detail/d9d9a73389e35bf503J82N-8GVFU.html" target="_blank">立即查看职位 →</a>
+  </div>
+
+  <!-- #9 FAE售前 全应科技 -->
+  <div class="job-card">
+    <div class="card-top">
+      <span class="rank-badge">#9</span>
+    </div>
+    <a class="job-title" href="https://www.zhipin.com/job_detail/cbd570926e0f7eee0nV-3920EVVX.html" target="_blank">FAE售前</a>
+    <div class="company">🏢 全应科技 · 工业AI节能SaaS</div>
+    <div class="meta-row">
+      <span class="meta-tag">📍 西安·雁塔区</span>
+      <span class="meta-tag salary">💰 面议</span>
+      <span class="meta-tag source-boss">Boss直聘</span>
+    </div>
+    <div class="score-section">
+      <div class="score-header"><span class="score-label">综合评分</span><span class="score-total">78</span></div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:75%"></div></div>
+      <div class="dim-bars">
+        <div class="dim-bar-row"><span class="dim-bar-label">岗位匹配</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#4c51bf"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">行业吻合</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:80%;background:#38a169"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">公司吸引</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:50%;background:#d97706"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">发展潜力</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#805ad5"></div></div></div>
+      </div>
+    </div>
+    <a class="cta-btn" href="https://www.zhipin.com/job_detail/cbd570926e0f7eee0nV-3920EVVX.html" target="_blank">立即查看职位 →</a>
+  </div>
+
+  <!-- #10 360集团 售前专家 -->
+  <div class="job-card">
+    <div class="card-top">
+      <span class="rank-badge">#10</span>
+    </div>
+    <a class="job-title" href="https://www.zhipin.com/job_detail/100a20982f1fba560nV42dm9FVVS.html" target="_blank">售前专家（重庆/西安）</a>
+    <div class="company">🏢 360集团 · 互联网安全上市大厂</div>
+    <div class="meta-row">
+      <span class="meta-tag">📍 西安·雁塔区</span>
+      <span class="meta-tag salary">💰 面议（大厂级）</span>
+      <span class="meta-tag source-boss">Boss直聘</span>
+    </div>
+    <div class="score-section">
+      <div class="score-header"><span class="score-label">综合评分</span><span class="score-total">77</span></div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:74%"></div></div>
+      <div class="dim-bars">
+        <div class="dim-bar-row"><span class="dim-bar-label">岗位匹配</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#4c51bf"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">行业吻合</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:60%;background:#38a169"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">公司吸引</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:85%;background:#d97706"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">发展潜力</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:70%;background:#805ad5"></div></div></div>
+      </div>
+    </div>
+    <a class="cta-btn" href="https://www.zhipin.com/job_detail/100a20982f1fba560nV42dm9FVVS.html" target="_blank">立即查看职位 →</a>
+  </div>
+
+  <!-- #11 西安BDM 慧策旺店通 -->
+  <div class="job-card">
+    <div class="card-top">
+      <span class="rank-badge">#11</span>
+      <span class="fresh-badge"><span class="fresh-dot"></span>近7天·活跃</span>
+    </div>
+    <a class="job-title" href="https://www.liepin.com/job/1975000001.shtml" target="_blank">西安BDM</a>
+    <div class="company">🏢 慧策·旺店通 · 电商SaaS，新三板上市</div>
+    <div class="meta-row">
+      <span class="meta-tag">📍 西安·新城区</span>
+      <span class="meta-tag salary">💰 15-20K</span>
+      <span class="meta-tag source-liepin">猎聘</span>
+      <span class="meta-tag">14小时前更新</span>
+    </div>
+    <div class="score-section">
+      <div class="score-header"><span class="score-label">综合评分</span><span class="score-total">67</span></div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:64%"></div></div>
+      <div class="dim-bars">
+        <div class="dim-bar-row"><span class="dim-bar-label">岗位匹配</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:73%;background:#4c51bf"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">行业吻合</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:60%;background:#38a169"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">公司吸引</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:70%;background:#d97706"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">发展潜力</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:70%;background:#805ad5"></div></div></div>
+      </div>
+    </div>
+    <a class="cta-btn" href="https://www.liepin.com/zhaopin/?key=BDM&city=050200" target="_blank">立即查看职位 →</a>
+  </div>
+
+  <!-- #12 解决方案售前工程师 灵思创奇 -->
+  <div class="job-card">
+    <div class="card-top">
+      <span class="rank-badge">#12</span>
+    </div>
+    <a class="job-title" href="https://www.zhipin.com/job_detail/21e672ee0c04e656031z3N6_ElBU.html" target="_blank">解决方案售前工程师</a>
+    <div class="company">🏢 北京灵思创奇科技 · 数字化解决方案</div>
+    <div class="meta-row">
+      <span class="meta-tag">📍 西安·雁塔区</span>
+      <span class="meta-tag salary">💰 面议</span>
+      <span class="meta-tag source-boss">Boss直聘</span>
+    </div>
+    <div class="score-section">
+      <div class="score-header"><span class="score-label">综合评分</span><span class="score-total">70</span></div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:67%"></div></div>
+      <div class="dim-bars">
+        <div class="dim-bar-row"><span class="dim-bar-label">岗位匹配</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:100%;background:#4c51bf"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">行业吻合</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:60%;background:#38a169"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-label">公司吸引</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:50%;background:#d97706"></div></div></div>
+        <div class="dim-bar-row"><span class="dim-bar-fill" style="width:70%;background:#805ad5"></div></div>
+      </div>
+    </div>
+    <a class="cta-btn" href="https://www.zhipin.com/job_detail/21e672ee0c04e656031z3N6_ElBU.html" target="_blank">立即查看职位 →</a>
+  </div>
+
+</div>
+
+<!-- 跨界机会 -->
+<div class="stretch-section">
+  <h2>🚀 跨界机会（世界500强外企，建议也投）</h2>
+  <div class="stretch-grid">
+    <div class="stretch-card">
+      <h4>🔧 压缩机售前技术支持 — 西门子能源</h4>
+      <p><strong>亮点</strong>：西门子能源是全球工业龙头，外企薪资体系+国际背景加持。<br>
+      <strong>技能迁移</strong>：技术售前能力完全可迁移；需补充工业设备基础知识。<br>
+      <strong>挑战</strong>：行业跨度大（工业vs ICT），初期需要快速学习产品知识。<br>
+      <a href="https://www.zhipin.com/job_detail/dd55785e80dcff8503Z52dy9EFZQ.html" style="color:#6b21a8" target="_blank">→ 查看职位</a></p>
+    </div>
+    <div class="stretch-card">
+      <h4>⚡ Senior Sales Engineer Assembly — Eaton（西安）</h4>
+      <p><strong>亮点</strong>：Eaton全球电气500强，西安本地机会，外企职业路径清晰。<br>
+      <strong>技能迁移</strong>：大客户销售、技术方案能力高度匹配。<br>
+      <strong>挑战</strong>：电气/工业自动化方向，需了解配电/UPS产品线。<br>
+      <a href="https://www.linkedin.com/jobs/view/4374801082" style="color:#6b21a8" target="_blank">→ 查看职位</a></p>
+    </div>
+    <div class="stretch-card">
+      <h4>🔩 Sales Engineer — Atlas Copco（西安）</h4>
+      <p><strong>亮点</strong>：阿特拉斯·科普柯全球工业设备龙头，西安本地职位稀缺。<br>
+      <strong>技能迁移</strong>：售前/技术支持方法论完全适用。<br>
+      <strong>挑战</strong>：压缩机/真空技术专业知识需要时间积累。<br>
+      <a href="https://www.linkedin.com/jobs/view/4323364338" style="color:#6b21a8" target="_blank">→ 查看职位</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- 今日行动建议 -->
+<div class="action-section">
+  <h2>📋 今日求职行动建议</h2>
+  <ul class="action-list">
+    <li><span class="action-num">1</span>今日优先投递Top 3：LotusFlare（LinkedIn）、Canonical（LinkedIn）、科大讯飞（Boss直聘）。前两者为外资远程岗，需用英文简历+Cover Letter；讯飞为本地大厂，着重强调AI/教育数字化售前经验。</li>
+    <li><span class="action-num">2</span>烽火云谷"商务售前"是今日最匹配ICT/通信背景的本地岗位（评分84），烽火通信在通信行业口碑强，建议在Boss直聘直接发起聊天。</li>
+    <li><span class="action-num">3</span>猎聘上深睿博联"售前支持/解决方案经理"刚刚更新（14分钟前），医疗AI赛道增速快，薪资15-25K略低但成长空间大，可作为谈判起点。</li>
+    <li><span class="action-num">4</span>今日LinkedIn数据质量较好（10条fresh），建议开启LinkedIn求职通知，搜索 "solution architect OR presales"，地点选"Shaanxi, China"，可提前布局未来机会。</li>
+    <li><span class="action-num">5</span>技术修复：运行输出文件夹中的 <code>fix_chrome_remote_debug.sh</code> 脚本，重启Chrome开启远程调试，明日任务将恢复CDP代理完整能力（可获取薪资、活跃时间等更多字段）。</li>
+  </ul>
+</div>
+
+<footer>西安求职日报 · 2026-04-10 · 数据来源：Boss直聘 / 猎聘 / LinkedIn · 自动生成，仅供参考</footer>
+</body>
+</html>
