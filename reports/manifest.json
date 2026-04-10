@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-04-10",
+      "jobCount": 15,
+      "freshCount": 6,
+      "stretchCount": 3,
+      "hasForeign": true,
+      "topSalary": "30-40K=12，25-3"
+    },
+    {
       "date": "2026-04-08",
       "jobCount": 13,
       "freshCount": 0,
