@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-04-11",
+      "jobCount": 26,
+      "freshCount": 12,
+      "stretchCount": 8,
+      "hasForeign": true,
+      "topSalary": "25-45K · AI云赛道"
+    },
+    {
       "date": "2026-04-10",
       "jobCount": 15,
       "freshCount": 6,
