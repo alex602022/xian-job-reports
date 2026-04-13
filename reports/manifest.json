@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-04-13",
+      "jobCount": 9,
+      "freshCount": 5,
+      "stretchCount": 4,
+      "hasForeign": false,
+      "topSalary": "40-50K · MaaS阿里云"
+    },
+    {
       "date": "2026-04-11",
       "jobCount": 26,
       "freshCount": 12,
@@ -14,7 +22,7 @@
       "freshCount": 6,
       "stretchCount": 3,
       "hasForeign": true,
-      "topSalary": "30-40K=12，25-3"
+      "topSalary": "30-40K"
     },
     {
       "date": "2026-04-08",
@@ -38,7 +46,7 @@
       "freshCount": 11,
       "stretchCount": 4,
       "hasForeign": true,
-      "topSalary": "30-40K=12，25-3"
+      "topSalary": "30-40K"
     },
     {
       "date": "2026-04-05",
@@ -52,7 +60,7 @@
       "jobCount": 10,
       "stretchCount": 3,
       "hasForeign": true,
-      "topSalary": "30-40K=12，25"
+      "topSalary": "30-40K"
     },
     {
       "date": "2026-04-03",
