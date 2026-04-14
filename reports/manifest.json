@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-04-14",
+      "jobCount": 8,
+      "freshCount": 5,
+      "stretchCount": 3,
+      "hasForeign": false,
+      "topSalary": "20-50k · SaaS/AI销售总监"
+    },
+    {
       "date": "2026-04-13",
       "jobCount": 9,
       "freshCount": 5,
