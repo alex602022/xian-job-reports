@@ -1,0 +1,96 @@
+{
+  "reports": [
+    {
+      "date": "2026-04-15",
+      "jobCount": 21,
+      "freshCount": 12,
+      "stretchCount": 9,
+      "hasForeign": true,
+      "topSalary": "30-45K · AI原生销售/S2大客户"
+    },
+    {
+      "date": "2026-04-14",
+      "jobCount": 8,
+      "freshCount": 5,
+      "stretchCount": 3,
+      "hasForeign": false,
+      "topSalary": "20-50k · SaaS/AI销售总监"
+    },
+    {
+      "date": "2026-04-13",
+      "jobCount": 9,
+      "freshCount": 5,
+      "stretchCount": 4,
+      "hasForeign": false,
+      "topSalary": "40-50K · MaaS阿里云"
+    },
+    {
+      "date": "2026-04-11",
+      "jobCount": 26,
+      "freshCount": 12,
+      "stretchCount": 8,
+      "hasForeign": true,
+      "topSalary": "25-45K · AI云赛道"
+    },
+    {
+      "date": "2026-04-10",
+      "jobCount": 15,
+      "freshCount": 6,
+      "stretchCount": 3,
+      "hasForeign": true,
+      "topSalary": "30-40K"
+    },
+    {
+      "date": "2026-04-08",
+      "jobCount": 13,
+      "freshCount": 0,
+      "stretchCount": 3,
+      "hasForeign": true,
+      "topSalary": ""
+    },
+    {
+      "date": "2026-04-07",
+      "jobCount": 13,
+      "freshCount": 0,
+      "stretchCount": 3,
+      "hasForeign": true,
+      "topSalary": ""
+    },
+    {
+      "date": "2026-04-06",
+      "jobCount": 12,
+      "freshCount": 11,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "30-40K"
+    },
+    {
+      "date": "2026-04-05",
+      "jobCount": 11,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "25-50K · 14薪"
+    },
+    {
+      "date": "2026-04-04",
+      "jobCount": 10,
+      "stretchCount": 3,
+      "hasForeign": true,
+      "topSalary": "30-40K"
+    },
+    {
+      "date": "2026-04-03",
+      "jobCount": 12,
+      "stretchCount": 3,
+      "hasForeign": true,
+      "topSalary": "40K+ (外企)"
+    },
+    {
+      "date": "2026-04-02",
+      "jobCount": 10,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "55K·18薪"
+    }
+  ]
+}
