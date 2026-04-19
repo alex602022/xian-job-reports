@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>西安 ICT 岗位推荐报告 · 2026-04-19</title>
+  <style>
+    :root {
+      --primary: #1a56db;
+      --primary-light: #e8f0fe;
+      --success: #0e9f6e;
+      --success-light: #def7ec;
+      --warning: #c27803;
+      --warning-light: #fdf6b2;
+      --danger: #e02424;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-400: #9ca3af;
+      --gray-600: #4b5563;
+      --gray-800: #1f2937;
+      --radius: 10px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--gray-100);
+      color: var(--gray-800);
+      line-height: 1.6;
+    }
+    .header {
+      background: linear-gradient(135deg, #1a56db 0%, #0e9f6e 100%);
+      color: white;
+      padding: 36px 40px 28px;
+    }
+    .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .header .meta { font-size: 14px; opacity: 0.85; display: flex; gap: 24px; flex-wrap: wrap; }
+    .header .meta span { display: flex; align-items: center; gap: 6px; }
+    .container { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;
+    }
+    .stat-card {
+      background: white; border-radius: var(--radius); padding: 16px 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08); text-align: center;
+    }
+    .stat-card .num { font-size: 28px; font-weight: 700; color: var(--primary); }
+    .stat-card .label { font-size: 13px; color: var(--gray-600); margin-top: 4px; }
+    .section { margin-bottom: 32px; }
+    .section-title {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 18px; font-weight: 700; margin-bottom: 16px; padding-bottom: 10px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+    .badge {
+      display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 10px;
+      border-radius: 99px;
+    }
+    .badge-blue { background: var(--primary-light); color: var(--primary); }
+    .badge-green { background: var(--success-light); color: var(--success); }
+    .badge-yellow { background: var(--warning-light); color: var(--warning); }
+    .job-card {
+      background: white; border-radius: var(--radius); padding: 20px 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08); margin-bottom: 14px;
+      border-left: 4px solid transparent; transition: box-shadow .2s;
+    }
+    .job-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.12); }
+    .job-card.dir1 { border-left-color: var(--primary); }
+    .job-card.dir2 { border-left-color: var(--success); }
+    .job-card.pending { border-left-color: var(--gray-400); }
+    .job-card .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+    .job-card .title { font-size: 17px; font-weight: 700; color: var(--gray-800); }
+    .job-card .company { font-size: 15px; color: var(--primary); font-weight: 600; margin-top: 2px; }
+    .job-card .salary {
+      font-size: 15px; font-weight: 700; color: var(--danger); white-space: nowrap;
+      background: #fff5f5; padding: 2px 10px; border-radius: 6px;
+    }
+    .job-card .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+    .tag {
+      font-size: 12px; padding: 2px 9px; border-radius: 6px;
+      background: var(--gray-100); color: var(--gray-600);
+    }
+    .tag.platform { background: #ede9fe; color: #5b21b6; }
+    .tag.date { background: var(--success-light); color: var(--success); }
+    .tag.date-unknown { background: var(--warning-light); color: var(--warning); }
+    .job-card .reason {
+      font-size: 13.5px; color: var(--gray-600); margin-top: 6px; line-height: 1.55;
+    }
+    .job-card .reason strong { color: var(--gray-800); }
+    .job-card .actions { margin-top: 12px; }
+    .btn-link {
+      display: inline-block; font-size: 13px; font-weight: 600;
+      color: var(--primary); text-decoration: none; padding: 5px 14px;
+      border: 1.5px solid var(--primary); border-radius: 6px;
+    }
+    .btn-link:hover { background: var(--primary-light); }
+    .btn-link.disabled {
+      color: var(--gray-400); border-color: var(--gray-200); cursor: default;
+    }
+    .pending-notice {
+      background: var(--warning-light); border: 1px solid #fcd34d; border-radius: 8px;
+      padding: 12px 16px; font-size: 13px; color: var(--warning); margin-bottom: 16px;
+    }
+    /* Quality Score */
+    .quality-score {
+      background: white; border-radius: var(--radius); padding: 24px 28px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+    .quality-score h3 { font-size: 17px; font-weight: 700; margin-bottom: 16px; }
+    .score-total {
+      font-size: 28px; font-weight: 800; color: var(--primary);
+      text-align: center; margin-bottom: 16px;
+    }
+    .quality-score table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .quality-score th {
+      background: var(--gray-50); text-align: left; padding: 8px 12px;
+      font-weight: 600; color: var(--gray-600); font-size: 13px;
+    }
+    .quality-score td { padding: 9px 12px; border-bottom: 1px solid var(--gray-200); }
+    .quality-score tr:last-child td { border-bottom: none; }
+    .score-cell { font-weight: 700; color: var(--primary); }
+    .trigger-status {
+      margin-top: 16px; padding: 10px 16px; border-radius: 8px; font-size: 13.5px; font-weight: 600;
+    }
+    .trigger-ok { background: var(--success-light); color: var(--success); }
+    .trigger-warn { background: var(--warning-light); color: var(--warning); }
+    @media (max-width: 600px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .header { padding: 24px 20px; }
+      .container { padding: 16px 10px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🗂️ 西安 ICT 岗位推荐报告</h1>
+  <div class="meta">
+    <span>📅 生成日期：2026-04-19</span>
+    <span>👤 候选人：刘世豪</span>
+    <span>🏙️ 目标城市：西安</span>
+    <span>💰 薪资预期：20K+/月</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="num">14</div>
+      <div class="label">有效推荐职位</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">4</div>
+      <div class="label">覆盖平台</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">8</div>
+      <div class="label">方向一（精准匹配）</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">6</div>
+      <div class="label">方向二（跨界探索）</div>
+    </div>
+  </div>
+
+  <!-- 方向一 -->
+  <div class="section">
+    <div class="section-title">
+      <span>🎯 方向一：精准匹配</span>
+      <span class="badge badge-blue">ICT · 通信 · 云计算 · 售前</span>
+    </div>
+
+    <!-- 1 -->
+    <div class="job-card dir1">
+      <div class="top">
+        <div>
+          <div class="title">大装置-云计算售前解决方案经理（西安）</div>
+          <div class="company">商汤科技 SenseTime</div>
+        </div>
+        <div class="salary">薪资面议（登录后可见）</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">BOSS直聘</span>
+        <span class="tag date">2026-04-19 · 今日发布</span>
+        <span class="tag">云计算</span><span class="tag">AI</span><span class="tag">售前架构</span>
+      </div>
+      <div class="reason">
+        <strong>匹配理由：</strong>头部AI独角兽商汤科技西安在地岗，云计算+AI方向售前解决方案经理，与候选人阿里云ACE认证、AI商业化探索背景高度吻合；大装置客户对应运营商/大型行业客户，与诺基亚BDM积累的行业资源直接复用。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.zhipin.com/job_detail/31d9e8d4798a406c0nRz2du_EVtX.html" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="job-card dir1">
+      <div class="top">
+        <div>
+          <div class="title">解决方案经理</div>
+          <div class="company">纳吉特（智慧城市信息化）</div>
+        </div>
+        <div class="salary">薪资面议</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">BOSS直聘</span>
+        <span class="tag date">2026-04-19 · 今日发布</span>
+        <span class="tag">智慧城市</span><span class="tag">ICT</span><span class="tag">方案经理</span>
+      </div>
+      <div class="reason">
+        <strong>匹配理由：</strong>智慧城市信息化方向，职责含方案编制、客户技术交流、需求引导，与候选人8年ICT售前/方案经理经验深度契合；西安本地公司可深挖政企客户资源。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.zhipin.com/job_detail/8ddb9d154e4ef3e91Hx639y8FVBX.html" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="job-card dir1">
+      <div class="top">
+        <div>
+          <div class="title">售前工程师</div>
+          <div class="company">纳吉特（智慧城市信息化）</div>
+        </div>
+        <div class="salary">薪资面议</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">BOSS直聘</span>
+        <span class="tag date">2026-04-19 · 今日发布</span>
+        <span class="tag">5-10年经验</span><span class="tag">本科</span><span class="tag">ICT售前</span>
+      </div>
+      <div class="reason">
+        <strong>匹配理由：</strong>同公司平行岗位，5-10年经验/本科要求，与候选人硬性条件完全匹配；可同时投递两个岗位提高转化概率。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.zhipin.com/job_detail/4580d5664176c4471HB72d21GFo~.html" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="job-card dir1">
+      <div class="top">
+        <div>
+          <div class="title">售前经理</div>
+          <div class="company">海能达通信股份有限公司</div>
+        </div>
+        <div class="salary">15–25K · 约18–30万/年</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">猎聘</span>
+        <span class="tag date">2026-04-18 · 1天前</span>
+        <span class="tag">通信设备</span><span class="tag">西安高新区</span><span class="tag">5000人+</span>
+      </div>
+      <div class="reason">
+        <strong>匹配理由：</strong>海能达是通信设备行业上市巨头，西安高新区在地岗位；售前经理与候选人8年ICT售前/方案经验直接对口，通信设备行业背景与诺基亚经历高度协同。薪资区间符合预期下沿，但公司平台价值高。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.liepin.com/job/1981778477.shtml" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="job-card dir1">
+      <div class="top">
+        <div>
+          <div class="title">解决方案经理</div>
+          <div class="company">北斗天地股份有限公司</div>
+        </div>
+        <div class="salary">薪资面议</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">BOSS直聘</span>
+        <span class="tag date">2026-04-18 · 昨日发布</span>
+        <span class="tag">北斗导航</span><span class="tag">ICT国企上市</span><span class="tag">西安</span>
+      </div>
+      <div class="reason">
+        <strong>匹配理由：</strong>A股上市ICT国企，北斗导航+信息化方向；候选人诺基亚外资BDM背景在国企体系内有稀缺性，解决方案经理岗与ICT大客户经营经验精准匹配。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.zhipin.com/job_detail/024c2908a9ce53cc1HF62925EFpV.html" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="job-card dir1">
+      <div class="top">
+        <div>
+          <div class="title">售前解决方案经理</div>
+          <div class="company">微云天地（IT解决方案）</div>
+        </div>
+        <div class="salary">薪资面议</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">BOSS直聘</span>
+        <span class="tag date">2026-04-18 · 昨日发布</span>
+        <span class="tag">IT解决方案</span><span class="tag">西安</span>
+      </div>
+      <div class="reason">
+        <strong>匹配理由：</strong>IT解决方案公司，售前解决方案经理岗位与候选人售前/方案经理技能方向直接匹配；西安本地运营，可深化西北区客户资源复用。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.zhipin.com/job_detail/60d95783fbff80211H173t-8FVVU.html" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="job-card dir1">
+      <div class="top">
+        <div>
+          <div class="title">售前工程师</div>
+          <div class="company">联拓永欣</div>
+        </div>
+        <div class="salary">薪资面议</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">BOSS直聘</span>
+        <span class="tag date">2026-04-17 · 2天前</span>
+        <span class="tag">5-10年经验</span><span class="tag">ICT</span>
+      </div>
+      <div class="reason">
+        <strong>匹配理由：</strong>ICT方向售前工程师岗，5-10年经验要求与候选人8年经验精准匹配；可作为补充投递选项。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.zhipin.com/job_detail/b5b6814ec208200e1HZ80924EFBZ.html" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="job-card dir1">
+      <div class="top">
+        <div>
+          <div class="title">解决方案经理（ICT系统集成方向）</div>
+          <div class="company">苏州同元软控信息技术有限公司</div>
+        </div>
+        <div class="salary">15–22K/月</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">LinkedIn</span>
+        <span class="tag date">约2026-04-13 · 6天前</span>
+        <span class="tag">ICT系统集成</span><span class="tag">西安在地</span>
+      </div>
+      <div class="reason">
+        <strong>匹配理由：</strong>本次LinkedIn搜索精准度最高的ICT岗位；系统集成方向解决方案经理，与候选人SDN/光网络/方案经理背景高度吻合；薪资下沿略低于目标但有谈判空间。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.linkedin.com/jobs/view/4399340757/" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 方向二 -->
+  <div class="section">
+    <div class="section-title">
+      <span>🌱 方向二：跨界探索</span>
+      <span class="badge badge-green">AI · 能源数字化 · 新兴赛道</span>
+    </div>
+
+    <!-- 1 -->
+    <div class="job-card dir2">
+      <div class="top">
+        <div>
+          <div class="title">解决方案经理-电网行业</div>
+          <div class="company">方寸知微（AI+能源数字化）</div>
+        </div>
+        <div class="salary">薪资面议</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">BOSS直聘</span>
+        <span class="tag date">2026-04-18 · 昨日发布</span>
+        <span class="tag">AI</span><span class="tag">电网行业</span><span class="tag">西安</span>
+      </div>
+      <div class="reason">
+        <strong>跨界价值：</strong>AI+电网数字化解决方案，候选人具备国家电网客户关系（核心差异化优势）+SDN/光网络技术背景，在能源数字化ICT融合赛道有高于纯电力背景候选人的综合竞争力。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.zhipin.com/job_detail/60f8331d3beaaeef1HN609u4E1dZ.html" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="job-card dir2">
+      <div class="top">
+        <div>
+          <div class="title">解决方案经理</div>
+          <div class="company">为光能源</div>
+        </div>
+        <div class="salary">薪资面议</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">BOSS直聘</span>
+        <span class="tag date">2026-04-17 · 2天前</span>
+        <span class="tag">能源行业</span><span class="tag">西安</span>
+      </div>
+      <div class="reason">
+        <strong>跨界价值：</strong>新能源+信息化方向，候选人光接入网（PON/OLT）技术积累在光伏+储能通信接入场景有直接应用价值；能源数字化是候选人可接受行业之一，跨界门槛低。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.zhipin.com/job_detail/02515b8757cd427e03x8096_FltQ.html" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="job-card dir2">
+      <div class="top">
+        <div>
+          <div class="title">解决方案经理</div>
+          <div class="company">藏格科技</div>
+        </div>
+        <div class="salary">薪资面议</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">BOSS直聘</span>
+        <span class="tag date">2026-04-17 · 2天前</span>
+        <span class="tag">科技公司</span><span class="tag">3-5年经验</span><span class="tag">西安</span>
+      </div>
+      <div class="reason">
+        <strong>跨界价值：</strong>西安本地科技公司，3-5年经验要求（候选人8年经验具备溢出优势），具体行业方向需进入详情页确认；建议优先核实是否涉及ICT/工业互联网方向。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.zhipin.com/job_detail/56407a65693053da1HNy3ti0FltX.html" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="job-card dir2">
+      <div class="top">
+        <div>
+          <div class="title">售前工程师</div>
+          <div class="company">易诺科技</div>
+        </div>
+        <div class="salary">薪资面议</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">BOSS直聘</span>
+        <span class="tag date">2026-04-18 · 昨日发布</span>
+        <span class="tag">科技公司</span><span class="tag">3-5年经验</span>
+      </div>
+      <div class="reason">
+        <strong>跨界价值：</strong>本地科技公司售前工程师，行业方向待核实；候选人8年经验可在3-5年岗位获得快速晋升机会，适合作为补充投递保底选项。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.zhipin.com/job_detail/43741541eac6a7de03Zy0tq-F1pR.html" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="job-card dir2">
+      <div class="top">
+        <div>
+          <div class="title">Sales Support Manager（西安）</div>
+          <div class="company">Hitachi Energy（日立能源）</div>
+        </div>
+        <div class="salary">未标注（Promoted）</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">LinkedIn</span>
+        <span class="tag date-unknown">⚠ 发布日期未知（Promoted位）</span>
+        <span class="tag">工业ICT</span><span class="tag">外资</span><span class="tag">西安在地</span>
+      </div>
+      <div class="reason">
+        <strong>跨界价值：</strong>日立能源是重要ToB工业ICT头部企业；Sales Support Manager与售前/方案支持经理高度重合，候选人来自诺基亚外资背景，职业路径无缝衔接，可同步探索能源行业。建议登录LinkedIn核实发布时间。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.linkedin.com/jobs/view/4400754293/" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="job-card dir2">
+      <div class="top">
+        <div>
+          <div class="title">解决方案高级经理</div>
+          <div class="company">LONGi Solar（隆基绿能）</div>
+        </div>
+        <div class="salary">未标注（Promoted）</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">LinkedIn</span>
+        <span class="tag date-unknown">⚠ 发布日期未知（Promoted位）</span>
+        <span class="tag">新能源</span><span class="tag">西安本部</span>
+        <span class="tag">Actively Reviewing</span>
+      </div>
+      <div class="reason">
+        <strong>跨界价值：</strong>隆基绿能全球光伏龙头，西安总部；解决方案高级经理涉及能源ICT化需求，候选人PON/光纤接入网背景在光伏通信方向有迁移优势；"Actively Reviewing Applicants"表明需求紧迫，建议登录LinkedIn核实时间后优先投递。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.linkedin.com/jobs/view/4397212736/" target="_blank">查看职位详情 →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 链接待确认 -->
+  <div class="section">
+    <div class="section-title">
+      <span>🔗 链接待确认（不计入主推荐）</span>
+      <span class="badge badge-yellow">建议手动访问原平台核实</span>
+    </div>
+    <div class="pending-notice">
+      ⚠️ 以下职位已在猎聘/BOSS直聘页面中实际看到，但详情页 URL 因平台安全验证未能直接确认。建议在已登录的浏览器中搜索关键词后点击进入。
+    </div>
+
+    <div class="job-card pending">
+      <div class="top">
+        <div>
+          <div class="title">客户经理-央国企</div>
+          <div class="company">科大讯飞</div>
+        </div>
+        <div class="salary">15–30K · 14薪</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">猎聘</span>
+        <span class="tag date">2026-04-18 · 1天前</span>
+        <span class="tag">AI头部企业</span><span class="tag">央国企客户</span>
+      </div>
+      <div class="reason">
+        <strong>跨界价值：</strong>科大讯飞头部AI企业，央国企客户方向，候选人ToB商业化+大客户经理背景与AI行业客户开拓契合；建议在猎聘搜索"客户经理 央国企 西安"后确认链接。
+      </div>
+      <div class="actions">
+        <a class="btn-link disabled" href="#">链接待确认</a>
+      </div>
+    </div>
+
+    <div class="job-card pending">
+      <div class="top">
+        <div>
+          <div class="title">国家业务经理（电力行业）</div>
+          <div class="company">某苏州通信设备大厂（10000人+，已上市）</div>
+        </div>
+        <div class="salary">25–40K（约30–48万/年）</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">猎聘</span>
+        <span class="tag date">2026-04-19 · 今日发布</span>
+        <span class="tag">通信设备</span><span class="tag">电力行业</span><span class="tag">高薪</span>
+      </div>
+      <div class="reason">
+        <strong>精准匹配（薪资最佳）：</strong>通信设备行业大厂，西安开展电力行业业务；候选人诺基亚BDM背景+SDN/光网络经验与通信设备+电力客户深度契合，薪资25-40K是本期最高，请重点关注。建议猎聘搜索"国家业务经理 电力"确认链接。
+      </div>
+      <div class="actions">
+        <a class="btn-link disabled" href="#">链接待确认</a>
+      </div>
+    </div>
+
+    <div class="job-card pending">
+      <div class="top">
+        <div>
+          <div class="title">云计算售前架构师</div>
+          <div class="company">腾讯</div>
+        </div>
+        <div class="salary">薪资面议</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">BOSS直聘</span>
+        <span class="tag date-unknown">⚠ 发布日期未知（安全验证拦截）</span>
+        <span class="tag">云计算</span><span class="tag">互联网大厂</span>
+      </div>
+      <div class="reason">
+        <strong>精准匹配：</strong>腾讯云计算售前架构师，与候选人阿里云ACE认证及云网络背景高度契合；发布时间被安全验证拦截未能获取，建议登录BOSS直聘后确认是否在14天内。
+      </div>
+      <div class="actions">
+        <a class="btn-link" href="https://www.zhipin.com/job_detail/782ac540ce9fd70d1nF_2du6EVNS.html" target="_blank">尝试访问 →</a>
+      </div>
+    </div>
+
+    <div class="job-card pending">
+      <div class="top">
+        <div>
+          <div class="title">大客户销售经理（急聘）</div>
+          <div class="company">中熔电气（创业板上市）</div>
+        </div>
+        <div class="salary">18–20K · 14薪</div>
+      </div>
+      <div class="tags">
+        <span class="tag platform">猎聘</span>
+        <span class="tag date">2026-04-18 · 急聘</span>
+        <span class="tag">仪器仪表</span><span class="tag">上市公司</span>
+      </div>
+      <div class="reason">
+        <strong>可探索：</strong>西安高新区创业板上市公司，大客户销售经理岗位匹配候选人大客户经营能力；行业为仪器仪表偏制造，需候选人评估跨界意愿。
+      </div>
+      <div class="actions">
+        <a class="btn-link disabled" href="#">链接待确认（猎聘搜索"大客户销售经理 中熔"）</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 平台说明 -->
+  <div class="section">
+    <div class="section-title">📊 本期平台搜索情况</div>
+    <div style="background:white;border-radius:var(--radius);padding:20px 24px;box-shadow:0 1px 3px rgba(0,0,0,.08)">
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        <thead>
+          <tr style="background:var(--gray-50)">
+            <th style="padding:10px 12px;text-align:left;font-weight:600;color:var(--gray-600)">平台</th>
+            <th style="padding:10px 12px;text-align:left;font-weight:600;color:var(--gray-600)">状态</th>
+            <th style="padding:10px 12px;text-align:left;font-weight:600;color:var(--gray-600)">获取职位数</th>
+            <th style="padding:10px 12px;text-align:left;font-weight:600;color:var(--gray-600)">说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--gray-200)">
+            <td style="padding:10px 12px;font-weight:600">BOSS直聘</td>
+            <td style="padding:10px 12px"><span style="color:#0e9f6e;font-weight:600">✅ 成功</span></td>
+            <td style="padding:10px 12px">11条</td>
+            <td style="padding:10px 12px;color:var(--gray-600)">薪资未登录不可见；10条有精确发布日期；1条（腾讯）日期被安全验证拦截</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--gray-200)">
+            <td style="padding:10px 12px;font-weight:600">猎聘</td>
+            <td style="padding:10px 12px"><span style="color:#c27803;font-weight:600">⚠ 部分成功</span></td>
+            <td style="padding:10px 12px">7条</td>
+            <td style="padding:10px 12px;color:var(--gray-600)">海能达1条URL已确认；其余4条因安全验证无法直接访问详情页，标注链接待确认</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--gray-200)">
+            <td style="padding:10px 12px;font-weight:600">LinkedIn</td>
+            <td style="padding:10px 12px"><span style="color:#0e9f6e;font-weight:600">✅ 成功</span></td>
+            <td style="padding:10px 12px">6条</td>
+            <td style="padding:10px 12px;color:var(--gray-600)">苏州同元软控1条有明确日期（6天前）；2条Promoted广告位无日期；其余为制造业/能源行业偏向</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 12px;font-weight:600">前程无忧</td>
+            <td style="padding:10px 12px"><span style="color:#e02424;font-weight:600">❌ API失败</span></td>
+            <td style="padding:10px 12px">0条（有效URL）</td>
+            <td style="padding:10px 12px;color:var(--gray-600)">we.51job.com API被阿里云WAF拦截（滑动验证），网页端获取到部分数据但均无精确发布时间及详情页URL，未计入主推荐</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 质量评分 -->
+  <div class="section">
+    <div class="section-title">🏅 本期质量评分</div>
+    <div class="quality-score">
+      <div class="score-total">总分：73 / 100</div>
+      <table>
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th>得分</th>
+            <th>评分依据</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A 平台覆盖率</td>
+            <td class="score-cell">18/25</td>
+            <td>3/4平台成功（BOSS直聘✓、猎聘部分✓、LinkedIn✓；前程无忧API失败×）</td>
+          </tr>
+          <tr>
+            <td>B 有效URL比例</td>
+            <td class="score-cell">18/25</td>
+            <td>18条有效详情页URL / 24条总计 ≈ 75%（其中4条猎聘链接待确认）</td>
+          </tr>
+          <tr>
+            <td>C 发布时间覆盖</td>
+            <td class="score-cell">18/25</td>
+            <td>14条有明确发布时间 / 18条有效URL ≈ 78%（BOSS直聘10条全覆盖；LinkedIn 1/6；猎聘3/7）</td>
+          </tr>
+          <tr>
+            <td>D 职位相关度</td>
+            <td class="score-cell">15/15</td>
+            <td>方向一8个职位均与ICT/通信/售前/云计算直接相关，相关度100%</td>
+          </tr>
+          <tr>
+            <td>E 数据零幻觉</td>
+            <td class="score-cell">10/10</td>
+            <td>本次无幻觉职位；所有推荐均可在当前会话抓取记录中溯源</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="trigger-status trigger-ok">
+        ✅ 质量达标（73分 ≥ 60分），无需触发自检优化循环
+      </div>
+      <div style="margin-top:12px;font-size:13px;color:var(--gray-600)">
+        ⚠️ 前程无忧API连续多日被WAF拦截，已记录于 scraping_strategy.md。建议后续探索使用 Cookie 登录态绕过验证方案。
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center;padding:24px;color:var(--gray-400);font-size:12px;">
+  报告由 Claude Cowork 自动生成 · 2026-04-19 · 数据来源：BOSS直聘 / 猎聘 / LinkedIn · 仅供参考
+</div>
+
+</body>
+</html>

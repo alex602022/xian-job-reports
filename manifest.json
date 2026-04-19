@@ -1,6 +1,38 @@
 {
   "reports": [
     {
+      "date": "2026-04-19",
+      "jobCount": 14,
+      "freshCount": 8,
+      "stretchCount": 6,
+      "hasForeign": true,
+      "topSalary": "20K"
+    },
+    {
+      "date": "2026-04-18",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "50K"
+    },
+    {
+      "date": "2026-04-17",
+      "jobCount": 5,
+      "freshCount": 3,
+      "stretchCount": 2,
+      "hasForeign": true,
+      "topSalary": "15k"
+    },
+    {
+      "date": "2026-04-16",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": false,
+      "topSalary": "20k"
+    },
+    {
       "date": "2026-04-15",
       "jobCount": 21,
       "freshCount": 12,

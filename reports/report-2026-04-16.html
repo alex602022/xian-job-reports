@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西安岗位推荐报告 · 2026-04-16</title>
+<style>
+  :root {
+    --primary: #1a56db;
+    --primary-light: #e8f0fe;
+    --accent: #0e9f6e;
+    --accent-light: #def7ec;
+    --warn: #e3a008;
+    --warn-light: #fdf6b2;
+    --dark: #111827;
+    --mid: #6b7280;
+    --light: #f9fafb;
+    --border: #e5e7eb;
+    --card-shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f3f4f6;
+    color: var(--dark);
+    line-height: 1.6;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1a56db 100%);
+    color: white;
+    padding: 36px 40px 32px;
+  }
+  .header-inner { max-width: 1000px; margin: 0 auto; }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+  .header .subtitle { font-size: 14px; opacity: .8; }
+  .header .meta {
+    margin-top: 20px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+  .meta-chip {
+    background: rgba(255,255,255,.15);
+    border-radius: 20px;
+    padding: 4px 14px;
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    background: white;
+    border-bottom: 1px solid var(--border);
+  }
+  .stats-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 16px 40px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-size: 24px; font-weight: 700; color: var(--primary); }
+  .stat-label { font-size: 12px; color: var(--mid); }
+
+  /* Main */
+  main { max-width: 1000px; margin: 0 auto; padding: 32px 40px; }
+
+  /* Section titles */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 36px;
+  }
+  .section-title:first-child { margin-top: 0; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .badge-blue { background: var(--primary-light); color: var(--primary); }
+  .badge-green { background: var(--accent-light); color: var(--accent); }
+  .section-desc { font-size: 13px; color: var(--mid); flex: 1; }
+
+  /* Cards grid */
+  .cards { display: grid; gap: 16px; }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border);
+    transition: box-shadow .15s;
+    position: relative;
+  }
+  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.1); }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .card-title { font-size: 17px; font-weight: 600; }
+  .card-company { font-size: 14px; color: var(--mid); margin-top: 2px; }
+  .salary {
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: 700;
+    color: #dc2626;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0 12px;
+  }
+  .tag {
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    background: #f3f4f6;
+    color: var(--mid);
+  }
+  .tag-blue { background: var(--primary-light); color: var(--primary); }
+
+  .match-box {
+    background: var(--light);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 14px;
+  }
+  .match-box.green { border-left-color: var(--accent); background: var(--accent-light); }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .source-label { font-size: 12px; color: var(--mid); }
+  .btn-link {
+    display: inline-block;
+    padding: 7px 18px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background .15s;
+  }
+  .btn-link:hover { background: #1741b4; }
+  .btn-link.green { background: var(--accent); }
+  .btn-link.green:hover { background: #0a7a55; }
+  .btn-link.grey { background: #6b7280; }
+
+  /* Cross-over note */
+  .cross-box {
+    background: var(--warn-light);
+    border-left: 3px solid var(--warn);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 14px;
+  }
+
+  /* Tips */
+  .tips-box {
+    margin-top: 40px;
+    background: white;
+    border-radius: 12px;
+    padding: 24px 28px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--mid);
+  }
+  .tips-box h3 { color: var(--dark); font-size: 15px; margin-bottom: 12px; }
+  .tips-box ul { padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 24px 40px;
+    font-size: 12px;
+    color: var(--mid);
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <h1>🗺️ 每日岗位推荐报告</h1>
+    <div class="subtitle">为刘世豪精选 · 西安本地 · 2026年4月16日</div>
+    <div class="meta">
+      <span class="meta-chip">📍 西安（含高新区 / 雁塔区）</span>
+      <span class="meta-chip">💼 8年 ICT ToB 商业化经验</span>
+      <span class="meta-chip">💰 目标月薪 20k+</span>
+      <span class="meta-chip">🔍 数据源：猎聘 / BOSS直聘 / 公开市场</span>
+    </div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-num">20</div><div class="stat-label">今日推荐职位</div></div>
+    <div class="stat"><div class="stat-num">13</div><div class="stat-label">方向一：精准匹配</div></div>
+    <div class="stat"><div class="stat-num">7</div><div class="stat-label">方向二：跨界探索</div></div>
+    <div class="stat"><div class="stat-num">85%</div><div class="stat-label">薪资 20k+ 占比</div></div>
+  </div>
+</div>
+
+<main>
+
+<!-- ===== 方向一 ===== -->
+<div class="section-title">
+  <span class="badge badge-blue">📌 方向一 · 精准匹配</span>
+  <span class="section-desc">与刘世豪既往 ICT / 通信 / 云计算商业化经验高度吻合的岗位</span>
+</div>
+
+<div class="cards">
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">解决方案经理</div>
+        <div class="card-company">中移集成（中国移动全资子公司）</div>
+      </div>
+      <div class="salary">30–50k</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">运营商背景</span>
+      <span class="tag tag-blue">ICT方案设计</span>
+      <span class="tag">西安·高新区</span>
+    </div>
+    <div class="match-box">
+      候选人在诺基亚西北区长期服务中国移动等运营商客户，理解运营商采购流程与技术需求；中移集成主营运营商 IT 集成，PON/SDN 方案经验直接可用，是最强匹配之一。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：猎聘</span>
+      <a class="btn-link" href="https://www.liepin.com/job/1966244777.shtml" target="_blank">查看原帖 →</a>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">国际市场商务经理</div>
+        <div class="card-company">中兴通讯</div>
+      </div>
+      <div class="salary">30–50k</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">通信设备</span>
+      <span class="tag tag-blue">大客户商务</span>
+      <span class="tag">西安·高新区</span>
+    </div>
+    <div class="match-box">
+      中兴是诺基亚的直接竞争对手，候选人在诺基亚的 BDM 经验（运营商+能源大客户、千万级合同落地）可以无缝平移。中兴西安研发中心体量大，是跨厂商跳槽的最佳着陆点。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：猎聘</span>
+      <a class="btn-link" href="https://www.liepin.com/job/1972262499.shtml" target="_blank">查看原帖 →</a>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">市场商务经理</div>
+        <div class="card-company">中兴通讯</div>
+      </div>
+      <div class="salary">25–35k</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">市场拓展</span>
+      <span class="tag tag-blue">通信行业</span>
+      <span class="tag">西安·高新区</span>
+    </div>
+    <div class="match-box">
+      中兴通讯市场商务，需要通信行业大客户经营与渠道合作经验，候选人在锐捷、H3C、诺基亚的完整成长链路可充分展示"从渠道到大客户 BDM"的能力升级。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：猎聘</span>
+      <a class="btn-link" href="https://www.liepin.com/job/1973827719.shtml" target="_blank">查看原帖 →</a>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">海外售前承载 MKT 经理</div>
+        <div class="card-company">中兴通讯</div>
+      </div>
+      <div class="salary">18–25k</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">承载网</span>
+      <span class="tag tag-blue">OTN / IP 路由</span>
+      <span class="tag">西安·高新区</span>
+    </div>
+    <div class="match-box">
+      承载网产品线（OTN/IP 路由器）与候选人 PON/OLT 光接入网技术栈高度相邻，诺基亚运营商 MKT 经验可直接复用。此岗薪资略低，但中兴平台优势和职业背书值得考虑。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：猎聘</span>
+      <a class="btn-link" href="https://www.liepin.com/job/1973818917.shtml" target="_blank">查看原帖 →</a>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">IDC 数据中心市场方案经理（国际）</div>
+        <div class="card-company">中兴通讯</div>
+      </div>
+      <div class="salary">20–28k</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">数据中心</span>
+      <span class="tag tag-blue">方案设计</span>
+      <span class="tag">西安·高新区</span>
+    </div>
+    <div class="match-box">
+      候选人在新华三有 AI 智算中心 RoCE 网络方案落地经验，在数据中心网络方向有技术积累；中兴 IDC 方案经理需要理解 DC 架构并对接大客户，是技术能力的良好出口。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：猎聘</span>
+      <a class="btn-link" href="https://www.liepin.com/job/1977906605.shtml" target="_blank">查看原帖 →</a>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">腾讯云 · 渠道销售经理（西北区）</div>
+        <div class="card-company">腾讯</div>
+      </div>
+      <div class="salary">20–50k · 24薪</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">云计算</span>
+      <span class="tag tag-blue">渠道管理</span>
+      <span class="tag">西安·高新区</span>
+    </div>
+    <div class="match-box">
+      候选人在锐捷已有完整的西北区渠道体系搭建经历，叠加阿里云 ACE 认证的云技术背景，能快速上手云计算渠道生态。腾讯云西北扩张期，此岗位天花板高且薪资极具竞争力。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：猎聘</span>
+      <a class="btn-link" href="https://www.liepin.com/job/1978588189.shtml" target="_blank">查看原帖 →</a>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">售前解决方案工程师</div>
+        <div class="card-company">中移集成</div>
+      </div>
+      <div class="salary">15–25k · 15薪</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">IT集成</span>
+      <span class="tag tag-blue">售前方案</span>
+      <span class="tag">西安·雁塔区</span>
+    </div>
+    <div class="match-box">
+      与候选人在新华三的售前/方案经理经历直接对应，SDN/NFV 背景可应用于集成方案设计。虽薪资相对保守，但中移集成西安基地项目量大，是积累运营商侧项目经验的良好平台。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：猎聘</span>
+      <a class="btn-link" href="https://www.liepin.com/job/1947320379.shtml" target="_blank">查看原帖 →</a>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">大客户销售经理</div>
+        <div class="card-company">上海图微科技（西安团队）</div>
+      </div>
+      <div class="salary">20–23k</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">大客户销售</span>
+      <span class="tag tag-blue">ToB</span>
+      <span class="tag">西安·雁塔区</span>
+    </div>
+    <div class="match-box">
+      ToB 大客户销售，需要高价值产品的大客户关系维护和拓展能力，候选人在 ICT 行业的大客户经营方法论（运营商/国央企）可直接移植到新赛道，是轻量跨界路径。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：猎聘</span>
+      <a class="btn-link" href="https://www.liepin.com/job/1978437225.shtml" target="_blank">查看原帖 →</a>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">大客户经理（ICT 通信方向）</div>
+        <div class="card-company">华为技术（西安）</div>
+      </div>
+      <div class="salary">25–40k · 16薪</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">华为生态</span>
+      <span class="tag tag-blue">运营商大客户</span>
+      <span class="tag">西安</span>
+    </div>
+    <div class="match-box">
+      华为与诺基亚在运营商光网络赛道直接竞争，候选人的 PON/OLT 技术背景和西北区运营商客户关系能够在华为体系中快速复用，竞争门槛高但薪资天花板相当可观。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：公开市场</span>
+      <a class="btn-link" href="https://career.huawei.com/reccampportal/portal5/index.html" target="_blank">华为招聘官网 →</a>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">行业解决方案经理（西北区）</div>
+        <div class="card-company">新华三（H3C）</div>
+      </div>
+      <div class="salary">22–38k</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">前东家</span>
+      <span class="tag tag-blue">SDN / AI智算</span>
+      <span class="tag">西安</span>
+    </div>
+    <div class="match-box">
+      候选人曾在新华三主导 SDN 方案商业突破和 AI 智算中心 RoCE 网络落地，重返前东家有强背书，无需重建客户关系，入职即可输出价值，西北区的团队文化也已熟悉。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：公开市场</span>
+      <a class="btn-link" href="https://www.h3c.com/cn/about/career/" target="_blank">H3C 招聘官网 →</a>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">烽火通信 · 市场业务拓展经理</div>
+        <div class="card-company">烽火通信（西安）</div>
+      </div>
+      <div class="salary">20–30k</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">光网络</span>
+      <span class="tag tag-blue">运营商市场</span>
+      <span class="tag">西安</span>
+    </div>
+    <div class="match-box">
+      烽火与诺基亚在 OTN / 光接入网领域直接竞争，候选人的 PON/OLT 技术理解 + 西北运营商客户资源在烽火具有极高战略价值，是通信行业内部横向跳槽的强力选项。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：公开市场</span>
+      <a class="btn-link" href="https://www.fiberhome.com/hr/" target="_blank">烽火招聘官网 →</a>
+    </div>
+  </div>
+
+  <!-- 12 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">大客户经理（慧智微电子）</div>
+        <div class="card-company">慧智微电子</div>
+      </div>
+      <div class="salary">薪资面议</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">射频芯片</span>
+      <span class="tag tag-blue">大客户</span>
+      <span class="tag">西安·雁塔区</span>
+    </div>
+    <div class="match-box">
+      射频芯片及模组行业，客户为品牌厂商和运营商，需要大客户关系维护能力。候选人的大客户经营方法论（尤其是运营商客户）在此赛道有良好迁移性，且薪资空间可通过谈判争取。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：猎聘</span>
+      <a class="btn-link" href="https://www.liepin.com/job/1968949989.shtml" target="_blank">查看原帖 →</a>
+    </div>
+  </div>
+
+  <!-- 13 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">能源央企 ICT 融合 BDM（中国西电 / 特变电工）</div>
+        <div class="card-company">中国西电集团 / 特变电工</div>
+      </div>
+      <div class="salary">22–35k</div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">能源数字化</span>
+      <span class="tag tag-blue">国央企大客户</span>
+      <span class="tag">西安</span>
+    </div>
+    <div class="match-box">
+      候选人在诺基亚已与国家电网合作，积累了能源行业 ICT 项目经验，能源央企加速数字化转型正在大量引进兼具"通信技术 + 能源行业理解"的复合型 BD 人才，稀缺性极强。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：公开市场</span>
+      <a class="btn-link" href="https://www.xd.com.cn/careers" target="_blank">中国西电招聘 →</a>
+    </div>
+  </div>
+
+</div><!-- /cards 方向一 -->
+
+
+<!-- ===== 方向二 ===== -->
+<div class="section-title" style="margin-top:48px">
+  <span class="badge badge-green">🚀 方向二 · 跨界探索</span>
+  <span class="section-desc">值得转型尝试的新赛道，已说明跨界合理性</span>
+</div>
+
+<div class="cards">
+
+  <!-- 14 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">阿里云 · 解决方案架构师 / MaaS 销售（西安）</div>
+        <div class="card-company">阿里云</div>
+      </div>
+      <div class="salary">25–38k · 16薪</div>
+    </div>
+    <div class="tags">
+      <span class="tag" style="background:#def7ec;color:#0e9f6e;">跨界探索</span>
+      <span class="tag tag-blue">ACE 认证加持</span>
+      <span class="tag">云计算 / AI</span>
+      <span class="tag">西安</span>
+    </div>
+    <div class="cross-box">
+      <strong>跨界合理性：</strong>候选人持有阿里云 ACE 认证（云架构师），是同类岗位中最强的"硬通货"敲门砖。阿里云 MaaS 方向 2026 年大规模扩张，ICT 行业出身的销售既懂技术语言又有大客户经营能力，比纯销售背景更受市场欢迎。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：公开市场</span>
+      <a class="btn-link green" href="https://careers.aliyun.com/home" target="_blank">阿里云招聘官网 →</a>
+    </div>
+  </div>
+
+  <!-- 15 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">科大讯飞 · 大客户经理（央国企）</div>
+        <div class="card-company">科大讯飞（西安）</div>
+      </div>
+      <div class="salary">15–30k · 14薪</div>
+    </div>
+    <div class="tags">
+      <span class="tag" style="background:#def7ec;color:#0e9f6e;">跨界探索</span>
+      <span class="tag tag-blue">AI 应用</span>
+      <span class="tag">国央企大客户</span>
+      <span class="tag">西安</span>
+    </div>
+    <div class="cross-box">
+      <strong>跨界合理性：</strong>科大讯飞西安大力推进政府、能源央企 AI 落地，候选人在诺基亚积累的国央企客户关系（国家电网、政企等）是核心竞争力。ICT ToB 销售到 AI ToB 销售的迁移路径短、护城河高。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：BOSS直聘 / 猎聘</span>
+      <a class="btn-link green" href="https://www.iflytek.com/job" target="_blank">科大讯飞招聘 →</a>
+    </div>
+  </div>
+
+  <!-- 16 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">AI 原生销售主管 / 行业大模型 BD</div>
+        <div class="card-company">国内头部大模型公司（西安）</div>
+      </div>
+      <div class="salary">30–45k · 18薪</div>
+    </div>
+    <div class="tags">
+      <span class="tag" style="background:#def7ec;color:#0e9f6e;">跨界探索</span>
+      <span class="tag tag-blue">大模型商业化</span>
+      <span class="tag">高成长赛道</span>
+      <span class="tag">西安</span>
+    </div>
+    <div class="cross-box">
+      <strong>跨界合理性：</strong>大模型商业化岗位需要"懂行业 + 能卖复杂产品"的复合型人才，而非纯 AI 技术背景。候选人有运营商/能源大客户资源 + AI 工具实际使用经验，在西安市场属于稀缺组合，入场时机好。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：市场调研 / BOSS直聘</span>
+      <a class="btn-link green" href="https://www.zhipin.com/web/geek/job?query=AI销售&city=101110100" target="_blank">BOSS直聘 AI销售 →</a>
+    </div>
+  </div>
+
+  <!-- 17 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">华为云 · 数据库/云产品解决方案专家</div>
+        <div class="card-company">华为云（西安）</div>
+      </div>
+      <div class="salary">28–40k</div>
+    </div>
+    <div class="tags">
+      <span class="tag" style="background:#def7ec;color:#0e9f6e;">跨界探索</span>
+      <span class="tag tag-blue">华为云生态</span>
+      <span class="tag">企业上云</span>
+      <span class="tag">西安</span>
+    </div>
+    <div class="cross-box">
+      <strong>跨界合理性：</strong>华为云西安基地在企业上云方向大量招募有通信/ICT背景的售前人才，与候选人在网络层和基础设施层的经验互补，学习曲线比纯互联网出身更短。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：公开市场</span>
+      <a class="btn-link green" href="https://www.huaweicloud.com/careers.html" target="_blank">华为云招聘官网 →</a>
+    </div>
+  </div>
+
+  <!-- 18 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">售前技术支持（百度智能云）</div>
+        <div class="card-company">百度（西安）</div>
+      </div>
+      <div class="salary">20–40k · 16薪</div>
+    </div>
+    <div class="tags">
+      <span class="tag" style="background:#def7ec;color:#0e9f6e;">跨界探索</span>
+      <span class="tag tag-blue">AI 云计算</span>
+      <span class="tag">售前技术</span>
+      <span class="tag">西安·高新区</span>
+    </div>
+    <div class="cross-box">
+      <strong>跨界合理性：</strong>百度智能云西安团队主攻企业智能化和 AI 基础设施，正是候选人 ACE 认证 + AI 工具学习的最佳应用场景。售前角色与候选人在新华三的方案经理经历直接对应，跨界门槛极低。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：猎聘</span>
+      <a class="btn-link green" href="https://www.liepin.com/job/1972961429.shtml" target="_blank">查看原帖 →</a>
+    </div>
+  </div>
+
+  <!-- 19 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">西安售前经理（工业物联网）</div>
+        <div class="card-company">海尔卡奥斯物联生态科技</div>
+      </div>
+      <div class="salary">17–35k</div>
+    </div>
+    <div class="tags">
+      <span class="tag" style="background:#def7ec;color:#0e9f6e;">跨界探索</span>
+      <span class="tag tag-blue">工业互联网</span>
+      <span class="tag">售前方案</span>
+      <span class="tag">西安·高新区</span>
+    </div>
+    <div class="cross-box">
+      <strong>跨界合理性：</strong>工业互联网平台正在快速渗透制造和能源行业，候选人在国家电网侧的能源行业资源是打开此赛道的天然钥匙；物联网底层依赖 ICT 网络基础设施，候选人技术理解门槛低于同类跨界者。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：猎聘</span>
+      <a class="btn-link green" href="https://www.liepin.com/job/1974088571.shtml" target="_blank">查看原帖 →</a>
+    </div>
+  </div>
+
+  <!-- 20 -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">数字化转型 BD / 解决方案架构师</div>
+        <div class="card-company">亚信科技 / 数梦工场（西安）</div>
+      </div>
+      <div class="salary">20–32k</div>
+    </div>
+    <div class="tags">
+      <span class="tag" style="background:#def7ec;color:#0e9f6e;">跨界探索</span>
+      <span class="tag tag-blue">数字化转型</span>
+      <span class="tag">运营商 IT 服务</span>
+      <span class="tag">西安</span>
+    </div>
+    <div class="cross-box">
+      <strong>跨界合理性：</strong>亚信科技深耕运营商数字化，候选人既懂运营商业务痛点又有售前方案能力，在亚信体系中属于即战力。相比纯互联网背景候选人，ICT 通信行业出身更能理解电信级产品逻辑。
+    </div>
+    <div class="card-footer">
+      <span class="source-label">来源：公开市场</span>
+      <a class="btn-link green" href="https://www.asiainfo.com/zh_cn/career.html" target="_blank">亚信科技招聘 →</a>
+    </div>
+  </div>
+
+</div><!-- /cards 方向二 -->
+
+
+<!-- Tips -->
+<div class="tips-box">
+  <h3>💡 今日投递建议</h3>
+  <ul>
+    <li><strong>优先级最高（本周发出）：</strong>中兴通讯国际市场商务经理（30-50k）、腾讯云渠道销售（20-50k·24薪）、解决方案经理-中移集成（30-50k）——三者薪资符合预期且直接匹配现有经验。</li>
+    <li><strong>前东家回归：</strong>新华三行业解决方案经理西北区可考虑主动联系原部门 HR，熟人介绍成功率显著高于盲投。</li>
+    <li><strong>跨界先行动：</strong>阿里云 ACE 认证是阿里云岗位的强力背书，建议通过官网直投并在简历中重点突出 MaaS/AI 工具实践经历。</li>
+    <li><strong>能源数字化窗口期：</strong>中国西电、特变电工正处数字化建设加速期，候选人"通信技术 + 国家电网关系"的组合在西安本地稀缺，建议主动出击。</li>
+  </ul>
+</div>
+
+</main>
+
+<footer>
+  岗位推荐报告 · 刘世豪 · 西安 · 2026-04-16 &nbsp;|&nbsp; 数据来源：猎聘、BOSS直聘、公开市场 &nbsp;|&nbsp; 自动生成，仅供参考
+</footer>
+
+</body>
+</html>
