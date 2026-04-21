@@ -205,6 +205,28 @@
       .header { padding: 24px 20px; }
       .job-header { flex-direction: column; }
     }
+
+    /* ── 星标按钮 ── */
+    .star-btn {
+      background: none; border: none; cursor: pointer;
+      font-size: 1.35rem; padding: 2px 4px; line-height: 1;
+      border-radius: 6px; transition: transform 0.15s;
+      flex-shrink: 0; align-self: flex-start;
+    }
+    .star-btn:hover { transform: scale(1.25); }
+    .star-btn.starred { color: #f59e0b; }
+    .star-btn:not(.starred) { color: #d1d5db; filter: grayscale(1); }
+    .star-btn:not(.starred):hover { color: #f59e0b; filter: none; }
+    .star-toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 999;
+      background: #1a1a2e; color: #fff; padding: 10px 18px;
+      border-radius: 10px; font-size: 13.5px; font-weight: 500;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.2s, transform 0.2s; pointer-events: none;
+    }
+    .star-toast.show { opacity: 1; transform: translateY(0); }
+
   </style>
 </head>
 <body>
@@ -259,6 +281,16 @@
         <div class="job-company">Baicells · 西安·雁塔区</div>
       </div>
       <div class="job-salary">25–50K</div>
+      <button class="star-btn" title="星标此岗位"
+        onclick="toggleStar(this)"
+        data-id="job_270721297"
+        data-title="基站售前解决方案专家"
+        data-company="Baicells"
+        data-salary="25–50K"
+        data-url="https://www.zhipin.com/job_detail/a6ea79bf650bad1003192Nq0ElBU.html"
+        data-source="BOSS直聘"
+        data-direction="match"
+        data-date="2026-04-21">☆</button>
     </div>
     <div class="job-meta">
       <span>🏢 BOSS直聘</span>
@@ -286,6 +318,16 @@
         <div class="job-company">金山云 · 西安·雁塔区</div>
       </div>
       <div class="job-salary">20–35K</div>
+      <button class="star-btn" title="星标此岗位"
+        onclick="toggleStar(this)"
+        data-id="job_472633882"
+        data-title="大客户销售 · 运营商方向"
+        data-company="金山云"
+        data-salary="20–35K"
+        data-url="https://www.zhipin.com/job_detail/c467b739e13909400nZ7092-E1tX.html"
+        data-source="BOSS直聘"
+        data-direction="match"
+        data-date="2026-04-21">☆</button>
     </div>
     <div class="job-meta">
       <span>🏢 BOSS直聘</span>
@@ -313,6 +355,16 @@
         <div class="job-company">商汤科技（SenseTime）· 西安·长安区</div>
       </div>
       <div class="job-salary">17–30K</div>
+      <button class="star-btn" title="星标此岗位"
+        onclick="toggleStar(this)"
+        data-id="job_1663259352"
+        data-title="大装置 · 云计算售前解决方案经理（西安）"
+        data-company="商汤科技（SenseTime）"
+        data-salary="17–30K"
+        data-url="https://www.zhipin.com/job_detail/31d9e8d4798a406c0nRz2du_EVtX.html"
+        data-source="BOSS直聘"
+        data-direction="match"
+        data-date="2026-04-21">☆</button>
     </div>
     <div class="job-meta">
       <span>🏢 BOSS直聘</span>
@@ -341,6 +393,16 @@
         <div class="job-company">融科联创 · 西安·碑林区</div>
       </div>
       <div class="job-salary">20–30K</div>
+      <button class="star-btn" title="星标此岗位"
+        onclick="toggleStar(this)"
+        data-id="job_2031340440"
+        data-title="大客户经理（西安）"
+        data-company="融科联创"
+        data-salary="20–30K"
+        data-url="https://www.zhipin.com/job_detail/7e7a4417f0fe89391Hdz3ty5GVZT.html"
+        data-source="BOSS直聘"
+        data-direction="match"
+        data-date="2026-04-21">☆</button>
     </div>
     <div class="job-meta">
       <span>🏢 BOSS直聘</span>
@@ -367,6 +429,16 @@
         <div class="job-company">海能达 · 西安</div>
       </div>
       <div class="job-salary">15–25K</div>
+      <button class="star-btn" title="星标此岗位"
+        onclick="toggleStar(this)"
+        data-id="job_1230992489"
+        data-title="售前经理"
+        data-company="海能达"
+        data-salary="15–25K"
+        data-url="https://www.zhipin.com/job_detail/4ff20c1fe56a5ee30nd43961F1JS.html"
+        data-source="BOSS直聘"
+        data-direction="match"
+        data-date="2026-04-21">☆</button>
     </div>
     <div class="job-meta">
       <span>🏢 BOSS直聘</span>
@@ -394,6 +466,16 @@
         <div class="job-company">爱讯达 · 西安·雁塔区</div>
       </div>
       <div class="job-salary">15–25K</div>
+      <button class="star-btn" title="星标此岗位"
+        onclick="toggleStar(this)"
+        data-id="job_676357859"
+        data-title="互联产品经理（运营商方向）"
+        data-company="爱讯达"
+        data-salary="15–25K"
+        data-url="https://www.zhipin.com/job_detail/42f5fead1af25dee0nd63Ni1E1NQ.html"
+        data-source="BOSS直聘"
+        data-direction="match"
+        data-date="2026-04-21">☆</button>
     </div>
     <div class="job-meta">
       <span>🏢 BOSS直聘</span>
@@ -420,6 +502,16 @@
         <div class="job-company">苏州同元软控信息技术 · 西安</div>
       </div>
       <div class="job-salary">15–25K</div>
+      <button class="star-btn" title="星标此岗位"
+        onclick="toggleStar(this)"
+        data-id="job_1154706071"
+        data-title="解决方案经理（石油 · 油田方向）"
+        data-company="苏州同元软控信息技术"
+        data-salary="15–25K"
+        data-url="https://www.linkedin.com/jobs/view/4396255553/"
+        data-source="LinkedIn"
+        data-direction="match"
+        data-date="2026-04-21">☆</button>
     </div>
     <div class="job-meta">
       <span>🔗 LinkedIn</span>
@@ -452,6 +544,16 @@
         <div class="job-company">科大讯飞 · 西安·雁塔区</div>
       </div>
       <div class="job-salary">20–35K · 14薪</div>
+      <button class="star-btn" title="星标此岗位"
+        onclick="toggleStar(this)"
+        data-id="job_1046771792"
+        data-title="售前咨询经理（高校产业学院方向）"
+        data-company="科大讯飞"
+        data-salary="20–35K · 14薪"
+        data-url="https://www.zhipin.com/job_detail/ab9fa4b640c942530nV-29q0ElVZ.html"
+        data-source="BOSS直聘"
+        data-direction="cross"
+        data-date="2026-04-21">☆</button>
     </div>
     <div class="job-meta">
       <span>🏢 BOSS直聘</span>
@@ -479,6 +581,16 @@
         <div class="job-company">爱讯达 · 西安·雁塔区</div>
       </div>
       <div class="job-salary">15–25K</div>
+      <button class="star-btn" title="星标此岗位"
+        onclick="toggleStar(this)"
+        data-id="job_240804491"
+        data-title="售前技术支持（油田方向）"
+        data-company="爱讯达"
+        data-salary="15–25K"
+        data-url="https://www.zhipin.com/job_detail/f37196e1e1c1ce0b0nZ53t24E1VT.html"
+        data-source="BOSS直聘"
+        data-direction="cross"
+        data-date="2026-04-21">☆</button>
     </div>
     <div class="job-meta">
       <span>🏢 BOSS直聘</span>
@@ -505,6 +617,16 @@
         <div class="job-company">陕西你我空间人工智能科技 · 西安</div>
       </div>
       <div class="job-salary warn">8K–16K</div>
+      <button class="star-btn" title="星标此岗位"
+        onclick="toggleStar(this)"
+        data-id="job_1116847312"
+        data-title="渠道合作伙伴"
+        data-company="陕西你我空间人工智能科技"
+        data-salary="8K–16K"
+        data-url="https://jobs.51job.com/171583662.html"
+        data-source="前程无忧"
+        data-direction="cross"
+        data-date="2026-04-21">☆</button>
     </div>
     <div class="job-meta">
       <span>📋 前程无忧</span>
@@ -529,6 +651,16 @@
         <div class="job-company">Flatgigs · 远程（全国）</div>
       </div>
       <div class="job-salary warn">未披露</div>
+      <button class="star-btn" title="星标此岗位"
+        onclick="toggleStar(this)"
+        data-id="job_1157680881"
+        data-title="Business Development Manager (Web3 & DeFi)"
+        data-company="Flatgigs"
+        data-salary="未披露"
+        data-url="https://www.linkedin.com/jobs/view/4402915396/"
+        data-source="LinkedIn"
+        data-direction="cross"
+        data-date="2026-04-21">☆</button>
     </div>
     <div class="job-meta">
       <span>🔗 LinkedIn</span>
@@ -555,6 +687,16 @@
         <div class="job-company">北京钛盾科技发展 · 西安·未央区</div>
       </div>
       <div class="job-salary warn">1–2万</div>
+      <button class="star-btn" title="星标此岗位"
+        onclick="toggleStar(this)"
+        data-id="job_258131926"
+        data-title="大客户经理"
+        data-company="北京钛盾科技发展"
+        data-salary="1–2万"
+        data-url="https://jobs.51job.com/xian-wyq/122533585.html"
+        data-source="前程无忧"
+        data-direction="cross"
+        data-date="2026-04-21">☆</button>
     </div>
     <div class="job-meta">
       <span>📋 前程无忧</span>
@@ -629,5 +771,66 @@
   </div>
 
 </div>
+
+<div class="star-toast" id="starToast"></div>
+<script>
+// ── 星标功能 ──────────────────────────────────────
+const STAR_KEY = 'xian_starred_jobs_v1';
+
+function getStarred() {
+  try { return JSON.parse(localStorage.getItem(STAR_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+function saveStarred(data) { localStorage.setItem(STAR_KEY, JSON.stringify(data)); }
+
+function toggleStar(btn) {
+  const starred = getStarred();
+  const id = btn.dataset.id;
+  if (starred[id]) {
+    delete starred[id];
+    btn.textContent = '☆';
+    btn.classList.remove('starred');
+    btn.title = '星标此岗位';
+    showToast('已取消星标：' + btn.dataset.title);
+  } else {
+    starred[id] = {
+      id, title: btn.dataset.title, company: btn.dataset.company,
+      salary: btn.dataset.salary, url: btn.dataset.url,
+      source: btn.dataset.source, direction: btn.dataset.direction,
+      dateReported: btn.dataset.date,
+      starredAt: new Date().toISOString(),
+      status: '待投递', notes: ''
+    };
+    btn.textContent = '⭐';
+    btn.classList.add('starred');
+    btn.title = '已星标，点击取消';
+    showToast('⭐ 已星标：' + btn.dataset.title);
+  }
+  saveStarred(starred);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('starToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// 页面加载时恢复星标状态
+(function restoreStars() {
+  const starred = getStarred();
+  document.querySelectorAll('.star-btn').forEach(btn => {
+    if (starred[btn.dataset.id]) {
+      btn.textContent = '⭐';
+      btn.classList.add('starred');
+      btn.title = '已星标，点击取消';
+    } else {
+      btn.title = '星标此岗位';
+    }
+  });
+})();
+// ─────────────────────────────────────────────────
+</script>
+
 </body>
 </html>

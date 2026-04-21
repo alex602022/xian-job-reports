@@ -152,6 +152,29 @@
 
   /* ---- FOOTER ---- */
   footer { text-align: center; padding: 24px; font-size: 12px; color: var(--muted); border-top: 1px solid #e2e8f0; }
+
+  /* ---- STARRED ENTRY ---- */
+  .starred-entry {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+    border-radius: 14px; padding: 20px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; margin-bottom: 36px; cursor: pointer;
+    box-shadow: 0 4px 18px rgba(15,52,96,0.3);
+    text-decoration: none; transition: box-shadow 0.2s, transform 0.15s;
+    flex-wrap: wrap;
+  }
+  .starred-entry:hover { box-shadow: 0 8px 28px rgba(15,52,96,0.45); transform: translateY(-2px); }
+  .starred-entry-left { display: flex; align-items: center; gap: 14px; }
+  .starred-icon { font-size: 2rem; }
+  .starred-entry h3 { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 3px; }
+  .starred-entry p { font-size: 13px; color: rgba(255,255,255,0.65); }
+  .starred-count-badge {
+    background: var(--gold); color: #1a1a2e;
+    font-size: 22px; font-weight: 800;
+    padding: 8px 18px; border-radius: 10px; white-space: nowrap;
+  }
+  .starred-count-badge small { font-size: 12px; font-weight: 600; display: block; text-align: center; }
+
 </style>
 </head>
 <body>
@@ -168,7 +191,22 @@
 </header>
 
 <div class="container">
-  <!-- CALENDAR -->
+  <!-- STARRED ENTRY -->
+  <a class="starred-entry" href="starred.html">
+    <div class="starred-entry-left">
+      <span class="starred-icon">⭐</span>
+      <div>
+        <h3>星标岗位跟进</h3>
+        <p>管理你感兴趣的职位，记录投递进展</p>
+      </div>
+    </div>
+    <div class="starred-count-badge">
+      <span id="starredCount">0</span>
+      <small>已星标</small>
+    </div>
+  </a>
+
+    <!-- CALENDAR -->
   <div class="section-title">📅 报告日历</div>
   <div class="calendar-nav">
     <button class="cal-btn" onclick="prevMonth()">‹ 上月</button>
@@ -226,6 +264,13 @@ async function init() {
   updateStats();
   renderCalendar();
   renderTimeline();
+
+  // 读取星标数量
+  try {
+    const starred = JSON.parse(localStorage.getItem('xian_starred_jobs_v1') || '{}');
+    const count = Object.keys(starred).length;
+    document.getElementById('starredCount').textContent = count;
+  } catch(e) {}
 }
 
 function updateStats() {
