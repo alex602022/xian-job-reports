@@ -774,63 +774,93 @@
 
 <div class="star-toast" id="starToast"></div>
 <script>
-// ── 星标功能 ──────────────────────────────────────
-const STAR_KEY = 'xian_starred_jobs_v1';
+// ── 星标 + 云同步 ─────────────────────────────────────
+const STAR_KEY  = 'xian_starred_jobs_v1';
+const TOKEN_KEY = 'xian_gh_token';
+const GH_REPO   = 'alex602022/xian-job-reports';
+const GH_FILE   = 'starred_jobs.json';
 
-function getStarred() {
-  try { return JSON.parse(localStorage.getItem(STAR_KEY) || '{}'); }
-  catch(e) { return {}; }
+function getLocal()  { try{return JSON.parse(localStorage.getItem(STAR_KEY)||'{}')}catch{return{}} }
+function setLocal(d) { localStorage.setItem(STAR_KEY, JSON.stringify(d)) }
+function getToken()  { return localStorage.getItem(TOKEN_KEY)||'' }
+
+async function ghWrite(data) {
+  const token = getToken();
+  if (!token) return;
+  try {
+    const metaRes = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`,
+      { headers:{ Authorization:`token ${token}` } });
+    const meta = await metaRes.json();
+    if (!meta.sha) return;
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
+      method:'PUT',
+      headers:{ Authorization:`token ${token}`, 'Content-Type':'application/json' },
+      body: JSON.stringify({ message:'sync starred jobs', content, sha: meta.sha })
+    });
+  } catch {}
 }
-function saveStarred(data) { localStorage.setItem(STAR_KEY, JSON.stringify(data)); }
 
 function toggleStar(btn) {
-  const starred = getStarred();
+  const data = getLocal();
+  if (!data.jobs) data.jobs = {};
   const id = btn.dataset.id;
-  if (starred[id]) {
-    delete starred[id];
-    btn.textContent = '☆';
-    btn.classList.remove('starred');
-    btn.title = '星标此岗位';
+  if (data.jobs[id]) {
+    delete data.jobs[id];
+    btn.textContent = '☆'; btn.classList.remove('starred'); btn.title = '星标此岗位';
     showToast('已取消星标：' + btn.dataset.title);
   } else {
-    starred[id] = {
+    data.jobs[id] = {
       id, title: btn.dataset.title, company: btn.dataset.company,
       salary: btn.dataset.salary, url: btn.dataset.url,
       source: btn.dataset.source, direction: btn.dataset.direction,
       dateReported: btn.dataset.date,
-      starredAt: new Date().toISOString(),
-      status: '待投递', notes: ''
+      starredAt: new Date().toISOString(), status: '待投递', notes: ''
     };
-    btn.textContent = '⭐';
-    btn.classList.add('starred');
-    btn.title = '已星标，点击取消';
-    showToast('⭐ 已星标：' + btn.dataset.title);
+    btn.textContent = '⭐'; btn.classList.add('starred'); btn.title = '已星标，点击取消';
+    showToast('⭐ 已星标 · <a href="../starred.html" style="color:#fbbf24">查看跟进 →</a>');
   }
-  saveStarred(starred);
+  setLocal(data);
+  ghWrite(data); // 后台静默同步
 }
 
-function showToast(msg) {
+function showToast(html) {
   const t = document.getElementById('starToast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
+  t.innerHTML = html; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-// 页面加载时恢复星标状态
-(function restoreStars() {
-  const starred = getStarred();
+// 页面加载：从 GitHub 拉取最新数据合并到本地，再恢复星标状态
+async function initStars() {
+  const local = getLocal();
+  if (!local.jobs) local.jobs = {};
+  // 后台拉取 GitHub 最新数据（如有 token）
+  if (getToken()) {
+    try {
+      const res = await fetch(`https://raw.githubusercontent.com/${GH_REPO}/main/${GH_FILE}?t=${Date.now()}`);
+      if (res.ok) {
+        const remote = await res.json();
+        const rJobs = remote.jobs || {};
+        for (const [id, job] of Object.entries(rJobs)) {
+          if (!local.jobs[id] || job.starredAt > local.jobs[id].starredAt)
+            local.jobs[id] = job;
+        }
+        setLocal(local);
+      }
+    } catch {}
+  }
+  // 恢复按钮状态
   document.querySelectorAll('.star-btn').forEach(btn => {
-    if (starred[btn.dataset.id]) {
-      btn.textContent = '⭐';
-      btn.classList.add('starred');
-      btn.title = '已星标，点击取消';
+    if (local.jobs[btn.dataset.id]) {
+      btn.textContent = '⭐'; btn.classList.add('starred'); btn.title = '已星标，点击取消';
     } else {
       btn.title = '星标此岗位';
     }
   });
-})();
-// ─────────────────────────────────────────────────
-</script>
+}
 
+initStars();
+// ─────────────────────────────────────────────────────
+</script>
 </body>
 </html>

@@ -6,327 +6,387 @@
   <title>⭐ 星标岗位跟进 · 刘世豪</title>
   <style>
     :root {
-      --navy: #0f3460; --blue: #1e5fa8; --gold: #f59e0b;
-      --green: #16a34a; --red: #dc2626; --orange: #d97706;
-      --purple: #7c3aed; --gray: #6b7280;
-      --bg: #f0f2f5; --card: #fff; --border: #e5e7eb; --text: #111827;
+      --navy:#0f3460;--blue:#1e5fa8;--gold:#f59e0b;
+      --green:#16a34a;--red:#dc2626;--orange:#d97706;--purple:#7c3aed;--gray:#6b7280;
+      --bg:#f0f2f5;--card:#fff;--border:#e5e7eb;--text:#111827;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'PingFang SC','Microsoft YaHei',-apple-system,sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'PingFang SC','Microsoft YaHei',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 
-    /* Header */
-    header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
-      color: #fff; padding: 32px 24px 24px;
-    }
-    .header-inner { max-width: 960px; margin: 0 auto; }
-    .header-top { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
-    .back-btn {
-      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
-      color: #fff; padding: 6px 14px; border-radius: 8px; font-size: 13px;
-      text-decoration: none; transition: background 0.2s;
-    }
-    .back-btn:hover { background: rgba(255,255,255,0.2); }
-    header h1 { font-size: 22px; font-weight: 800; }
-    header p { font-size: 13px; opacity: 0.65; margin-top: 2px; }
-    .status-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
-    .status-pill {
-      padding: 5px 16px; border-radius: 20px; font-size: 12.5px; font-weight: 600;
-      cursor: pointer; border: 2px solid transparent; transition: all 0.15s;
-    }
-    .status-pill.active { border-color: #fff; }
-    .pill-all    { background: rgba(255,255,255,0.15); color: #fff; }
-    .pill-todo   { background: #374151; color: #d1d5db; }
-    .pill-sent   { background: #1d4ed8; color: #fff; }
-    .pill-inter  { background: #d97706; color: #fff; }
-    .pill-offer  { background: #16a34a; color: #fff; }
-    .pill-pass   { background: #991b1b; color: #fff; }
+    header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 60%,#0f3460 100%);color:#fff;padding:28px 24px 20px;}
+    .header-inner{max-width:960px;margin:0 auto;}
+    .header-top{display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap;}
+    .back-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;padding:6px 14px;border-radius:8px;font-size:13px;text-decoration:none;transition:background .2s;white-space:nowrap;}
+    .back-btn:hover{background:rgba(255,255,255,.22);}
+    .header-title h1{font-size:20px;font-weight:800;}
+    .header-title p{font-size:12px;opacity:.6;margin-top:2px;}
 
-    .header-stats { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px; }
-    .hstat { text-align: center; }
-    .hstat .num { font-size: 24px; font-weight: 800; color: var(--gold); }
-    .hstat .lbl { font-size: 11px; opacity: 0.6; }
+    .sync-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+    .sync-status{font-size:12px;opacity:.75;display:flex;align-items:center;gap:6px;}
+    .sync-dot{width:8px;height:8px;border-radius:50%;background:#9ca3af;}
+    .sync-dot.ok{background:#34d399;}
+    .sync-dot.syncing{background:#fbbf24;animation:pulse .8s infinite;}
+    .sync-dot.err{background:#f87171;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+    .sync-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;padding:5px 13px;border-radius:7px;font-size:12px;cursor:pointer;transition:background .15s;}
+    .sync-btn:hover{background:rgba(255,255,255,.22);}
+    .token-btn{background:rgba(245,158,11,.2);border:1px solid rgba(245,158,11,.4);color:#fbbf24;padding:5px 13px;border-radius:7px;font-size:12px;cursor:pointer;transition:background .15s;}
+    .token-btn:hover{background:rgba(245,158,11,.3);}
 
-    /* Main */
-    .container { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .hstats{display:flex;gap:20px;flex-wrap:wrap;margin-top:4px;}
+    .hstat .num{font-size:22px;font-weight:800;color:var(--gold);}
+    .hstat .lbl{font-size:11px;opacity:.6;}
 
-    /* Empty state */
-    .empty-state {
-      background: var(--card); border-radius: 14px; padding: 60px 20px;
-      text-align: center; color: var(--gray); margin-top: 8px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    }
-    .empty-state .icon { font-size: 48px; margin-bottom: 14px; }
-    .empty-state p { font-size: 15px; margin-bottom: 8px; }
-    .empty-state small { font-size: 13px; opacity: 0.7; }
-    .empty-state a { color: var(--blue); text-decoration: none; }
+    .filter-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+    .pill{padding:5px 15px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border:2px solid transparent;transition:all .15s;opacity:.8;}
+    .pill.active{opacity:1;border-color:#fff;}
+    .pill-all{background:rgba(255,255,255,.15);color:#fff;}
+    .pill-todo{background:#374151;color:#d1d5db;}
+    .pill-sent{background:#1d4ed8;color:#fff;}
+    .pill-inter{background:#d97706;color:#fff;}
+    .pill-offer{background:#16a34a;color:#fff;}
+    .pill-pass{background:#991b1b;color:#fff;}
 
-    /* Job cards */
-    .jobs-grid { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
+    .container{max-width:960px;margin:0 auto;padding:24px 20px 60px;}
 
-    .starred-card {
-      background: var(--card); border-radius: 12px; padding: 18px 20px;
-      border: 1px solid var(--border); border-left: 4px solid var(--navy);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      transition: box-shadow 0.15s;
-    }
-    .starred-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.1); }
-    .starred-card.status-todo  { border-left-color: var(--gray); }
-    .starred-card.status-sent  { border-left-color: var(--blue); }
-    .starred-card.status-inter { border-left-color: var(--orange); }
-    .starred-card.status-offer { border-left-color: var(--green); }
-    .starred-card.status-pass  { border-left-color: var(--red); }
+    .empty-state{background:var(--card);border-radius:14px;padding:52px 20px;text-align:center;color:var(--gray);box-shadow:0 2px 12px rgba(0,0,0,.06);}
+    .empty-state .icon{font-size:44px;margin-bottom:12px;}
+    .empty-state p{font-size:15px;margin-bottom:6px;}
+    .empty-state small{font-size:13px;opacity:.7;}
+    .empty-state a{color:var(--blue);}
 
-    .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
-    .card-left { flex: 1; min-width: 0; }
-    .card-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-    .card-company { font-size: 0.88rem; color: var(--gray); }
-    .card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
-    .salary-badge {
-      font-size: 0.95rem; font-weight: 700; color: var(--green);
-      background: #dcfce7; padding: 3px 12px; border-radius: 20px;
-    }
-    .unstar-btn {
-      background: none; border: 1px solid var(--border); border-radius: 6px;
-      padding: 3px 10px; font-size: 12px; color: var(--gray); cursor: pointer;
-      transition: all 0.15s;
-    }
-    .unstar-btn:hover { background: #fee2e2; border-color: var(--red); color: var(--red); }
+    .jobs-grid{display:flex;flex-direction:column;gap:12px;margin-top:4px;}
+    .sc{background:var(--card);border-radius:12px;padding:18px 20px;border:1px solid var(--border);border-left:4px solid var(--navy);box-shadow:0 2px 8px rgba(0,0,0,.05);transition:box-shadow .15s;}
+    .sc:hover{box-shadow:0 4px 18px rgba(0,0,0,.1);}
+    .sc.s-todo{border-left-color:var(--gray);}
+    .sc.s-sent{border-left-color:var(--blue);}
+    .sc.s-inter{border-left-color:var(--orange);}
+    .sc.s-offer{border-left-color:var(--green);}
+    .sc.s-pass{border-left-color:var(--red);}
 
-    .card-meta { display: flex; gap: 10px; margin: 10px 0; flex-wrap: wrap; font-size: 0.8rem; color: var(--gray); }
-    .card-meta span { display: flex; align-items: center; gap: 4px; }
+    .sc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;}
+    .sc-title{font-size:1rem;font-weight:700;}
+    .sc-company{font-size:.88rem;color:var(--gray);margin-top:2px;}
+    .sc-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;}
+    .salary{font-size:.95rem;font-weight:700;color:var(--green);background:#dcfce7;padding:3px 12px;border-radius:20px;}
+    .unstar-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:12px;color:var(--gray);cursor:pointer;transition:all .15s;}
+    .unstar-btn:hover{background:#fee2e2;border-color:var(--red);color:var(--red);}
 
-    .card-controls { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; align-items: flex-start; }
+    .sc-meta{display:flex;gap:10px;margin:10px 0;font-size:.8rem;color:var(--gray);flex-wrap:wrap;}
+    .sc-controls{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;align-items:flex-start;}
+    .status-sel{padding:6px 12px;border-radius:8px;border:1.5px solid var(--border);font-size:.83rem;font-weight:600;cursor:pointer;outline:none;background:#fff;min-width:108px;}
+    .status-sel.todo{border-color:var(--gray);color:var(--gray);}
+    .status-sel.sent{border-color:var(--blue);color:var(--blue);}
+    .status-sel.inter{border-color:var(--orange);color:var(--orange);}
+    .status-sel.offer{border-color:var(--green);color:var(--green);}
+    .status-sel.pass{border-color:var(--red);color:var(--red);}
+    .notes-inp{flex:1;min-width:150px;padding:6px 10px;border-radius:8px;border:1.5px solid var(--border);font-size:.83rem;outline:none;resize:none;font-family:inherit;background:#fafafa;color:var(--text);}
+    .notes-inp:focus{border-color:var(--blue);background:#fff;}
 
-    .status-select {
-      padding: 6px 12px; border-radius: 8px; border: 1.5px solid var(--border);
-      font-size: 0.83rem; font-weight: 600; cursor: pointer; outline: none;
-      transition: border-color 0.15s; background: #fff; min-width: 110px;
-    }
-    .status-select:focus { border-color: var(--blue); }
-    .status-select.todo  { border-color: var(--gray);   color: var(--gray); }
-    .status-select.sent  { border-color: var(--blue);   color: var(--blue); }
-    .status-select.inter { border-color: var(--orange); color: var(--orange); }
-    .status-select.offer { border-color: var(--green);  color: var(--green); }
-    .status-select.pass  { border-color: var(--red);    color: var(--red); }
+    .sc-links{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;}
+    .lbtn{font-size:.82rem;padding:5px 12px;border-radius:7px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;font-weight:500;transition:all .15s;border:1.5px solid transparent;}
+    .lbtn-primary{background:var(--navy);color:#fff;}
+    .lbtn-primary:hover{background:var(--blue);}
+    .lbtn-sec{background:#fff;color:var(--navy);border-color:var(--navy);}
+    .lbtn-sec:hover{background:var(--navy);color:#fff;}
+    .sc-ts{font-size:.74rem;color:#bbb;margin-top:8px;}
 
-    .notes-input {
-      flex: 1; min-width: 160px; padding: 6px 10px; border-radius: 8px;
-      border: 1.5px solid var(--border); font-size: 0.83rem; outline: none;
-      transition: border-color 0.15s; color: var(--text); resize: none;
-      font-family: inherit; background: #fafafa;
-    }
-    .notes-input:focus { border-color: var(--blue); background: #fff; }
-    .notes-input::placeholder { color: #bbb; }
+    /* Token 设置弹窗 */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;}
+    .modal{background:#fff;border-radius:16px;padding:28px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+    .modal h2{font-size:17px;font-weight:800;margin-bottom:8px;}
+    .modal p{font-size:13px;color:var(--gray);line-height:1.6;margin-bottom:16px;}
+    .modal input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;outline:none;font-family:monospace;}
+    .modal input:focus{border-color:var(--blue);}
+    .modal-note{font-size:12px;color:var(--gray);margin-top:8px;line-height:1.5;}
+    .modal-btns{display:flex;gap:10px;margin-top:18px;justify-content:flex-end;}
+    .mbtn{padding:8px 20px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .15s;}
+    .mbtn-skip{background:#f3f4f6;color:var(--gray);}
+    .mbtn-skip:hover{background:#e5e7eb;}
+    .mbtn-save{background:var(--navy);color:#fff;}
+    .mbtn-save:hover{background:var(--blue);}
 
-    .card-links { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-    .job-link-btn {
-      font-size: 0.82rem; padding: 5px 12px; border-radius: 7px;
-      text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
-      font-weight: 500; transition: all 0.15s; border: 1.5px solid transparent;
-    }
-    .btn-primary { background: var(--navy); color: #fff; }
-    .btn-primary:hover { background: var(--blue); }
-    .btn-secondary { background: #fff; color: var(--navy); border-color: var(--navy); }
-    .btn-secondary:hover { background: var(--navy); color: #fff; }
-
-    .starred-at { font-size: 0.75rem; color: #bbb; margin-top: 8px; }
-
-    .section-label {
-      font-size: 12px; font-weight: 700; text-transform: uppercase;
-      color: var(--gray); letter-spacing: 0.08em; margin: 24px 0 10px;
-    }
-
-    footer { text-align: center; padding: 20px; font-size: 12px; color: var(--gray); border-top: 1px solid var(--border); margin-top: 20px; }
+    footer{text-align:center;padding:20px;font-size:12px;color:var(--gray);border-top:1px solid var(--border);}
   </style>
 </head>
 <body>
 
+<!-- Token 设置弹窗 -->
+<div class="modal-overlay" id="tokenModal" style="display:none;">
+  <div class="modal">
+    <h2>🔗 开启跨设备同步</h2>
+    <p>输入你的 GitHub Personal Access Token，星标数据将自动同步到 GitHub 仓库，手机和电脑都能看到。</p>
+    <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" />
+    <p class="modal-note">
+      Token 仅存储在本浏览器本地（localStorage），不会上传到任何服务器。<br/>
+      需要 <strong>repo</strong> 权限。<a href="https://github.com/settings/tokens" target="_blank" style="color:var(--blue)">在 GitHub 生成 →</a>
+    </p>
+    <div class="modal-btns">
+      <button class="mbtn mbtn-skip" onclick="closeTokenModal()">仅本地使用</button>
+      <button class="mbtn mbtn-save" onclick="saveToken()">保存并同步</button>
+    </div>
+  </div>
+</div>
+
 <header>
   <div class="header-inner">
     <div class="header-top">
-      <a href="../index.html" class="back-btn">← 返回首页</a>
-      <div>
+      <a href="index.html" class="back-btn">← 首页</a>
+      <div class="header-title">
         <h1>⭐ 星标岗位跟进</h1>
         <p>刘世豪 · 求职进度管理</p>
       </div>
     </div>
-
-    <div class="header-stats">
-      <div class="hstat"><div class="num" id="countAll">0</div><div class="lbl">全部星标</div></div>
-      <div class="hstat"><div class="num" id="countTodo" style="color:#9ca3af">0</div><div class="lbl">待投递</div></div>
-      <div class="hstat"><div class="num" id="countSent" style="color:#60a5fa">0</div><div class="lbl">已投递</div></div>
-      <div class="hstat"><div class="num" id="countInter" style="color:#fbbf24">0</div><div class="lbl">面试中</div></div>
-      <div class="hstat"><div class="num" id="countOffer" style="color:#34d399">0</div><div class="lbl">Offer</div></div>
+    <div class="sync-bar">
+      <span class="sync-status"><span class="sync-dot" id="syncDot"></span><span id="syncText">检查同步状态...</span></span>
+      <button class="sync-btn" onclick="fullSync()">↻ 立即同步</button>
+      <button class="token-btn" onclick="showTokenModal()">🔑 Token 设置</button>
     </div>
-
-    <div class="status-pills">
-      <span class="status-pill pill-all active" onclick="filterStatus('all', this)">全部</span>
-      <span class="status-pill pill-todo" onclick="filterStatus('待投递', this)">待投递</span>
-      <span class="status-pill pill-sent" onclick="filterStatus('已投递', this)">已投递</span>
-      <span class="status-pill pill-inter" onclick="filterStatus('面试中', this)">面试中</span>
-      <span class="status-pill pill-offer" onclick="filterStatus('Offer', this)">Offer ✓</span>
-      <span class="status-pill pill-pass" onclick="filterStatus('已放弃', this)">已放弃</span>
+    <div class="hstats">
+      <div class="hstat"><div class="num" id="cAll">0</div><div class="lbl">全部</div></div>
+      <div class="hstat"><div class="num" id="cTodo" style="color:#9ca3af">0</div><div class="lbl">待投递</div></div>
+      <div class="hstat"><div class="num" id="cSent" style="color:#60a5fa">0</div><div class="lbl">已投递</div></div>
+      <div class="hstat"><div class="num" id="cInter" style="color:#fbbf24">0</div><div class="lbl">面试中</div></div>
+      <div class="hstat"><div class="num" id="cOffer" style="color:#34d399">0</div><div class="lbl">Offer</div></div>
+    </div>
+    <div class="filter-pills">
+      <span class="pill pill-all active" onclick="setFilter('all',this)">全部</span>
+      <span class="pill pill-todo" onclick="setFilter('待投递',this)">待投递</span>
+      <span class="pill pill-sent" onclick="setFilter('已投递',this)">已投递</span>
+      <span class="pill pill-inter" onclick="setFilter('面试中',this)">面试中</span>
+      <span class="pill pill-offer" onclick="setFilter('Offer',this)">Offer ✓</span>
+      <span class="pill pill-pass" onclick="setFilter('已放弃',this)">已放弃</span>
     </div>
   </div>
 </header>
 
-<div class="container">
-  <div id="jobsContainer"></div>
-</div>
-
-<footer>星标数据存储在本浏览器本地（localStorage），更换设备或清除缓存后会丢失。</footer>
+<div class="container"><div id="jobsContainer"></div></div>
+<footer>数据同步至 GitHub 仓库 · 跨设备共享 · 本地 localStorage 做离线缓存</footer>
 
 <script>
-const STAR_KEY = 'xian_starred_jobs_v1';
+const STAR_KEY  = 'xian_starred_jobs_v1';
+const TOKEN_KEY = 'xian_gh_token';
+const GH_REPO   = 'alex602022/xian-job-reports';
+const GH_FILE   = 'starred_jobs.json';
+const SC = { '待投递':'todo','已投递':'sent','面试中':'inter','Offer':'offer','已放弃':'pass' };
+const STATUS_OPTS = ['待投递','已投递','面试中','Offer','已放弃'];
+
 let currentFilter = 'all';
 
-const STATUS_CLASS = {
-  '待投递': 'todo', '已投递': 'sent', '面试中': 'inter', 'Offer': 'offer', '已放弃': 'pass'
-};
-const STATUS_OPTIONS = ['待投递', '已投递', '面试中', 'Offer', '已放弃'];
+// ── localStorage ──────────────────────────────────────
+function getLocal()  { try{return JSON.parse(localStorage.getItem(STAR_KEY)||'{}')}catch{return{}} }
+function setLocal(d) { localStorage.setItem(STAR_KEY, JSON.stringify(d)) }
+function getToken()  { return localStorage.getItem(TOKEN_KEY)||'' }
 
-function getStarred() {
-  try { return JSON.parse(localStorage.getItem(STAR_KEY) || '{}'); }
-  catch(e) { return {}; }
-}
-function saveStarred(data) {
-  localStorage.setItem(STAR_KEY, JSON.stringify(data));
-}
-
-function genId(url) {
-  let h = 0;
-  for (let i = 0; i < url.length; i++) h = (Math.imul(31, h) + url.charCodeAt(i)) | 0;
-  return 'job_' + Math.abs(h);
+// ── GitHub API ────────────────────────────────────────
+async function ghRead() {
+  try {
+    const res = await fetch(`https://raw.githubusercontent.com/${GH_REPO}/main/${GH_FILE}?t=${Date.now()}`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch { return null; }
 }
 
-function updateCounts(starred) {
-  const jobs = Object.values(starred);
-  document.getElementById('countAll').textContent = jobs.length;
-  document.getElementById('countTodo').textContent = jobs.filter(j => j.status === '待投递').length;
-  document.getElementById('countSent').textContent = jobs.filter(j => j.status === '已投递').length;
-  document.getElementById('countInter').textContent = jobs.filter(j => j.status === '面试中').length;
-  document.getElementById('countOffer').textContent = jobs.filter(j => j.status === 'Offer').length;
+async function ghWrite(data) {
+  const token = getToken();
+  if (!token) return false;
+  try {
+    // 获取当前 SHA
+    const metaRes = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`,
+      { headers:{ Authorization:`token ${token}` } });
+    const meta = await metaRes.json();
+    if (!meta.sha) return false;
+    // 写入
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const putRes = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
+      method:'PUT',
+      headers:{ Authorization:`token ${token}`, 'Content-Type':'application/json' },
+      body: JSON.stringify({ message:'sync starred jobs', content, sha: meta.sha })
+    });
+    return putRes.ok;
+  } catch { return false; }
 }
 
-function filterStatus(status, el) {
-  currentFilter = status;
-  document.querySelectorAll('.status-pill').forEach(p => p.classList.remove('active'));
+// ── 合并策略：两边 jobs 取 starredAt 较新的 ─────────────
+function mergeData(local, remote) {
+  const lJobs = local.jobs || {};
+  const rJobs = (remote && remote.jobs) || {};
+  const merged = { ...rJobs };
+  for (const [id, job] of Object.entries(lJobs)) {
+    if (!merged[id] || job.starredAt > merged[id].starredAt) merged[id] = job;
+    // 已在本地删除（status='_deleted'）则从合并结果移除
+    if (merged[id]?.status === '_deleted') delete merged[id];
+  }
+  return { jobs: merged };
+}
+
+// ── 完整同步（拉取 + 合并 + 推送）──────────────────────
+async function fullSync() {
+  setSyncStatus('syncing', '同步中...');
+  const token = getToken();
+  if (!token) { setSyncStatus('', '未配置 Token，仅本地模式'); render(); return; }
+
+  const remote = await ghRead();
+  const local  = getLocal();
+  const merged = mergeData(local, remote);
+  setLocal(merged);
+
+  const ok = await ghWrite(merged);
+  if (ok) {
+    setSyncStatus('ok', '已同步 · ' + new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}));
+  } else {
+    setSyncStatus('err', 'Token 无效或网络失败');
+  }
+  updateCounts(merged.jobs || {});
+  render();
+}
+
+function setSyncStatus(state, text) {
+  const dot = document.getElementById('syncDot');
+  dot.className = 'sync-dot' + (state ? ' '+state : '');
+  document.getElementById('syncText').textContent = text;
+}
+
+// ── 星标 / 取消星标 ───────────────────────────────────
+function unstar(id) {
+  const data = getLocal();
+  delete (data.jobs||{})[id];
+  setLocal(data);
+  silentPush(data);
+  updateCounts(data.jobs||{});
+  render();
+}
+
+function changeStatus(id, val) {
+  const data = getLocal();
+  if (data.jobs?.[id]) { data.jobs[id].status = val; data.jobs[id].updatedAt = new Date().toISOString(); }
+  setLocal(data);
+  silentPush(data);
+  const card = document.querySelector(`.sc[data-id="${id}"]`);
+  if (card) card.className = `sc s-${SC[val]||'todo'}`;
+  const sel = document.querySelector(`.status-sel[data-id="${id}"]`);
+  if (sel) sel.className = `status-sel ${SC[val]||'todo'}`;
+}
+
+function saveNotes(id, notes) {
+  const data = getLocal();
+  if (data.jobs?.[id]) { data.jobs[id].notes = notes; data.jobs[id].updatedAt = new Date().toISOString(); }
+  setLocal(data);
+  silentPush(data);
+}
+
+async function silentPush(data) {
+  if (!getToken()) return;
+  await ghWrite(data);
+}
+
+// ── 统计 ─────────────────────────────────────────────
+function updateCounts(jobs) {
+  const arr = Object.values(jobs);
+  document.getElementById('cAll').textContent   = arr.length;
+  document.getElementById('cTodo').textContent  = arr.filter(j=>j.status==='待投递').length;
+  document.getElementById('cSent').textContent  = arr.filter(j=>j.status==='已投递').length;
+  document.getElementById('cInter').textContent = arr.filter(j=>j.status==='面试中').length;
+  document.getElementById('cOffer').textContent = arr.filter(j=>j.status==='Offer').length;
+}
+
+// ── 筛选 ─────────────────────────────────────────────
+function setFilter(f, el) {
+  currentFilter = f;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
   render();
 }
 
-function formatDate(isoStr) {
-  if (!isoStr) return '';
-  const d = new Date(isoStr);
+// ── 渲染 ─────────────────────────────────────────────
+function fmt(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
   return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')} 星标`;
 }
 
-function unstar(id) {
-  const starred = getStarred();
-  delete starred[id];
-  saveStarred(starred);
-  updateCounts(starred);
-  render();
-}
-
-function changeStatus(id, newStatus) {
-  const starred = getStarred();
-  if (starred[id]) {
-    starred[id].status = newStatus;
-    saveStarred(starred);
-    updateCounts(starred);
-    // Update card border class
-    const card = document.querySelector(`.starred-card[data-id="${id}"]`);
-    if (card) {
-      card.className = `starred-card status-${STATUS_CLASS[newStatus] || 'todo'}`;
-    }
-    // Update select class
-    const sel = document.querySelector(`.status-select[data-id="${id}"]`);
-    if (sel) sel.className = `status-select ${STATUS_CLASS[newStatus] || 'todo'}`;
-  }
-}
-
-function saveNotes(id, notes) {
-  const starred = getStarred();
-  if (starred[id]) {
-    starred[id].notes = notes;
-    saveStarred(starred);
-  }
-}
-
 function render() {
-  const starred = getStarred();
-  const jobs = Object.values(starred).sort((a, b) => {
-    const ORDER = {'面试中':0,'Offer':1,'已投递':2,'待投递':3,'已放弃':4};
-    return (ORDER[a.status]??9) - (ORDER[b.status]??9) || b.starredAt.localeCompare(a.starredAt);
-  });
-
-  const filtered = currentFilter === 'all' ? jobs : jobs.filter(j => j.status === currentFilter);
-  const container = document.getElementById('jobsContainer');
+  const data = getLocal();
+  const jobs = Object.values(data.jobs || {})
+    .sort((a,b)=>{
+      const O={'面试中':0,'Offer':1,'已投递':2,'待投递':3,'已放弃':4};
+      return (O[a.status]??9)-(O[b.status]??9) || (b.starredAt||'').localeCompare(a.starredAt||'');
+    });
+  const filtered = currentFilter==='all' ? jobs : jobs.filter(j=>j.status===currentFilter);
+  const el = document.getElementById('jobsContainer');
 
   if (jobs.length === 0) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <div class="icon">⭐</div>
-        <p>还没有星标岗位</p>
-        <small>在 <a href="reports/2026-04-21.html">每日报告</a> 中点击职位卡片右上角的 ☆ 即可星标</small>
-      </div>`;
+    el.innerHTML=`<div class="empty-state"><div class="icon">⭐</div>
+      <p>还没有星标岗位</p>
+      <small>打开每日报告，点击职位卡片右上角的 ☆ 即可星标</small></div>`;
     return;
   }
-
   if (filtered.length === 0) {
-    container.innerHTML = `<div class="empty-state"><div class="icon">🔍</div><p>当前筛选下没有岗位</p></div>`;
+    el.innerHTML=`<div class="empty-state"><div class="icon">🔍</div><p>当前筛选下没有岗位</p></div>`;
     return;
   }
 
-  container.innerHTML = filtered.map(job => {
-    const sc = STATUS_CLASS[job.status] || 'todo';
-    const options = STATUS_OPTIONS.map(s =>
-      `<option value="${s}" ${s === job.status ? 'selected' : ''}>${s}</option>`
-    ).join('');
+  el.innerHTML = filtered.map(job=>{
+    const sc = SC[job.status]||'todo';
+    const opts = STATUS_OPTS.map(s=>`<option value="${s}"${s===job.status?' selected':''}>${s}</option>`).join('');
     const reportLink = job.dateReported ? `reports/${job.dateReported}.html` : '#';
-    return `
-    <div class="starred-card status-${sc}" data-id="${job.id}">
-      <div class="card-top">
-        <div class="card-left">
-          <div class="card-title">${job.title}</div>
-          <div class="card-company">${job.company}</div>
-        </div>
-        <div class="card-right">
-          <span class="salary-badge">${job.salary || '薪资面议'}</span>
-          <button class="unstar-btn" onclick="unstar('${job.id}')">✕ 取消星标</button>
+    return `<div class="sc s-${sc}" data-id="${job.id}">
+      <div class="sc-top">
+        <div><div class="sc-title">${job.title}</div><div class="sc-company">${job.company}</div></div>
+        <div class="sc-right">
+          <span class="salary">${job.salary||'薪资面议'}</span>
+          <button class="unstar-btn" onclick="unstar('${job.id}')">✕ 取消</button>
         </div>
       </div>
-      <div class="card-meta">
-        <span>📋 ${job.source || '—'}</span>
-        <span>📅 来自 ${job.dateReported || '—'} 报告</span>
-        ${job.direction === 'match' ? '<span>🎯 精准匹配</span>' : '<span>🚀 跨界探索</span>'}
+      <div class="sc-meta">
+        <span>📋 ${job.source||'—'}</span>
+        <span>📅 ${job.dateReported||'—'} 报告</span>
+        <span>${job.direction==='match'?'🎯 精准匹配':'🚀 跨界探索'}</span>
       </div>
-      <div class="card-controls">
-        <select class="status-select ${sc}" data-id="${job.id}"
-          onchange="changeStatus('${job.id}', this.value)">
-          ${options}
-        </select>
-        <textarea class="notes-input" rows="1" placeholder="备注：面试时间、联系人、进展..."
+      <div class="sc-controls">
+        <select class="status-sel ${sc}" data-id="${job.id}" onchange="changeStatus('${job.id}',this.value)">${opts}</select>
+        <textarea class="notes-inp" rows="1" placeholder="备注：面试时间、联系人、进展..."
           data-id="${job.id}"
-          onchange="saveNotes('${job.id}', this.value)"
+          onchange="saveNotes('${job.id}',this.value)"
           oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"
-        >${job.notes || ''}</textarea>
+        >${job.notes||''}</textarea>
       </div>
-      <div class="card-links">
-        <a class="job-link-btn btn-primary" href="${job.url}" target="_blank">→ 查看原职位</a>
-        <a class="job-link-btn btn-secondary" href="${reportLink}" target="_blank">📄 来源报告</a>
+      <div class="sc-links">
+        <a class="lbtn lbtn-primary" href="${job.url}" target="_blank">→ 查看原职位</a>
+        <a class="lbtn lbtn-sec" href="${reportLink}" target="_blank">📄 来源报告</a>
       </div>
-      <div class="starred-at">${formatDate(job.starredAt)}</div>
+      <div class="sc-ts">${fmt(job.starredAt)}</div>
     </div>`;
   }).join('');
 }
 
-// Init
-const starred = getStarred();
-updateCounts(starred);
-render();
+// ── Token 弹窗 ────────────────────────────────────────
+function showTokenModal() { document.getElementById('tokenModal').style.display='flex'; }
+function closeTokenModal(){ document.getElementById('tokenModal').style.display='none'; }
+function saveToken() {
+  const val = document.getElementById('tokenInput').value.trim();
+  if (val) { localStorage.setItem(TOKEN_KEY, val); }
+  closeTokenModal();
+  fullSync();
+}
+
+// ── 初始化 ────────────────────────────────────────────
+async function init() {
+  const token = getToken();
+  const local = getLocal();
+  updateCounts(local.jobs||{});
+  render(); // 先用本地数据渲染
+
+  if (!token) {
+    setSyncStatus('', '未配置 Token，仅本地模式');
+    // 如果从未设置过 token 且有星标数据，提示设置同步
+    if (Object.keys(local.jobs||{}).length === 0) showTokenModal();
+    return;
+  }
+  await fullSync();
+}
+
+init();
 </script>
 </body>
 </html>
