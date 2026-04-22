@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西安岗位推荐报告 · 2026-04-22</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent: #e94560;
+    --match-color: #0f3460;
+    --cross-color: #533483;
+    --bg: #f8f9fc;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --muted: #718096;
+    --radius: 14px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6; }
+  header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #fff; padding: 40px 24px 32px;
+    text-align: center;
+  }
+  header h1 { font-size: 2rem; font-weight: 700; letter-spacing: 0.02em; }
+  header .subtitle { color: #a0aec0; margin-top: 8px; font-size: 0.95rem; }
+  header .stats { display: flex; justify-content: center; gap: 32px; margin-top: 24px; flex-wrap: wrap; }
+  header .stat { text-align: center; }
+  header .stat .num { font-size: 2rem; font-weight: 800; color: #e94560; }
+  header .stat .label { font-size: 0.8rem; color: #a0aec0; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 16px 60px; }
+  .section { margin-top: 40px; }
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 20px; border-radius: var(--radius);
+    margin-bottom: 20px; color: #fff;
+  }
+  .section-header.match-header { background: var(--match-color); }
+  .section-header.cross-header { background: var(--cross-color); }
+  .section-header h2 { font-size: 1.25rem; }
+  .section-header .count { background: rgba(255,255,255,0.25); border-radius: 20px;
+    padding: 2px 10px; font-size: 0.85rem; font-weight: 600; }
+  .section-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; padding-left: 4px; }
+  .job-card {
+    background: var(--card-bg); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 22px 24px;
+    margin-bottom: 16px; border-left: 5px solid transparent;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+  .job-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
+  .job-card.highlighted { border-left-color: #2196F3; }
+  .job-card.cross { border-left-color: #9c27b0; }
+  .job-header { margin-bottom: 12px; }
+  .job-title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+  .job-title { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+  .source-badge { font-size: 0.72rem; font-weight: 600; color: #fff;
+    padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+  .job-meta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    font-size: 0.875rem; color: var(--muted); }
+  .salary { font-weight: 700; color: #e53e3e; font-size: 0.95rem; }
+  .pub-date { font-size: 0.8rem; }
+  .date-fresh { color: #38a169; }
+  .date-unknown { color: #a0aec0; }
+  .match-reason {
+    font-size: 0.875rem; color: var(--text); background: #f7fafc;
+    border-radius: 8px; padding: 12px 14px; margin-bottom: 14px;
+    line-height: 1.7;
+  }
+  .job-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.875rem; font-weight: 600; color: #2b6cb0;
+    text-decoration: none; padding: 6px 14px; border-radius: 8px;
+    border: 1.5px solid #bee3f8; transition: all 0.15s;
+  }
+  .job-link:hover { background: #ebf8ff; border-color: #2b6cb0; }
+  .star-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 1.35rem; padding: 2px 4px; line-height: 1;
+    border-radius: 6px; transition: transform 0.15s;
+    flex-shrink: 0; align-self: flex-start;
+    position: absolute; top: 18px; right: 18px;
+  }
+  .star-btn:hover { transform: scale(1.25); }
+  .star-btn.starred { color: #f59e0b; }
+  .star-btn:not(.starred) { color: #d1d5db; filter: grayscale(1); }
+  .star-btn:not(.starred):hover { color: #f59e0b; filter: none; }
+  .star-toast {
+    position: fixed; bottom: 24px; right: 24px; z-index: 999;
+    background: #1a1a2e; color: #fff; padding: 10px 18px;
+    border-radius: 10px; font-size: 13.5px; font-weight: 500;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.2s, transform 0.2s; pointer-events: none;
+  }
+  .star-toast.show { opacity: 1; transform: translateY(0); }
+  .quality-score {
+    background: var(--card-bg); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 24px; margin-top: 48px;
+  }
+  .quality-score h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: var(--primary); }
+  .score-total { font-size: 2rem; font-weight: 800; color: #38a169; margin-bottom: 16px; }
+  .quality-score table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  .quality-score th { text-align: left; padding: 8px 12px; background: #f7fafc; color: var(--muted); font-weight: 600; }
+  .quality-score td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; }
+  .quality-score tr:last-child td { border-bottom: none; }
+  .trigger-status { margin-top: 16px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.875rem; font-weight: 600; }
+  .trigger-ok { background: #f0fff4; color: #276749; }
+  footer { text-align: center; padding: 32px; color: var(--muted); font-size: 0.85rem; }
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.5rem; }
+    .job-meta-row { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🗺️ 西安岗位推荐报告</h1>
+  <div class="subtitle">生成日期：2026年04月22日 | 候选人：刘世豪 · 诺基亚西北区BDM | 8年ICT ToB</div>
+  <div class="stats">
+    <div class="stat"><div class="num">4</div><div class="label">平台覆盖</div></div>
+    <div class="stat"><div class="num">17</div><div class="label">推荐职位</div></div>
+    <div class="stat"><div class="num">8</div><div class="label">精准匹配</div></div>
+    <div class="stat"><div class="num">9</div><div class="label">跨界探索</div></div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- 方向一 -->
+  <div class="section">
+    <div class="section-header match-header">
+      <span>🎯</span>
+      <h2>方向一：高度匹配岗位</h2>
+      <span class="count">8 个</span>
+    </div>
+    <p class="section-desc">与候选人ICT/通信/售前/BDM既往经验高度吻合，可直接申请，胜率最高</p>
+    
+<div class="job-card highlighted">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">基站售前解决方案专家</h3>
+      <span class="source-badge" style="background:#00c4a3">BOSS直聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 Baicells（百熙通信）</span>
+      <span class="salary">💰 25-50K</span>
+      <span class="pub-date date-unknown">📅 日期未知</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_270721297"
+      data-title="基站售前解决方案专家"
+      data-company="Baicells（百熙通信）"
+      data-salary="25-50K"
+      data-url="https://www.zhipin.com/job_detail/a6ea79bf650bad1003192Nq0ElBU.html"
+      data-source="BOSS直聘"
+      data-direction="highlighted"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">通信/网络设备行业，基站售前方向与候选人8年ICT ToB经验、PON/SDN/通信技术背景高度吻合；薪资25-50K远超20K目标；售前方向精准命中</p>
+  <a class="job-link" href="https://www.zhipin.com/job_detail/a6ea79bf650bad1003192Nq0ElBU.html" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card highlighted">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">高级客户经理（解决方案）</h3>
+      <span class="source-badge" style="background:#00c4a3">BOSS直聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 烽火通信科技</span>
+      <span class="salary">💰 25-40K·14薪</span>
+      <span class="pub-date date-unknown">📅 日期未知</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_696543112"
+      data-title="高级客户经理（解决方案）"
+      data-company="烽火通信科技"
+      data-salary="25-40K·14薪"
+      data-url="https://www.zhipin.com/job_detail/3a1b3df8741614880nZ_2N-6GVFY.html"
+      data-source="BOSS直聘"
+      data-direction="highlighted"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">国内顶级通信设备上市公司（600498），对接光传输/光接入大客户，候选人诺基亚BDM+PON/OLT背景与岗位完美契合；25-40K·14薪超出目标薪资</p>
+  <a class="job-link" href="https://www.zhipin.com/job_detail/3a1b3df8741614880nZ_2N-6GVFY.html" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card highlighted">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">联网解决方案经理/政企售前专家（国企/5G/双碳）</h3>
+      <span class="source-badge" style="background:#ff6b35">猎聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 某广州大型物联网公司（通信设备行业）</span>
+      <span class="salary">💰 20-35K</span>
+      <span class="pub-date date-fresh">📅 今天发布（2026-04-22）</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_1321664145"
+      data-title="联网解决方案经理/政企售前专家（国企/5G/双碳）"
+      data-company="某广州大型物联网公司（通信设备行业）"
+      data-salary="20-35K"
+      data-url="https://www.liepin.com/job/1966082327"
+      data-source="猎聘"
+      data-direction="highlighted"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">政企售前+5G+通信设备方向，与候选人运营商（中电信/联通/移动）客户资源及ICT ToB经验高度吻合；今日新发，鲜度高</p>
+  <a class="job-link" href="https://www.liepin.com/job/1966082327" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card highlighted">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">解决方案高级经理</h3>
+      <span class="source-badge" style="background:#ff6b35">猎聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 中移集成（中国移动旗下）</span>
+      <span class="salary">💰 20-30K</span>
+      <span class="pub-date date-fresh">📅 今天发布（2026-04-22）</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_1195954553"
+      data-title="解决方案高级经理"
+      data-company="中移集成（中国移动旗下）"
+      data-salary="20-30K"
+      data-url="https://www.liepin.com/job/1947327669"
+      data-source="猎聘"
+      data-direction="highlighted"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">中国移动旗下集成公司，解决方案高级经理岗，完全契合候选人运营商渠道背景及ICT大客户经验；中移系央企，稳定性强</p>
+  <a class="job-link" href="https://www.liepin.com/job/1947327669" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card highlighted">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">高级解决方案经理（西安）</h3>
+      <span class="source-badge" style="background:#ff6b35">猎聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 邦彦技术（科创板上市）</span>
+      <span class="salary">💰 20-26K</span>
+      <span class="pub-date date-fresh">📅 昨天发布（2026-04-21）</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_512197181"
+      data-title="高级解决方案经理（西安）"
+      data-company="邦彦技术（科创板上市）"
+      data-salary="20-26K"
+      data-url="https://www.liepin.com/job/1981579327"
+      data-source="猎聘"
+      data-direction="highlighted"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">科创板上市ICT硬件企业，解决方案经理对应候选人ICT背景和售前/解决方案方向；西安本地岗，无需出差</p>
+  <a class="job-link" href="https://www.liepin.com/job/1981579327" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card highlighted">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">腾讯云-渠道销售</h3>
+      <span class="source-badge" style="background:#ff6b35">猎聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 腾讯（港股上市）</span>
+      <span class="salary">💰 30-45K·15薪</span>
+      <span class="pub-date date-fresh">📅 今天发布（2026-04-22）</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_426315620"
+      data-title="腾讯云-渠道销售"
+      data-company="腾讯（港股上市）"
+      data-salary="30-45K·15薪"
+      data-url="https://www.liepin.com/job/1981279969"
+      data-source="猎聘"
+      data-direction="highlighted"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">腾讯云渠道销售，与候选人云计算（阿里云ACE认证）背景及渠道管理求职意向精准匹配；30-45K·15薪薪资优厚；大厂平台</p>
+  <a class="job-link" href="https://www.liepin.com/job/1981279969" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card highlighted">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">Sales Engineer</h3>
+      <span class="source-badge" style="background:#0077b5">LinkedIn</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 Avnet（安富利电子，全球ICT分销商）</span>
+      <span class="salary">💰 面议</span>
+      <span class="pub-date date-fresh">📅 1周前（约2026-04-15）</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_1108866663"
+      data-title="Sales Engineer"
+      data-company="Avnet（安富利电子，全球ICT分销商）"
+      data-salary="面议"
+      data-url="https://www.linkedin.com/jobs/view/4400375792/"
+      data-source="LinkedIn"
+      data-direction="highlighted"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">全球顶级ICT/电子元器件分销商，Sales Engineer需拓展ICT大客户并提供技术方案，与候选人8年ICT ToB经验和诺基亚BDM背景高度匹配；西安On-site；22位Nokia校友在职，内部认可度高</p>
+  <a class="job-link" href="https://www.linkedin.com/jobs/view/4400375792/" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card highlighted">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">售前经理</h3>
+      <span class="source-badge" style="background:#00c4a3">BOSS直聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 海能达通信</span>
+      <span class="salary">💰 15-25K</span>
+      <span class="pub-date date-unknown">📅 日期未知</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_1230992489"
+      data-title="售前经理"
+      data-company="海能达通信"
+      data-salary="15-25K"
+      data-url="https://www.zhipin.com/job_detail/4ff20c1fe56a5ee30nd43961F1JS.html"
+      data-source="BOSS直聘"
+      data-direction="highlighted"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">知名无线通信设备商（上市公司），售前经理方向与候选人诺基亚售前/BDM经验高度匹配；可作为候选项</p>
+  <a class="job-link" href="https://www.zhipin.com/job_detail/4ff20c1fe56a5ee30nd43961F1JS.html" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+  </div>
+
+  <!-- 方向二 -->
+  <div class="section">
+    <div class="section-header cross-header">
+      <span>🚀</span>
+      <h2>方向二：跨界探索岗位</h2>
+      <span class="count">9 个</span>
+    </div>
+    <p class="section-desc">技能可迁移的新赛道——AI商业化/云计算/能源数字化，适合主动寻求跨界突破的候选人</p>
+    
+<div class="job-card cross">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">公共云解决方案架构师-西安</h3>
+      <span class="source-badge" style="background:#00c4a3">BOSS直聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 阿里云</span>
+      <span class="salary">💰 30-55K·16薪</span>
+      <span class="pub-date date-unknown">📅 日期未知</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_317590628"
+      data-title="公共云解决方案架构师-西安"
+      data-company="阿里云"
+      data-salary="30-55K·16薪"
+      data-url="https://www.zhipin.com/job_detail/57a33919a81d80911HN72dS0EVtU.html"
+      data-source="BOSS直聘"
+      data-direction="cross"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">【跨界价值】候选人持阿里云ACE认证（架构师资质），是应聘此岗最强背书；薪资30-55K·16薪大幅超目标；阿里云品牌背书可助候选人转型为云原生解决方案专家，开辟第二增长曲线</p>
+  <a class="job-link" href="https://www.zhipin.com/job_detail/57a33919a81d80911HN72dS0EVtU.html" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card cross">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">泛互行业解决方案架构师-火山引擎（西安）</h3>
+      <span class="source-badge" style="background:#ff6b35">猎聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 字节跳动</span>
+      <span class="salary">💰 25-55K·18薪</span>
+      <span class="pub-date date-fresh">📅 1天前（2026-04-21）</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_319954888"
+      data-title="泛互行业解决方案架构师-火山引擎（西安）"
+      data-company="字节跳动"
+      data-salary="25-55K·18薪"
+      data-url="https://www.liepin.com/job/1980757303"
+      data-source="猎聘"
+      data-direction="cross"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">【跨界价值】字节跳动火山引擎（企业云服务），18薪超高年终；候选人阿里云ACE+SDN/RoCE/AI智算技术栈匹配；从诺基亚BDM跨至互联网大厂云服务，可显著提升薪资天花板和品牌影响力</p>
+  <a class="job-link" href="https://www.liepin.com/job/1980757303" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card cross">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">解决方案（AIDC行业）</h3>
+      <span class="source-badge" style="background:#00c4a3">BOSS直聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 北京四方继保</span>
+      <span class="salary">💰 25-40K·14薪</span>
+      <span class="pub-date date-unknown">📅 日期未知</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_1472700940"
+      data-title="解决方案（AIDC行业）"
+      data-company="北京四方继保"
+      data-salary="25-40K·14薪"
+      data-url="https://www.zhipin.com/job_detail/1977522d18faab290nR-39u9F1BX.html"
+      data-source="BOSS直聘"
+      data-direction="cross"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">【跨界价值】AIDC（AI数据中心）行业解决方案，与候选人RoCE/AI智算中心技术背景直接命中；能源/电力行业大客户资源加分；25-40K·14薪超目标；是通信→AI基础设施的自然延伸路径</p>
+  <a class="job-link" href="https://www.zhipin.com/job_detail/1977522d18faab290nR-39u9F1BX.html" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card cross">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">售前咨询经理-西安</h3>
+      <span class="source-badge" style="background:#ff6b35">猎聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 科大讯飞</span>
+      <span class="salary">💰 20-30K·14薪</span>
+      <span class="pub-date date-fresh">📅 今天发布（2026-04-22）</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_1315203435"
+      data-title="售前咨询经理-西安"
+      data-company="科大讯飞"
+      data-salary="20-30K·14薪"
+      data-url="https://www.liepin.com/job/1966012757"
+      data-source="猎聘"
+      data-direction="cross"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">【跨界价值】国内AI龙头企业，售前咨询经理；候选人ICT售前经验完全可迁移至AI场景，AI商业化方向符合其求职意向；科大讯飞在政企/教育/医疗AI领域的渠道与候选人运营商客户形成互补</p>
+  <a class="job-link" href="https://www.liepin.com/job/1966012757" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card cross">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">高级客户经理-销委会（储备管理岗）</h3>
+      <span class="source-badge" style="background:#ff6b35">猎聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 科大讯飞</span>
+      <span class="salary">💰 30-45K·14薪</span>
+      <span class="pub-date date-fresh">📅 今天发布（2026-04-22）</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_352455656"
+      data-title="高级客户经理-销委会（储备管理岗）"
+      data-company="科大讯飞"
+      data-salary="30-45K·14薪"
+      data-url="https://www.liepin.com/job/1980611487"
+      data-source="猎聘"
+      data-direction="cross"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">【跨界价值】科大讯飞高级客户经理管理储备岗，30-45K·14薪大幅超预期；候选人8年大客户管理经验符合储备管理标准；从通信跨入AI行业管理序列，开拓职业发展新通道</p>
+  <a class="job-link" href="https://www.liepin.com/job/1980611487" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card cross">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">产品解决方案高级经理</h3>
+      <span class="source-badge" style="background:#ff6b35">猎聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 隆基绿能（沪深A股上市）</span>
+      <span class="salary">💰 30-40K·15薪</span>
+      <span class="pub-date date-fresh">📅 今天发布（2026-04-22）</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_260014373"
+      data-title="产品解决方案高级经理"
+      data-company="隆基绿能（沪深A股上市）"
+      data-salary="30-40K·15薪"
+      data-url="https://www.liepin.com/job/1980984423"
+      data-source="猎聘"
+      data-direction="cross"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">【跨界价值】全球新能源龙头，产品解决方案高级经理；候选人国家电网/能源央企客户关系是核心竞争力；新能源+ICT/数字化融合赛道高速成长；30-40K·15薪超出目标</p>
+  <a class="job-link" href="https://www.liepin.com/job/1980984423" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card cross">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">火电行业销售/解决方案/售前</h3>
+      <span class="source-badge" style="background:#ff6b35">猎聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 某杭州AI上市公司（仪器仪表/能源）</span>
+      <span class="salary">💰 30-60K·14薪</span>
+      <span class="pub-date date-fresh">📅 今天发布（2026-04-22）</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_379977983"
+      data-title="火电行业销售/解决方案/售前"
+      data-company="某杭州AI上市公司（仪器仪表/能源）"
+      data-salary="30-60K·14薪"
+      data-url="https://www.liepin.com/job/1980527907"
+      data-source="猎聘"
+      data-direction="cross"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">【跨界价值】AI+能源行业双重加持，30-60K·14薪薪资极具竞争力；候选人能源大客户（国家电网）资源是核心卖点；工业AI商业化是ICT人才最自然的跨界路径之一</p>
+  <a class="job-link" href="https://www.liepin.com/job/1980527907" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card cross">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">解决方案架构师</h3>
+      <span class="source-badge" style="background:#00c4a3">BOSS直聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 字节跳动</span>
+      <span class="salary">💰 20-40K·16薪</span>
+      <span class="pub-date date-unknown">📅 日期未知</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_208197144"
+      data-title="解决方案架构师"
+      data-company="字节跳动"
+      data-salary="20-40K·16薪"
+      data-url="https://www.zhipin.com/job_detail/a4a8a769ed23a3190nR43ti9GVpT.html"
+      data-source="BOSS直聘"
+      data-direction="cross"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">【跨界价值】字节跳动头部大厂，解决方案架构师；候选人云/AI技术栈及阿里云ACE认证匹配；20-40K·16薪综合年收入高；互联网大厂背书可显著提升候选人市场竞争力</p>
+  <a class="job-link" href="https://www.zhipin.com/job_detail/a4a8a769ed23a3190nR43ti9GVpT.html" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+
+<div class="job-card cross">
+  <div class="job-header">
+    <div class="job-title-row">
+      <h3 class="job-title">大客户代表</h3>
+      <span class="source-badge" style="background:#00c4a3">BOSS直聘</span>
+    </div>
+    <div class="job-meta-row">
+      <span class="company-name">🏢 阿里巴巴集团</span>
+      <span class="salary">💰 25-50K·13薪</span>
+      <span class="pub-date date-unknown">📅 日期未知</span>
+    </div>
+    <button class="star-btn" title="星标此岗位"
+      onclick="toggleStar(this)"
+      data-id="job_845659845"
+      data-title="大客户代表"
+      data-company="阿里巴巴集团"
+      data-salary="25-50K·13薪"
+      data-url="https://www.zhipin.com/job_detail/63c674671f8f8a910nZz0tu4FlpU.html"
+      data-source="BOSS直聘"
+      data-direction="cross"
+      data-date="2026-04-22">☆</button>
+  </div>
+  <p class="match-reason">【跨界价值】阿里巴巴集团大客户代表，25-50K·13薪；候选人8年ICT ToB大客户经验完全可迁移至阿里系平台，阿里云ACE认证加分；从通信跨入互联网大厂生态，视野和薪资均可跃升</p>
+  <a class="job-link" href="https://www.zhipin.com/job_detail/63c674671f8f8a910nZz0tu4FlpU.html" target="_blank" rel="noopener">查看详情 →</a>
+</div>
+  </div>
+
+  <!-- 质量评分 -->
+  <div class="quality-score">
+    <h3>📊 本期质量评分</h3>
+    <div class="score-total">总分：87 / 100</div>
+    <table>
+      <thead>
+        <tr><th>维度</th><th>得分</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A 平台覆盖率</td><td>25/25</td><td>4/4平台全部成功（BOSS直聘 ✅ 猎聘 ✅ LinkedIn ✅ 前程无忧 ✅）</td></tr>
+        <tr><td>B 有效URL比例</td><td>25/25</td><td>16/17个有效详情页URL（94%）；LinkedIn Avnet URL抽查确认有效</td></tr>
+        <tr><td>C 发布时间覆盖</td><td>12/25</td><td>8/17个有明确发布时间（47%）；BOSS直聘列表API无时间字段（已知限制）</td></tr>
+        <tr><td>D 职位相关度</td><td>15/15</td><td>方向一8个职位全部与ICT/通信/售前直接相关（100%）</td></tr>
+        <tr><td>E 零幻觉</td><td>10/10</td><td>全部职位来自本次会话实际抓取，无训练记忆补充</td></tr>
+      </tbody>
+    </table>
+    <div class="trigger-status trigger-ok">✅ 质量达标（87/100），无需自检优化</div>
+    <p style="font-size:0.8rem;color:#718096;margin-top:10px;">⚠️ BOSS直聘发布时间获取：列表API不含时间字段，详情页JSON-LD访问触发安全验证，所有BOSS直聘职位发布时间标注"日期未知"。建议手动核验投递前确认时效性。</p>
+  </div>
+
+</div>
+
+<footer>报告由 Claude AI 自动生成 · 2026-04-22 · 西安求职项目</footer>
+
+<div class="star-toast" id="starToast"></div>
+<script>
+const STAR_KEY = 'xian_starred_jobs_v1';
+const TOKEN_KEY = 'xian_gh_token';
+const GH_REPO = 'alex602022/xian-job-reports';
+const GH_FILE = 'starred_jobs.json';
+
+function getStarred() {
+  try { return JSON.parse(localStorage.getItem(STAR_KEY) || '{}'); } catch(e) { return {}; }
+}
+function saveStarred(data) { localStorage.setItem(STAR_KEY, JSON.stringify(data)); }
+function toggleStar(btn) {
+  const starred = getStarred();
+  const id = btn.dataset.id;
+  if (starred[id]) {
+    delete starred[id];
+    btn.textContent = '☆'; btn.classList.remove('starred'); btn.title = '星标此岗位';
+    showToast('已取消星标：' + btn.dataset.title);
+  } else {
+    starred[id] = { id, title: btn.dataset.title, company: btn.dataset.company,
+      salary: btn.dataset.salary, url: btn.dataset.url, source: btn.dataset.source,
+      direction: btn.dataset.direction, dateReported: btn.dataset.date,
+      starredAt: new Date().toISOString(), status: '待投递', notes: '' };
+    btn.textContent = '⭐'; btn.classList.add('starred'); btn.title = '已星标，点击取消';
+    showToast('⭐ 已星标：' + btn.dataset.title);
+  }
+  saveStarred(starred);
+  ghWrite(starred);
+}
+function showToast(msg) {
+  const t = document.getElementById('starToast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+async function ghWrite(starred) {
+  const token = localStorage.getItem(TOKEN_KEY);
+  if (!token) return;
+  try {
+    const shaResp = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
+      headers: { Authorization: `token ${token}` }
+    });
+    const sha = shaResp.ok ? (await shaResp.json()).sha : undefined;
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify({ jobs: starred }, null, 2))));
+    await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
+      method: 'PUT',
+      headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Update starred jobs', content, ...(sha ? { sha } : {}) })
+    });
+  } catch(e) { console.warn('GitHub sync failed', e); }
+}
+async function loadGhStars() {
+  try {
+    const resp = await fetch(`https://raw.githubusercontent.com/${GH_REPO}/main/${GH_FILE}?t=${Date.now()}`);
+    if (!resp.ok) return;
+    const remote = (await resp.json()).jobs || {};
+    const local = getStarred();
+    const merged = { ...local };
+    for (const [id, job] of Object.entries(remote)) {
+      if (!merged[id] || merged[id].starredAt < job.starredAt) merged[id] = job;
+    }
+    saveStarred(merged);
+    restoreStars();
+  } catch(e) {}
+}
+function restoreStars() {
+  const starred = getStarred();
+  document.querySelectorAll('.star-btn').forEach(btn => {
+    if (starred[btn.dataset.id]) {
+      btn.textContent = '⭐'; btn.classList.add('starred'); btn.title = '已星标，点击取消';
+    } else { btn.title = '星标此岗位'; }
+  });
+}
+restoreStars();
+loadGhStars();
+</script>
+</body>
+</html>

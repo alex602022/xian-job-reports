@@ -1,6 +1,17 @@
 {
   "reports": [
     {
+      "date": "2026-04-22",
+      "file": "reports/2026-04-22.html",
+      "dir1_count": 8,
+      "dir2_count": 9,
+      "total": 17,
+      "salary_ref": "50K",
+      "tags": [
+        "含外资岗位"
+      ]
+    },
+    {
       "date": "2026-04-19",
       "jobCount": 14,
       "freshCount": 8,
