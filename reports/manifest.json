@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-04-23",
+      "jobCount": 16,
+      "freshCount": 12,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "25-50K（Baicells基站售前）"
+    },
+    {
       "date": "2026-04-22",
       "jobCount": 17,
       "freshCount": 8,
