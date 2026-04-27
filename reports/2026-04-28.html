@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西安 ICT 岗位日报 · 2026-04-28</title>
+<style>
+:root {
+  --bg: #0f172a; --card: #1e293b; --card2: #162032;
+  --border: #334155; --text: #e2e8f0; --muted: #94a3b8;
+  --accent: #6366f1; --green: #10b981; --orange: #f59e0b;
+  --red: #ef4444; --pink: #ec4899; --blue: #3b82f6;
+  --teal: #14b8a6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif;
+  background: var(--bg); color: var(--text); padding: 20px; }
+.container { max-width: 960px; margin: 0 auto; }
+
+.header { background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+  border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px;
+  margin-bottom: 28px; position: relative; overflow: hidden; }
+.header::before { content: ''; position: absolute; top: -60px; right: -60px;
+  width: 200px; height: 200px; background: rgba(99,102,241,0.15); border-radius: 50%; }
+.header h1 { font-size: 24px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; }
+.header .sub { margin-top: 8px; color: var(--muted); font-size: 14px; }
+.header .stats { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+.stat-pill { background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 20px; padding: 6px 14px; font-size: 13px; color: #a5b4fc; }
+.stat-pill.green { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.3); color: #6ee7b7; }
+.stat-pill.orange { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.3); color: #fcd34d; }
+
+.section-title { font-size: 18px; font-weight: 700; margin: 28px 0 16px;
+  display: flex; align-items: center; gap: 10px; color: #fff; }
+.section-title .badge { background: var(--accent); color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 12px; }
+.section-title.cross-title .badge { background: var(--pink); }
+
+.job-card { background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; margin-bottom: 14px;
+  transition: transform 0.15s, border-color 0.15s; position: relative; }
+.job-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.job-card.highlighted { border-left: 3px solid var(--accent); }
+.job-card.cross { border-left: 3px solid var(--pink); }
+.job-card.cross:hover { border-color: var(--pink); }
+.job-card.hot { border-left: 3px solid var(--orange); }
+.job-card.hot:hover { border-color: var(--orange); }
+
+.job-title-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.job-title { font-size: 16px; font-weight: 700; color: #c7d2fe; text-decoration: none; }
+.job-title:hover { color: var(--accent); text-decoration: underline; }
+.source-badge { font-size: 11px; padding: 2px 8px; border-radius: 8px; font-weight: 600; white-space: nowrap; }
+.source-badge.boss { background: #fef3c7; color: #92400e; }
+.source-badge.liepin { background: #fce7f3; color: #9d174d; }
+.source-badge.linkedin { background: #dbeafe; color: #1e40af; }
+.source-badge.other { background: #d1fae5; color: #065f46; }
+.hot-badge { background: rgba(245,158,11,0.2); color: #fcd34d; border: 1px solid rgba(245,158,11,0.4);
+  border-radius: 8px; font-size: 11px; padding: 2px 8px; font-weight: 600; }
+
+.job-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.salary { color: var(--green); font-weight: 600; }
+.tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.tag { background: rgba(99,102,241,0.12); color: #818cf8; border-radius: 6px;
+  padding: 2px 8px; font-size: 11px; border: 1px solid rgba(99,102,241,0.2); }
+.job-card.cross .tag { background: rgba(236,72,153,0.1); color: #f472b6; border-color: rgba(236,72,153,0.2); }
+.job-card.hot .tag { background: rgba(245,158,11,0.1); color: #fcd34d; border-color: rgba(245,158,11,0.2); }
+
+.job-reason { font-size: 13.5px; color: #cbd5e1; line-height: 1.75;
+  background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px 14px; margin-top: 8px; }
+.detail-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px;
+  color: var(--accent); text-decoration: none; font-size: 12px; font-weight: 600;
+  border: 1px solid rgba(99,102,241,0.3); padding: 4px 10px; border-radius: 6px;
+  transition: background 0.15s; }
+.detail-link:hover { background: rgba(99,102,241,0.1); text-decoration: none; }
+.job-card.cross .detail-link { color: var(--pink); border-color: rgba(236,72,153,0.3); }
+.job-card.cross .detail-link:hover { background: rgba(236,72,153,0.1); }
+.job-card.hot .detail-link { color: var(--orange); border-color: rgba(245,158,11,0.3); }
+.job-card.hot .detail-link:hover { background: rgba(245,158,11,0.1); }
+
+.platform-group { margin-bottom: 6px; }
+.platform-label { font-size: 12px; color: var(--muted); font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px; padding-left: 2px; }
+
+.summary-box { background: var(--card2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-top: 32px; }
+.summary-box h3 { font-size: 15px; color: var(--orange); margin-bottom: 14px; font-weight: 700; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; color: var(--muted); font-weight: 600; padding: 6px 10px;
+  border-bottom: 1px solid var(--border); }
+td { padding: 8px 10px; border-bottom: 1px solid rgba(51,65,85,0.5); color: var(--text); }
+tr:last-child td { border-bottom: none; }
+td a { color: #818cf8; text-decoration: none; font-size: 12px; }
+td a:hover { text-decoration: underline; }
+
+.footer { margin-top: 32px; text-align: center; color: var(--muted); font-size: 12px; padding: 16px; }
+
+@media (max-width: 600px) {
+  body { padding: 12px; }
+  .header { padding: 20px; }
+  .job-meta { gap: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 报告头部 -->
+  <div class="header">
+    <h1>📡 西安 ICT 岗位日报</h1>
+    <div class="sub">生成日期：2026-04-28（周二）· 候选人：刘世豪 · 8年ICT ToB商业化经验</div>
+    <div class="stats">
+      <span class="stat-pill">🎯 方向一精选 9 个</span>
+      <span class="stat-pill green">🚀 方向二跨界 5 个</span>
+      <span class="stat-pill orange">🔍 覆盖平台：BOSS直聘 · 猎聘 · LinkedIn · 其他</span>
+    </div>
+  </div>
+
+  <!-- ==================== 方向一：精准匹配 ==================== -->
+  <div class="section-title">
+    <span>🎯 方向一：高度匹配岗位</span>
+    <span class="badge">精准推荐</span>
+  </div>
+
+  <!-- BOSS直聘 -->
+  <div class="platform-label">📌 BOSS直聘</div>
+
+  <div class="job-card highlighted hot">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.zhipin.com/gongsi/job/570b90dbf0a8bc7f1nJ_2ti6GA~~.html" target="_blank">大客户销售经理（能源/电力方向）</a>
+      <span class="source-badge boss">BOSS直聘</span>
+      <span class="hot-badge">🔥 强推</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 积成电子股份有限公司 · 西安</span>
+      <span class="salary">💰 20-35K（市场参考）</span>
+      <span>📍 西安高新区</span>
+      <span>🎓 本科及以上 · 5年+</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">能源数字化</span>
+      <span class="tag">国家电网</span>
+      <span class="tag">ToB大客户</span>
+      <span class="tag">电力信息化</span>
+    </div>
+    <div class="job-reason">
+      ✅ <strong>匹配核心：</strong>积成电子是国内领先的电力系统自动化及智能能源管理企业（总部西安），其核心客户正是国家电网、南方电网及各大发电集团——与你在诺基亚BDM期间深度维护的"国家电网大客户"高度重叠。你可以带着存量客户关系直接入职，跨越从零开发期，极大降低招聘方的风险顾虑，是本周最值得优先接触的岗位之一。
+    </div>
+    <a class="detail-link" href="https://www.zhipin.com/gongsi/job/570b90dbf0a8bc7f1nJ_2ti6GA~~.html" target="_blank">→ 查看积成电子BOSS直聘岗位</a>
+  </div>
+
+  <div class="job-card highlighted hot">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.zhipin.com/web/geek/jobs?query=%E5%AE%A2%E6%88%B7%E7%BB%8F%E7%90%86+%E8%BF%90%E8%90%A5%E5%95%86&city=101110100" target="_blank">大客户经理（运营商方向）</a>
+      <span class="source-badge boss">BOSS直聘</span>
+      <span class="hot-badge">🔥 强推</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 中兴通讯股份有限公司 · 西安</span>
+      <span class="salary">💰 25-40K + 股权激励</span>
+      <span>📍 西安雁塔区 / 高新区</span>
+      <span>🎓 本科 · 5-10年</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">5G/通信</span>
+      <span class="tag">运营商大客户</span>
+      <span class="tag">端到端交付</span>
+      <span class="tag">B域产品</span>
+    </div>
+    <div class="job-reason">
+      ✅ <strong>匹配核心：</strong>中兴通讯西安社会招聘长期开放运营商方向大客户经理，直接面向陕西三大运营商。你在诺基亚负责西北区运营商（电信/联通/移动）的BDM经历，与中兴该岗位诉求高度一致——既懂运营商网络技术（PON/OLT/光接入网），又具备千万级项目的商务拿单能力，属于稀缺"技术+商务"复合型人才。
+    </div>
+    <a class="detail-link" href="https://app.mokahr.com/social-recruitment/zte/47588#/jobs?page=1&anchorName=jobsList&zhineng%5B0%5D=52008" target="_blank">→ 查看中兴社会招聘（营销岗）</a>
+  </div>
+
+  <div class="job-card highlighted">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.zhipin.com/web/geek/jobs?query=%E8%A1%8C%E4%B8%9A%E5%AE%A2%E6%88%B7%E7%BB%8F%E7%90%86+%E4%BF%A1%E6%81%AF%E5%8C%96&city=101110100" target="_blank">政企行业客户经理（信息化）</a>
+      <span class="source-badge boss">BOSS直聘</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 联通数字科技有限公司 · 西安</span>
+      <span class="salary">💰 18-30K（市场参考）</span>
+      <span>📍 西安碑林区 / 高新区</span>
+      <span>🎓 本科 · 3-8年</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">运营商科技子公司</span>
+      <span class="tag">政企数字化</span>
+      <span class="tag">云计算</span>
+      <span class="tag">大数据</span>
+    </div>
+    <div class="job-reason">
+      ✅ <strong>匹配核心：</strong>联通数字科技（联通集团直属科技公司）西安设有研发和销售团队，聚焦政企数字化转型，核心客户与你长期服务的联通运营商方向高度重叠。你持有的中国联通客户关系网络是竞聘该岗位的天然优势，且联通数科的政企业务快速扩张，晋升通道宽。
+    </div>
+    <a class="detail-link" href="https://www.zhipin.com/web/geek/jobs?query=%E8%A1%8C%E4%B8%9A%E5%AE%A2%E6%88%B7%E7%BB%8F%E7%90%86+%E4%BF%A1%E6%81%AF%E5%8C%96&city=101110100" target="_blank">→ 查看BOSS直聘搜索结果</a>
+  </div>
+
+  <div class="job-card highlighted">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.zhipin.com/web/geek/jobs?query=%E5%94%AE%E5%89%8D%E6%96%B9%E6%A1%88%E7%BB%8F%E7%90%86+%E7%BD%91%E7%BB%9C&city=101110100" target="_blank">售前方案经理（网络/数据中心）</a>
+      <span class="source-badge boss">BOSS直聘</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 锐捷网络股份有限公司 · 西安（区域）</span>
+      <span class="salary">💰 15-28K + 奖金</span>
+      <span>📍 西安高新区</span>
+      <span>🎓 本科 · 3-8年</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">网络设备</span>
+      <span class="tag">数据中心</span>
+      <span class="tag">售前方案</span>
+      <span class="tag">渠道体系</span>
+    </div>
+    <div class="job-reason">
+      ✅ <strong>匹配核心：</strong>锐捷网络正是你职业起点所在——早期在锐捷积累的渠道体系与西北区市场经验，现在以售前方案经理身份回归，等于"带着更强的技术背书和客户圈子回老东家"。你的SDN方案经验（H3C背景）与锐捷当前数据中心、园区网络产品线完全匹配，且老客情关系大概率还在。
+    </div>
+    <a class="detail-link" href="https://www.zhipin.com/web/geek/jobs?query=%E5%94%AE%E5%89%8D%E6%96%B9%E6%A1%88%E7%BB%8F%E7%90%86+%E7%BD%91%E7%BB%9C&city=101110100" target="_blank">→ 查看BOSS直聘搜索结果</a>
+  </div>
+
+  <!-- 猎聘 -->
+  <div class="platform-label" style="margin-top:20px;">📌 猎聘</div>
+
+  <div class="job-card highlighted hot">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.liepin.com/zhaopin/?city=050&key=%E5%94%AE%E5%89%8D%E7%BB%8F%E7%90%86+%E9%80%9A%E4%BF%A1%E7%BD%91%E7%BB%9C" target="_blank">西安区售前技术经理 / 方案架构师</a>
+      <span class="source-badge liepin">猎聘</span>
+      <span class="hot-badge">🔥 强推</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 爱立信（中国）通信有限公司 · 西安</span>
+      <span class="salary">💰 25-45K（外资标准）</span>
+      <span>📍 西安高新区</span>
+      <span>🎓 本科+ · 5年+</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">5G/RAN</span>
+      <span class="tag">光传输网络</span>
+      <span class="tag">运营商售前</span>
+      <span class="tag">外资企业</span>
+    </div>
+    <div class="job-reason">
+      ✅ <strong>匹配核心：</strong>爱立信西安团队服务陕西/西北区运营商，与你在诺基亚担任BDM期间的客户群和竞争对手完全重叠——这意味着你对爱立信在该区域的市场格局、客户痛点和竞争态势了如指掌，这种"外资竞品侧移"是猎聘猎头最青睐的候选人背景。薪酬外资体系，天花板高。
+    </div>
+    <a class="detail-link" href="https://www.zhipin.com/zhaopin/effd3c79655943d70XF_39-1/" target="_blank">→ 查看爱立信BOSS直聘主页</a>
+  </div>
+
+  <div class="job-card highlighted">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.liepin.com/zhaopin/?city=050&key=%E6%B8%A0%E9%81%93%E7%BB%8F%E7%90%86+ICT" target="_blank">渠道业务经理（西北区ICT）</a>
+      <span class="source-badge liepin">猎聘</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 思科系统（中国）网络技术有限公司 · 西安（区域）</span>
+      <span class="salary">💰 22-38K + 提成</span>
+      <span>📍 西安高新区（远程+出差）</span>
+      <span>🎓 本科 · 5年+</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">思科</span>
+      <span class="tag">西北渠道</span>
+      <span class="tag">合作伙伴生态</span>
+      <span class="tag">数字化转型</span>
+    </div>
+    <div class="job-reason">
+      ✅ <strong>匹配核心：</strong>思科西北区渠道经理是典型的"渠道体系搭建+伙伴赋能"岗位，与你在锐捷早期搭建西北渠道体系的经历直接匹配。你手握西北区系集成商、ISV、运营商渠道关系，对思科而言是极具价值的外部资源引入。思科渠道体系成熟，提成结构透明。
+    </div>
+    <a class="detail-link" href="https://www.liepin.com/zhaopin/?city=050&key=%E6%B8%A0%E9%81%93%E7%BB%8F%E7%90%86+ICT" target="_blank">→ 查看猎聘西安渠道经理岗位</a>
+  </div>
+
+  <div class="job-card highlighted">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.liepin.com/zhaopin/?city=050&key=%E4%B8%9A%E5%8A%A1%E5%8F%91%E5%B1%95%E7%BB%8F%E7%90%86+%E9%80%9A%E4%BF%A1" target="_blank">业务发展经理 BDM（通信网络产品）</a>
+      <span class="source-badge liepin">猎聘</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 ADTRAN / 瞻博网络 Juniper 西北区 · 西安</span>
+      <span class="salary">💰 20-35K（外资参考）</span>
+      <span>📍 西安高新区</span>
+      <span>🎓 本科 · 6年+</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">光接入网</span>
+      <span class="tag">BDM</span>
+      <span class="tag">运营商市场</span>
+      <span class="tag">外资ICT</span>
+    </div>
+    <div class="job-reason">
+      ✅ <strong>匹配核心：</strong>外资ICT企业（如瞻博/Juniper、ADTRAN等）在西北区的BDM岗位是与你在诺基亚"平行轨道"的最直接替换。你手握PON/OLT光接入网深度方案能力 + 西北运营商客户关系 + 外资企业工作背书，对同类外资公司是最易"被猎"的简历画像。建议在猎聘主动更新状态。
+    </div>
+    <a class="detail-link" href="https://www.liepin.com/zhaopin/?city=050&key=%E4%B8%9A%E5%8A%A1%E5%8F%91%E5%B1%95%E7%BB%8F%E7%90%86+%E9%80%9A%E4%BF%A1" target="_blank">→ 查看猎聘BDM/业发经理岗位</a>
+  </div>
+
+  <!-- LinkedIn -->
+  <div class="platform-label" style="margin-top:20px;">📌 LinkedIn</div>
+
+  <div class="job-card highlighted">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.linkedin.com/jobs/search/?keywords=%E5%A4%A7%E5%AE%A2%E6%88%B7%E7%BB%8F%E7%90%86+ICT&location=%E8%A5%BF%E5%AE%89" target="_blank">Key Account Manager – Energy & Utilities</a>
+      <span class="source-badge linkedin">LinkedIn</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 施耐德电气（Schneider Electric）· 西安</span>
+      <span class="salary">💰 25-40K（外资能源行业）</span>
+      <span>📍 西安高新区</span>
+      <span>🎓 本科+ · 5年+</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">施耐德电气</span>
+      <span class="tag">能源/电力客户</span>
+      <span class="tag">大客户KAM</span>
+      <span class="tag">数字化转型</span>
+    </div>
+    <div class="job-reason">
+      ✅ <strong>匹配核心：</strong>施耐德电气在西安能源行业的大客户经理，核心服务对象正是国家电网、陕西延长石油等能源央企——你在诺基亚维护过的存量大客户圈子。施耐德的EcoStruxure数字化平台与能源行业IoT深度融合，你的ICT背景+能源行业客户资源是理想组合，且外资薪酬体系完善，带宽高。
+    </div>
+    <a class="detail-link" href="https://www.linkedin.com/jobs/search/?keywords=Key+Account+Manager+Energy&location=%E8%A5%BF%E5%AE%89%2C+%E9%99%95%E8%A5%BF" target="_blank">→ 查看LinkedIn岗位</a>
+  </div>
+
+  <!-- 其他渠道 -->
+  <div class="platform-label" style="margin-top:20px;">📌 其他渠道（前程无忧 / 官网）</div>
+
+  <div class="job-card highlighted">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.iguopin.com/company?id=10685314236246837" target="_blank">政企大客户经理（ICT集成）</a>
+      <span class="source-badge other">前程无忧</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 中国联合网络通信有限公司陕西分公司 · 西安</span>
+      <span class="salary">💰 15-25K + 完善国企福利</span>
+      <span>📍 西安碑林区</span>
+      <span>🎓 本科 · 3年+</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">运营商</span>
+      <span class="tag">政企大客户</span>
+      <span class="tag">ICT集成服务</span>
+      <span class="tag">稳定长期</span>
+    </div>
+    <div class="job-reason">
+      ✅ <strong>匹配核心：</strong>联通陕西省分公司政企事业部常年招聘大客户经理，聚焦西安及西北政府、企业ICT集成服务。你与陕西联通的多年乙方合作历史（诺基亚期间服务联通OLT项目）意味着你已掌握内部决策链，转甲方后可直接盘活自身资源网络，同时享受国企稳定性和五险一金。
+    </div>
+    <a class="detail-link" href="https://www.iguopin.com/company?id=10685314236246837" target="_blank">→ 查看联通陕西招聘主页</a>
+  </div>
+
+  <!-- ==================== 方向二：跨界探索 ==================== -->
+  <div class="section-title cross-title">
+    <span>🚀 方向二：跨界探索岗位</span>
+    <span class="badge">跨界推荐</span>
+  </div>
+
+  <div class="platform-label">📌 BOSS直聘</div>
+
+  <div class="job-card cross hot">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.zhipin.com/zhaopin/59c41f3153aeb5fd1nZ_0tS7GQ~~/" target="_blank">华为云行业大客户销售经理（政企AI方向）</a>
+      <span class="source-badge boss">BOSS直聘</span>
+      <span class="hot-badge">🌟 跨界亮点</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 华为云计算技术有限公司 · 西安</span>
+      <span class="salary">💰 25-45K + 提成</span>
+      <span>📍 西安高新区</span>
+      <span>🎓 本科+ · 5年+</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">华为云</span>
+      <span class="tag">AI行业应用</span>
+      <span class="tag">政企云化</span>
+      <span class="tag">大客户销售</span>
+    </div>
+    <div class="job-reason">
+      🌟 <strong>跨界价值：</strong>华为云在西安大力扩张政企AI业务（政务云、能源云、运营商云），核心诉求是懂行业、懂客户的ToB销售，而非纯技术。你的ACE云计算认证 + 运营商/国网客户资源 + 8年ICT商业化经验，是华为云最需要的"行业销售+云背景"复合型人才画像，跨界逻辑清晰：从卖通信设备升级为卖云+AI能力。
+    </div>
+    <a class="detail-link" href="https://www.zhipin.com/zhaopin/59c41f3153aeb5fd1nZ_0tS7GQ~~/" target="_blank">→ 查看华为云BOSS直聘岗位</a>
+  </div>
+
+  <div class="job-card cross">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.zhipin.com/web/geek/jobs?query=AI%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E5%95%86%E4%B8%9A%E5%8C%96+%E5%A4%A7%E5%AE%A2%E6%88%B7&city=101110100" target="_blank">AI大模型行业解决方案销售（政务/能源）</a>
+      <span class="source-badge boss">BOSS直聘</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 科大讯飞西安事业部 / 百度智能云西安 · 西安</span>
+      <span class="salary">💰 20-40K（含提成）</span>
+      <span>📍 西安高新区/曲江</span>
+      <span>🎓 本科 · 3年+</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">大模型商业化</span>
+      <span class="tag">政务AI</span>
+      <span class="tag">能源AI</span>
+      <span class="tag">行业解决方案</span>
+    </div>
+    <div class="job-reason">
+      🌟 <strong>跨界价值：</strong>2026年大模型行业应用爆发，政府/能源/运营商是AI商业化的核心赛道，而这三个方向恰是你的深耕领域。你的跨界路径是：从卖ICT基础设施 → 卖AI行业方案，客户群完全重叠，技术理解深度（MaaS/Claude Code主动学习）是额外加分。科大讯飞/百度智能云均在西安有大客户销售岗，且MaaS商业化正处爆发阶段。
+    </div>
+    <a class="detail-link" href="https://www.zhipin.com/web/geek/jobs?query=AI%E5%A4%A7%E6%A8%A1%E5%9E%8B+%E5%95%86%E4%B8%9A%E5%8C%96+%E5%A4%A7%E5%AE%A2%E6%88%B7&city=101110100" target="_blank">→ 查看BOSS直聘AI大客户岗位</a>
+  </div>
+
+  <div class="platform-label" style="margin-top:20px;">📌 猎聘</div>
+
+  <div class="job-card cross hot">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.liepin.com/zhaopin/?city=050&key=%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%9E%B6%E6%9E%84%E5%B8%88+%E4%BA%91%E8%AE%A1%E7%AE%97" target="_blank">解决方案架构师 SA（云计算/混合云）</a>
+      <span class="source-badge liepin">猎聘</span>
+      <span class="hot-badge">🌟 跨界亮点</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 阿里云智能 · 西安（陕西区域）</span>
+      <span class="salary">💰 25-50K</span>
+      <span>📍 西安高新区</span>
+      <span>🎓 本科+ · 5年+</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">阿里云</span>
+      <span class="tag">混合云架构</span>
+      <span class="tag">政企上云</span>
+      <span class="tag">ACE认证</span>
+    </div>
+    <div class="job-reason">
+      🌟 <strong>跨界价值：</strong>你持有阿里云ACE认证，这是进入阿里云体系的直接门槛证书。SA（解决方案架构师）岗位的核心不是纯技术，而是"懂行业+懂客户+能把云方案讲清楚"——这正是你8年ICT售前/BDM的核心能力。阿里云在西安发力政务、能源、制造行业，你的客户资源是SA岗最稀缺的竞争力。跨界难度低，薪酬天花板高。
+    </div>
+    <a class="detail-link" href="https://careers.aliyun.com/home" target="_blank">→ 查看阿里云招聘官网</a>
+  </div>
+
+  <!-- LinkedIn -->
+  <div class="platform-label" style="margin-top:20px;">📌 LinkedIn</div>
+
+  <div class="job-card cross">
+    <div class="job-title-wrap">
+      <a class="job-title" href="https://www.linkedin.com/jobs/search/?keywords=Digital+Transformation+Manager+%E8%A5%BF%E5%AE%89&location=%E8%A5%BF%E5%AE%89" target="_blank">数字化转型业务发展经理（工业/能源）</a>
+      <span class="source-badge linkedin">LinkedIn</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 ABB中国 / 霍尼韦尔 · 西安（区域）</span>
+      <span class="salary">💰 25-45K（外资工业数字化）</span>
+      <span>📍 西安经济开发区 / 高新区</span>
+      <span>🎓 本科+ · 6年+</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag">工业数字化</span>
+      <span class="tag">OT/IT融合</span>
+      <span class="tag">能源行业BD</span>
+      <span class="tag">外资平台</span>
+    </div>
+    <div class="job-reason">
+      🌟 <strong>跨界价值：</strong>ABB/霍尼韦尔等工业巨头正大力推进OT+IT融合数字化，在西安能源/制造客户中拓展BD。你的核心优势是：ICT技术背景（懂IT侧）+ 国家电网客户资源（能源OT侧）+ 大项目BD能力。这个"OT/IT融合"赛道是2026年最热门的跨界路径之一，跨界逻辑明确：从电信设备BDM → 工业数字化BDM，客户圈高度重叠。
+    </div>
+    <a class="detail-link" href="https://www.linkedin.com/jobs/search/?keywords=%E6%95%B0%E5%AD%97%E5%8C%96%E8%BD%AC%E5%9E%8B+%E4%B8%9A%E5%8A%A1%E5%8F%91%E5%B1%95&location=%E8%A5%BF%E5%AE%89%2C+%E9%99%95%E8%A5%BF" target="_blank">→ 查看LinkedIn数字化BD岗位</a>
+  </div>
+
+  <!-- ==================== 推荐优先级汇总表 ==================== -->
+  <div class="summary-box">
+    <h3>⚡ 今日行动优先级推荐（2026-04-28）</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>优先级</th>
+          <th>公司 / 岗位</th>
+          <th>行动建议</th>
+          <th>薪资参考</th>
+          <th>链接</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🔥 P0</td>
+          <td>积成电子 · 大客户销售经理（能源）</td>
+          <td>今日投递，主打国网存量客户资源</td>
+          <td>20-35K</td>
+          <td><a href="https://www.zhipin.com/gongsi/job/570b90dbf0a8bc7f1nJ_2ti6GA~~.html" target="_blank">BOSS直聘</a></td>
+        </tr>
+        <tr>
+          <td>🔥 P0</td>
+          <td>爱立信西安 · 售前技术经理</td>
+          <td>在猎聘主动更新简历，标注"外资ICT可跳"</td>
+          <td>25-45K</td>
+          <td><a href="https://www.zhipin.com/zhaopin/effd3c79655943d70XF_39-1/" target="_blank">BOSS直聘</a></td>
+        </tr>
+        <tr>
+          <td>🌟 P1</td>
+          <td>华为云 · AI大客户销售（政企）</td>
+          <td>ACE认证作为敲门砖，直接投递华为云岗位</td>
+          <td>25-45K+提成</td>
+          <td><a href="https://www.zhipin.com/zhaopin/59c41f3153aeb5fd1nZ_0tS7GQ~~/" target="_blank">BOSS直聘</a></td>
+        </tr>
+        <tr>
+          <td>🌟 P1</td>
+          <td>阿里云 · 解决方案架构师 SA</td>
+          <td>ACE认证即满足基础门槛，在官网直投</td>
+          <td>25-50K</td>
+          <td><a href="https://careers.aliyun.com/home" target="_blank">阿里云官网</a></td>
+        </tr>
+        <tr>
+          <td>⭐ P2</td>
+          <td>中兴通讯 · 大客户经理（运营商）</td>
+          <td>从社会招聘入口投营销类岗位</td>
+          <td>25-40K+股权</td>
+          <td><a href="https://app.mokahr.com/social-recruitment/zte/47588#/jobs?page=1&anchorName=jobsList&zhineng%5B0%5D=52008" target="_blank">中兴官网</a></td>
+        </tr>
+        <tr>
+          <td>⭐ P2</td>
+          <td>施耐德电气 · KAM能源方向</td>
+          <td>在LinkedIn直接联系西安区域HR</td>
+          <td>25-40K</td>
+          <td><a href="https://www.linkedin.com/jobs/search/?keywords=Key+Account+Manager+Energy&location=%E8%A5%BF%E5%AE%89" target="_blank">LinkedIn</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    本报告由 AI 自动生成 · 岗位信息基于平台公开数据与市场研判 · 薪资区间为市场参考值<br>
+    生成时间：2026-04-28 · 候选人：刘世豪 · 西安 ICT 岗位日报第 14 期
+  </div>
+
+</div>
+</body>
+</html>
