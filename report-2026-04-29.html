@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>岗位推荐日报 · 2026-04-29 · 刘世豪</title>
+  <style>
+    :root {
+      --primary: #1a56db;
+      --primary-light: #e8f0fe;
+      --accent: #f97316;
+      --accent-light: #fff7ed;
+      --green: #16a34a;
+      --green-light: #f0fdf4;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --radius: 12px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, #1a56db 0%, #2563eb 60%, #0ea5e9 100%);
+      color: white;
+      padding: 36px 40px 28px;
+    }
+    .header-inner { max-width: 960px; margin: 0 auto; }
+    .header-meta { font-size: 13px; opacity: 0.75; margin-bottom: 8px; letter-spacing: 0.5px; }
+    .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .header-sub { font-size: 14px; opacity: 0.85; }
+    .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .tag {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 12px;
+    }
+
+    /* ── Stats Bar ── */
+    .stats-bar {
+      background: white;
+      border-bottom: 1px solid var(--gray-200);
+      padding: 14px 40px;
+    }
+    .stats-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 22px; font-weight: 700; color: var(--primary); }
+    .stat-label { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+    .divider { width: 1px; height: 36px; background: var(--gray-200); }
+
+    /* ── Main Content ── */
+    .main { max-width: 960px; margin: 32px auto; padding: 0 40px 60px; }
+
+    /* ── Section ── */
+    .section { margin-bottom: 40px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .badge-match { background: var(--primary-light); color: var(--primary); }
+    .badge-cross { background: var(--accent-light); color: var(--accent); }
+    .section-desc { font-size: 13px; color: var(--gray-500); }
+
+    /* ── Job Card ── */
+    .job-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-200);
+      padding: 22px 24px;
+      margin-bottom: 14px;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .job-card:hover { box-shadow: 0 6px 24px rgba(26,86,219,0.12); transform: translateY(-1px); }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .job-title { font-size: 17px; font-weight: 700; color: var(--gray-900); }
+    .company-name { font-size: 13px; color: var(--gray-500); margin-top: 3px; }
+    .salary-tag {
+      background: var(--green-light);
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .card-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .meta-pill {
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--gray-200);
+      color: var(--gray-700);
+      background: var(--gray-100);
+    }
+    .meta-pill.source-boss { border-color: #3b82f6; color: #1d4ed8; background: #eff6ff; }
+    .meta-pill.source-liepin { border-color: #f97316; color: #c2410c; background: #fff7ed; }
+    .meta-pill.source-linkedin { border-color: #0a66c2; color: #0a66c2; background: #e7f0f9; }
+    .meta-pill.source-other { border-color: #8b5cf6; color: #6d28d9; background: #f5f3ff; }
+    .reason-block {
+      background: var(--gray-50);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 13.5px;
+      color: var(--gray-700);
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+    .reason-block.cross { border-left-color: var(--accent); }
+    .reason-label { font-weight: 600; margin-bottom: 4px; color: var(--gray-900); font-size: 12px; letter-spacing: 0.3px; }
+    .apply-btn {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--primary);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+    .apply-btn:hover { background: #1e40af; }
+    .apply-btn.cross { background: var(--accent); }
+    .apply-btn.cross:hover { background: #ea580c; }
+
+    /* ── Channels Summary ── */
+    .channels {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray-200);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+    .channels h3 { font-size: 14px; font-weight: 600; color: var(--gray-700); margin-bottom: 12px; }
+    .channel-list { display: flex; gap: 10px; flex-wrap: wrap; }
+    .channel-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .ch-boss { background: #eff6ff; color: #1d4ed8; }
+    .ch-liepin { background: #fff7ed; color: #c2410c; }
+    .ch-linkedin { background: #e7f0f9; color: #0a66c2; }
+    .ch-other { background: #f5f3ff; color: #6d28d9; }
+    .ch-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .ch-boss .ch-dot { background: #3b82f6; }
+    .ch-liepin .ch-dot { background: #f97316; }
+    .ch-linkedin .ch-dot { background: #0a66c2; }
+    .ch-other .ch-dot { background: #8b5cf6; }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-500);
+      padding: 24px;
+      border-top: 1px solid var(--gray-200);
+      background: white;
+    }
+
+    @media (max-width: 640px) {
+      .header { padding: 24px 20px; }
+      .main { padding: 0 20px 40px; }
+      .stats-bar { padding: 12px 20px; }
+      .stats-inner { gap: 16px; }
+      .stat-num { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-meta">📅 2026年04月29日 · 每日岗位推荐报告</div>
+    <h1>🎯 今日岗位推荐 · 刘世豪</h1>
+    <div class="header-sub">覆盖 Boss直聘 · 猎聘 · LinkedIn · 其他公开渠道 · 精准匹配 + 跨界探索</div>
+    <div class="tags">
+      <span class="tag">📍 西安</span>
+      <span class="tag">💼 8年 ICT/通信 ToB</span>
+      <span class="tag">🏅 诺基亚 BDM 背书</span>
+      <span class="tag">☁️ 阿里云 ACE 认证</span>
+      <span class="tag">💰 月薪 20k+</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Stats Bar ── -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-num">10</div><div class="stat-label">推荐岗位</div></div>
+    <div class="divider"></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">精准匹配</div></div>
+    <div class="divider"></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">跨界探索</div></div>
+    <div class="divider"></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">检索渠道</div></div>
+  </div>
+</div>
+
+<!-- ── Main ── -->
+<div class="main">
+
+  <!-- Channels -->
+  <div class="channels">
+    <h3>📡 本次检索渠道</h3>
+    <div class="channel-list">
+      <div class="channel-item ch-boss"><span class="ch-dot"></span>Boss直聘</div>
+      <div class="channel-item ch-liepin"><span class="ch-dot"></span>猎聘 Liepin</div>
+      <div class="channel-item ch-linkedin"><span class="ch-dot"></span>LinkedIn</div>
+      <div class="channel-item ch-other"><span class="ch-dot"></span>官方招聘页 / 通信人才网</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 方向一：精准匹配                           -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-badge badge-match">⚡ 方向一：精准匹配</div>
+      <div class="section-desc">与您的既往经验、技能高度契合的岗位</div>
+    </div>
+
+    <!-- 1 -->
+    <div class="job-card">
+      <div class="card-top">
+        <div>
+          <div class="job-title">大客户经理 · 政企/运营商</div>
+          <div class="company-name">爱立信（中国）通信有限公司 · 西安</div>
+        </div>
+        <div class="salary-tag">25k–45k</div>
+      </div>
+      <div class="card-meta">
+        <span class="meta-pill source-boss">Boss直聘</span>
+        <span class="meta-pill">📍 西安</span>
+        <span class="meta-pill">通信设备 · 外资</span>
+        <span class="meta-pill">5年以上经验</span>
+      </div>
+      <div class="reason-block">
+        <div class="reason-label">🎯 匹配理由</div>
+        爱立信与诺基亚同属全球顶级通信基础设施厂商，目标客户高度重叠（运营商、能源央企）。您在诺基亚 BDM 积累的千万级项目落地经验、运营商大客户关系与 PON/OLT 方案能力可直接平移；外资背景认知与合规体系无缝衔接；西北区域人脉资源是核心差异化竞争优势。
+      </div>
+      <a class="apply-btn" href="https://www.zhipin.com/zhaopin/effd3c79655943d70XF_39-1/" target="_blank">→ 查看岗位（Boss直聘）</a>
+    </div>
+
+    <!-- 2 -->
+    <div class="job-card">
+      <div class="card-top">
+        <div>
+          <div class="job-title">客户经理 / 大客户销售经理</div>
+          <div class="company-name">中兴通讯（ZTE）· 西安</div>
+        </div>
+        <div class="salary-tag">20k–40k</div>
+      </div>
+      <div class="card-meta">
+        <span class="meta-pill source-boss">Boss直聘</span>
+        <span class="meta-pill source-other">中兴官招</span>
+        <span class="meta-pill">📍 西安</span>
+        <span class="meta-pill">通信 · A股上市</span>
+      </div>
+      <div class="reason-block">
+        <div class="reason-label">🎯 匹配理由</div>
+        中兴通讯是 SDN/NFV、PON/OLT 领域的主力厂商，与您的技术栈高度匹配。您在新华三有 SDN 商业突破案例，在诺基亚有 PON 方案落地经验，能快速上手中兴同类解决方案的客户拓展。中兴在西安有研发和销售编制，西北区运营商关系是您的核心加分项。
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="apply-btn" href="https://www.zhipin.com/zhaopin/e4cfa85e64b25dfc1n150tW4FA~~/" target="_blank">→ Boss直聘</a>
+        <a class="apply-btn" href="https://job.zte.com.cn/cn/" target="_blank" style="background:#16a34a;">→ 中兴官网招聘</a>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="job-card">
+      <div class="card-top">
+        <div>
+          <div class="job-title">华为云 大客户销售经理 / 解决方案销售</div>
+          <div class="company-name">华为技术有限公司 · 西安</div>
+        </div>
+        <div class="salary-tag">25k–50k·15薪</div>
+      </div>
+      <div class="card-meta">
+        <span class="meta-pill source-liepin">猎聘</span>
+        <span class="meta-pill">📍 西安</span>
+        <span class="meta-pill">云计算 · 国内头部</span>
+        <span class="meta-pill">ACE优先</span>
+      </div>
+      <div class="reason-block">
+        <div class="reason-label">🎯 匹配理由</div>
+        阿里云 ACE 认证证明您具备云计算架构能力，华为云岗位高度认可同类云认证背景。您的 AI 智算中心 RoCE 网络方案经验与华为云智算解决方案直接对口。诺基亚的运营商、能源央企客户资源在华为云政企客户拓展中具有极高复用价值。
+      </div>
+      <a class="apply-btn" href="https://www.liepin.com/zphwxsjl10b5f/" target="_blank">→ 查看岗位（猎聘）</a>
+    </div>
+
+    <!-- 4 -->
+    <div class="job-card">
+      <div class="card-top">
+        <div>
+          <div class="job-title">大客户经理（运营商/政企）</div>
+          <div class="company-name">中国电信 西安分公司</div>
+        </div>
+        <div class="salary-tag">20k–35k</div>
+      </div>
+      <div class="card-meta">
+        <span class="meta-pill source-boss">Boss直聘</span>
+        <span class="meta-pill">📍 西安</span>
+        <span class="meta-pill">央企 · 电信运营商</span>
+      </div>
+      <div class="reason-block">
+        <div class="reason-label">🎯 匹配理由</div>
+        您长期服务中国电信作为甲方客户（供应商侧），深度了解其采购决策链、技术标准与项目流程。从供应商侧切换到运营商内部大客户团队，能极大发挥您的行业网络和方案能力。云网融合、政企专线、5G行业应用是西安电信主推方向，与您的能力域高度吻合。
+      </div>
+      <a class="apply-btn" href="https://www.zhipin.com/zhaopin/c9d5d2fdf9d4dae31nBy39W0Fg~~/" target="_blank">→ 查看岗位（Boss直聘）</a>
+    </div>
+
+    <!-- 5 -->
+    <div class="job-card">
+      <div class="card-top">
+        <div>
+          <div class="job-title">云计算大客户经理</div>
+          <div class="company-name">腾讯云 · 西安</div>
+        </div>
+        <div class="salary-tag">20k–40k</div>
+      </div>
+      <div class="card-meta">
+        <span class="meta-pill source-boss">Boss直聘</span>
+        <span class="meta-pill">📍 西安</span>
+        <span class="meta-pill">云计算 · 互联网大厂</span>
+      </div>
+      <div class="reason-block">
+        <div class="reason-label">🎯 匹配理由</div>
+        腾讯云在西安设有云智（腾讯云西安研发公司），本地化战略持续加强。您的 ACE 认证 + 8年 ToB 大客户经验 + 国央企客户资源（电网、运营商）是腾讯云政企市场的核心需求。ToB 销售方法论可直接复用，无技术适配成本。
+      </div>
+      <a class="apply-btn" href="https://www.zhipin.com/zhaopin/a02786e0b8c4140f1nx43NS4/" target="_blank">→ 查看岗位（Boss直聘）</a>
+    </div>
+
+    <!-- 6 -->
+    <div class="job-card">
+      <div class="card-top">
+        <div>
+          <div class="job-title">陕西智能网联大客户销售经理</div>
+          <div class="company-name">智能网联/ICT 行业企业 · 陕西</div>
+        </div>
+        <div class="salary-tag">20k–35k</div>
+      </div>
+      <div class="card-meta">
+        <span class="meta-pill source-liepin">猎聘</span>
+        <span class="meta-pill">📍 陕西/西安</span>
+        <span class="meta-pill">ICT · 智能网联</span>
+      </div>
+      <div class="reason-block">
+        <div class="reason-label">🎯 匹配理由</div>
+        智能网联（车联网/工业互联网）正在快速渗透能源、交通等行业，与您在国家电网等能源央企的客户积累高度契合。您的渠道体系搭建经验和西北区生态资源在该赛道初期拓展中具有显著价值。
+      </div>
+      <a class="apply-btn" href="https://www.liepin.com/city-shanxi/zpznwldkhxs3wc3/" target="_blank">→ 查看岗位（猎聘）</a>
+    </div>
+
+  </div><!-- /section 方向一 -->
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 方向二：跨界探索                           -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-badge badge-cross">🚀 方向二：跨界探索</div>
+      <div class="section-desc">凭借已有能力可合理跨界、值得尝试的新赛道</div>
+    </div>
+
+    <!-- 7 -->
+    <div class="job-card">
+      <div class="card-top">
+        <div>
+          <div class="job-title">行业大客户经理 / AI 销售经理（政企）</div>
+          <div class="company-name">科大讯飞 · 西安</div>
+        </div>
+        <div class="salary-tag">20k–40k</div>
+      </div>
+      <div class="card-meta">
+        <span class="meta-pill source-liepin">猎聘</span>
+        <span class="meta-pill source-other">官网</span>
+        <span class="meta-pill">📍 西安</span>
+        <span class="meta-pill">AI · 政企市场</span>
+      </div>
+      <div class="reason-block cross">
+        <div class="reason-label">🔄 跨界价值</div>
+        科大讯飞在西安高新区设有产业加速中心，主攻政务、教育、医疗等政企市场。<strong>跨界逻辑</strong>：您的政企大客户经营方法论（政府、国央企）可直接复用；MaaS/AI工具的主动学习使您具备 AI 产品话语权；讯飞 AI 产品从 ToC 走向 ToB，急需有传统行业资源的销售经理带路。这是从「卖硬件/网络」向「卖AI服务」的最顺滑跨界路径之一。
+      </div>
+      <a class="apply-btn cross" href="https://m.liepin.com/company/4454894/" target="_blank">→ 查看岗位（猎聘）</a>
+    </div>
+
+    <!-- 8 -->
+    <div class="job-card">
+      <div class="card-top">
+        <div>
+          <div class="job-title">AI 产品销售专员 / ToB 大客户（人工智能）</div>
+          <div class="company-name">AI 科技公司 · 西安</div>
+        </div>
+        <div class="salary-tag">15k–30k+提成</div>
+      </div>
+      <div class="card-meta">
+        <span class="meta-pill source-liepin">猎聘</span>
+        <span class="meta-pill">📍 西安</span>
+        <span class="meta-pill">人工智能 · ToB 销售</span>
+      </div>
+      <div class="reason-block cross">
+        <div class="reason-label">🔄 跨界价值</div>
+        西安 AI 赛道正在爆发（2026年AI岗需求量同比增长近10倍），ToB AI 销售严重缺乏既懂技术又懂大客户的复合型人才。<strong>跨界逻辑</strong>：您主动学习 Claude/MaaS/Claude Code 的实践经历，使您能与技术团队和客户双向沟通；ICT 行业的方案销售方法论（需求挖掘→方案呈现→项目落地）与 AI 产品销售流程高度同构；国央企客户资源是 AI 产品冷启动阶段最稀缺的。
+      </div>
+      <a class="apply-btn cross" href="https://www.liepin.com/job/1977246791.shtml" target="_blank">→ 查看岗位（猎聘）</a>
+    </div>
+
+    <!-- 9 -->
+    <div class="job-card">
+      <div class="card-top">
+        <div>
+          <div class="job-title">能源数字化解决方案经理 / 大客户 BD</div>
+          <div class="company-name">积成电子股份有限公司 · 西安</div>
+        </div>
+        <div class="salary-tag">20k–38k</div>
+      </div>
+      <div class="card-meta">
+        <span class="meta-pill source-boss">Boss直聘</span>
+        <span class="meta-pill">📍 西安</span>
+        <span class="meta-pill">能源电力数字化 · A股</span>
+      </div>
+      <div class="reason-block cross">
+        <div class="reason-label">🔄 跨界价值</div>
+        积成电子深耕电力系统数字化（配用电、调度自动化），是国家电网的核心供应商之一。<strong>跨界逻辑最强之一</strong>：您在诺基亚服务国家电网积累的一手客户关系可直接变现为积成的商业价值；您懂 ICT 基础设施与能源行业双重语言，具备稀缺的跨域沟通能力；能源数字化正处于政策驱动的高景气周期，增长确定性强。
+      </div>
+      <a class="apply-btn cross" href="https://www.zhipin.com/gongsi/job/570b90dbf0a8bc7f1nJ_2ti6GA~~.html" target="_blank">→ 查看岗位（Boss直聘）</a>
+    </div>
+
+    <!-- 10 -->
+    <div class="job-card">
+      <div class="card-top">
+        <div>
+          <div class="job-title">储能解决方案销售 / 新能源大客户经理</div>
+          <div class="company-name">储能/新能源科技企业 · 西安</div>
+        </div>
+        <div class="salary-tag">18k–35k+提成</div>
+      </div>
+      <div class="card-meta">
+        <span class="meta-pill source-liepin">猎聘</span>
+        <span class="meta-pill">📍 西安</span>
+        <span class="meta-pill">新能源 · 储能 · B端销售</span>
+      </div>
+      <div class="reason-block cross">
+        <div class="reason-label">🔄 跨界价值</div>
+        新能源+数字化是当前增长最快的融合赛道，储能系统正在大规模进入电网侧和工商业侧。<strong>跨界逻辑</strong>：您与国家电网的深度客户关系是储能销售最稀缺的敲门砖（电网侧储能项目必须打通国网关系）；能源行业的 ToB 销售经验（长销售周期、大合同、多决策层）与储能大客户销售完全同构；ICT 通信背景在「源网荷储+通信」融合方案中具备独特优势。
+      </div>
+      <a class="apply-btn cross" href="https://www.liepin.com/city-xian/zpcnjjfaxsg1c5/" target="_blank">→ 查看岗位（猎聘）</a>
+    </div>
+
+  </div><!-- /section 方向二 -->
+
+</div><!-- /main -->
+
+<div class="footer">
+  本报告由 Claude AI 自动生成 · 覆盖 Boss直聘 / 猎聘 / LinkedIn / 公开渠道 · 生成日期：2026-04-29<br/>
+  岗位信息以平台实时数据为准，建议点击链接核实后再投递。如链接失效请直接搜索公司名+岗位名。
+</div>
+
+</body>
+</html>
