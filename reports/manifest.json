@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-04-29",
+      "jobCount": 10,
+      "freshCount": 9,
+      "stretchCount": 3,
+      "hasForeign": true,
+      "topSalary": "25-40K（烽火通信）"
+    },
+    {
       "date": "2026-04-28",
       "jobCount": 14,
       "freshCount": 9,
