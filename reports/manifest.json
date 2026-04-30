@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-04-30",
+      "jobCount": 15,
+      "freshCount": 1,
+      "stretchCount": 5,
+      "hasForeign": true,
+      "topSalary": "30-60K·15薪（腾讯云）"
+    },
+    {
       "date": "2026-04-29",
       "jobCount": 10,
       "freshCount": 9,
@@ -87,38 +95,6 @@
       "stretchCount": 0,
       "hasForeign": false,
       "topSalary": "20k+"
-    },
-    {
-      "date": "2026-04-15",
-      "jobCount": 13,
-      "freshCount": 9,
-      "stretchCount": 4,
-      "hasForeign": true,
-      "topSalary": "20k+"
-    },
-    {
-      "date": "2026-04-14",
-      "jobCount": 8,
-      "freshCount": 5,
-      "stretchCount": 3,
-      "hasForeign": false,
-      "topSalary": "20-50k · SaaS/AI销售总监"
-    },
-    {
-      "date": "2026-04-13",
-      "jobCount": 9,
-      "freshCount": 5,
-      "stretchCount": 4,
-      "hasForeign": false,
-      "topSalary": "40-50K · MaaS阿里云"
-    },
-    {
-      "date": "2026-04-11",
-      "jobCount": 26,
-      "freshCount": 12,
-      "stretchCount": 8,
-      "hasForeign": true,
-      "topSalary": "25-45K · AI云赛道"
     }
   ]
 }
