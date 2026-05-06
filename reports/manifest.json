@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-05-06",
+      "jobCount": 18,
+      "freshCount": 7,
+      "stretchCount": 8,
+      "hasForeign": true,
+      "topSalary": "55K·20薪（京东科技AI产品销售）"
+    },
+    {
       "date": "2026-04-30",
       "jobCount": 15,
       "freshCount": 1,
@@ -86,15 +94,7 @@
       "freshCount": 3,
       "stretchCount": 2,
       "hasForeign": true,
-      "topSalary": "15k–22k/月"
-    },
-    {
-      "date": "2026-04-16",
-      "jobCount": 0,
-      "freshCount": 0,
-      "stretchCount": 0,
-      "hasForeign": false,
-      "topSalary": "20k+"
+      "topSalary": "15k-22k/月"
     }
   ]
 }
