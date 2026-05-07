@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-05-07",
+      "jobCount": 16,
+      "freshCount": 13,
+      "stretchCount": 7,
+      "hasForeign": true,
+      "topSalary": "30-60K·13薪（阿里巴巴）"
+    },
+    {
       "date": "2026-05-06",
       "jobCount": 18,
       "freshCount": 7,
