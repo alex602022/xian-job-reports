@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-05-12",
+      "jobCount": 44,
+      "freshCount": 36,
+      "stretchCount": 16,
+      "hasForeign": true,
+      "topSalary": "60-90K·14薪（猎聘AI enterprise解决方案业务负责人）"
+    },
+    {
       "date": "2026-05-07",
       "jobCount": 16,
       "freshCount": 13,
