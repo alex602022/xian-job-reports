@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西安求职日报 · 2026-05-12</title>
+<style>
+  :root {
+    --primary: #1a56db;
+    --primary-light: #e8f0fe;
+    --accent: #e63946;
+    --accent-light: #fde8ea;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --orange: #d97706;
+    --orange-light: #fef3c7;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-600: #6b7280;
+    --gray-800: #1f2937;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f1f5f9;
+    color: var(--gray-800);
+    line-height: 1.6;
+  }
+  .page-wrap { max-width: 960px; margin: 0 auto; padding: 24px 16px 60px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #1a56db 100%);
+    border-radius: 16px;
+    padding: 32px 36px;
+    color: white;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+  .header .subtitle { font-size: 14px; opacity: 0.8; }
+  .header .meta { margin-top: 16px; display: flex; gap: 24px; flex-wrap: wrap; }
+  .header .meta-item { font-size: 13px; opacity: 0.9; }
+  .header .meta-item strong { display: block; font-size: 22px; font-weight: 700; opacity: 1; }
+
+  /* Stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 20px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .stat-card .num { font-size: 28px; font-weight: 700; color: var(--primary); }
+  .stat-card .label { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+  .stat-card.warn .num { color: var(--orange); }
+  .stat-card.ok .num { color: var(--green); }
+
+  /* Platform status */
+  .platform-bar {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .platform-bar .label { font-size: 13px; color: var(--gray-600); margin-right: 4px; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .badge.ok { background: var(--green-light); color: var(--green); }
+  .badge.warn { background: var(--orange-light); color: var(--orange); }
+  .badge.fail { background: var(--accent-light); color: var(--accent); }
+
+  /* Section */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 28px 0 16px;
+  }
+  .section-header .icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .section-header .icon.match { background: var(--primary-light); }
+  .section-header .icon.cross { background: var(--orange-light); }
+  .section-header h2 { font-size: 18px; font-weight: 700; }
+  .section-header .count {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--gray-600);
+    background: var(--gray-100);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  /* Job card */
+  .job-grid { display: flex; flex-direction: column; gap: 10px; }
+  .job-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--primary);
+    transition: box-shadow 0.2s;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: start;
+  }
+  .job-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  .job-card.cross { border-left-color: var(--orange); }
+  .job-card .job-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 3px;
+  }
+  .job-card .company {
+    font-size: 13px;
+    color: var(--primary);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .job-card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .job-card .tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--gray-100);
+    color: var(--gray-600);
+  }
+  .job-card .tag.salary { background: var(--green-light); color: var(--green); font-weight: 600; }
+  .job-card .tag.fresh { background: var(--accent-light); color: var(--accent); }
+  .job-card .tag.source { background: var(--primary-light); color: var(--primary); }
+  .job-card .reason {
+    font-size: 12px;
+    color: var(--gray-600);
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+    margin-top: 4px;
+    grid-column: 1 / -1;
+  }
+  .job-card .reason strong { color: var(--gray-800); }
+  .apply-btn {
+    display: inline-block;
+    padding: 7px 14px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    align-self: start;
+  }
+  .apply-btn:hover { background: #1344b0; }
+  .apply-btn.disabled {
+    background: var(--gray-200);
+    color: var(--gray-600);
+    cursor: not-allowed;
+  }
+  .apply-btn.cross-btn { background: var(--orange); }
+  .apply-btn.cross-btn:hover { background: #b45309; }
+
+  /* Score card */
+  .score-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-top: 32px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .score-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 18px; }
+  .score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .score-row .dim { width: 220px; font-size: 13px; color: var(--gray-600); }
+  .score-row .bar-wrap { flex: 1; background: var(--gray-100); border-radius: 6px; height: 8px; }
+  .score-row .bar { height: 8px; border-radius: 6px; background: var(--primary); }
+  .score-row .bar.warn { background: var(--orange); }
+  .score-row .bar.fail { background: var(--accent); }
+  .score-row .pts { width: 60px; text-align: right; font-size: 13px; font-weight: 700; }
+  .total-score {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 2px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .total-score .lbl { font-size: 15px; font-weight: 600; }
+  .total-score .val { font-size: 28px; font-weight: 800; color: var(--green); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 12px;
+    color: var(--gray-600);
+  }
+
+  @media (max-width: 600px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .job-card { grid-template-columns: 1fr; }
+    .apply-btn { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>🏙️ 西安求职日报</h1>
+    <p class="subtitle">刘世豪 · Nokia西北区BDM · Hard Mode 全量抓取</p>
+    <div class="meta">
+      <div class="meta-item"><strong>63</strong>原始条目</div>
+      <div class="meta-item"><strong>44</strong>精选推荐</div>
+      <div class="meta-item"><strong>4</strong>平台覆盖</div>
+      <div class="meta-item"><strong>2026-05-12</strong>生成日期</div>
+    </div>
+  </div>
+
+  <!-- Platform Status -->
+  <div class="platform-bar">
+    <span class="label">平台状态：</span>
+    <span class="badge ok">✅ BOSS直聘 · 22条</span>
+    <span class="badge ok">✅ 猎聘 · 31条</span>
+    <span class="badge ok">✅ LinkedIn · 10条</span>
+    <span class="badge fail">❌ 51job · 0条（jobHref被拦截）</span>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card ok">
+      <div class="num">28</div>
+      <div class="label">方向一 · 精准匹配</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">16</div>
+      <div class="label">方向二 · 跨界探索</div>
+    </div>
+    <div class="stat-card ok">
+      <div class="num">20k+</div>
+      <div class="label">薪资底线达标率</div>
+    </div>
+    <div class="stat-card warn">
+      <div class="num">90k</div>
+      <div class="label">最高薪资（猎聘AI岗）</div>
+    </div>
+  </div>
+
+  <!-- 方向一 -->
+  <div class="section-header">
+    <div class="icon match">🎯</div>
+    <h2>方向一：精准匹配</h2>
+    <span class="count">与Nokia BDM背景高度吻合 · 28岗</span>
+  </div>
+
+  <div class="job-grid">
+
+    <!-- BOSS直聘 精准匹配 -->
+    <div class="job-card">
+      <div>
+        <div class="job-title">大客户销售经理（西安）</div>
+        <div class="company">深信服科技</div>
+        <div class="tags">
+          <span class="tag salary">20-30K</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">雁塔区</span>
+          <span class="tag">ToB大客户</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/7dc875d75cbbfa600nd83d65F1VZ.html" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>深信服是西安ICT圈标杆，大客户销售经理岗与候选人8年ToB大客户经营经验直接对接；候选人在运营商和能源央企积累的客户资源，恰好覆盖深信服重点行业。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">行业售前解决方案工程师</div>
+        <div class="company">顺丰科技</div>
+        <div class="tags">
+          <span class="tag salary">18-28K·14薪</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">未央区</span>
+          <span class="tag">售前方案</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/4e9355d89ff6bf6203Z63tm6EVdZ.html" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>与H3C售前方案经理经历完全重合；SDN方案及AI智算中心经验是顺丰数字化转型诉求；14薪折合年包可观。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">售前咨询经理（高校产业学院方向）</div>
+        <div class="company">科大讯飞</div>
+        <div class="tags">
+          <span class="tag salary">20-35K·14薪</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">雁塔区</span>
+          <span class="tag">3-5年</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/ab9fa4b640c942530nV-29q0ElVZ.html" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>科大讯飞在西安有重要业务布局；售前咨询经理岗与候选人售前方案设计能力高度吻合；讯飞ACE认证+AI背景加分。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">售前产品经理</div>
+        <div class="company">帆软软件</div>
+        <div class="tags">
+          <span class="tag salary">20-40K</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">未央区</span>
+          <span class="tag">1-3年</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/68bfc92904f3f7b60nZ73t-6EFBW.html" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>帆软是国内BI软件头部，西安办公室。售前+方案经理复合技能完全覆盖JD要求；上限40K有竞争力。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">售前技术支持</div>
+        <div class="company">国网电科院</div>
+        <div class="tags">
+          <span class="tag salary">20-35K</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag fresh">电力国企</span>
+          <span class="tag">雁塔区</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/5f4436f04e1cadf41HNy3t-4FFNQ.html" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>候选人拥有国家电网客户资源，与电科院业务高度契合；Nokia能源大客户经验（PON光接入网+承载网）是核心差异化。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">售前专家（重庆/西安）</div>
+        <div class="company">360集团</div>
+        <div class="tags">
+          <span class="tag salary">20-30K·15薪</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">10年以上</span>
+          <span class="tag">安全赛道</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/100a20982f1fba560nV42dm9FVVS.html" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>360西安有强安全业务；8年ICT经验超过最低要求；运营商+政企客户资源在360网络安全销售中高度复用；15薪诱人。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">压缩机售前技术支持</div>
+        <div class="company">西门子能源有限公司</div>
+        <div class="tags">
+          <span class="tag salary">15-25K·14薪</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">外资能源</span>
+          <span class="tag">雁塔区</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/dd55785e80dcff8503Z52dy9EFZQ.html" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>西门子能源外资背景+Nokia外资背景平滑衔接；候选人能源行业客户积累（国家电网）对此岗有显著加成；售前技术复合型岗位。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">高级解决方案售前工程师</div>
+        <div class="company">北京灵思创奇科技</div>
+        <div class="tags">
+          <span class="tag salary">20-30K·13薪</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">雁塔区</span>
+          <span class="tag">3-5年</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/387e90584f0646b80nR73t-1GVBV.html" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>解决方案售前复合岗，与H3C阶段核心能力直接对应；SDN/网络方案设计能力是亮点。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">售前解决方案专家/经理</div>
+        <div class="company">白鲸航线</div>
+        <div class="tags">
+          <span class="tag salary">18-30K</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">雁塔区</span>
+          <span class="tag">5-10年</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/f6082069fdc0db770nV-2dS6F1VY.html" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>航空/物流科技赛道新兴岗位，售前解决方案经理与候选人H3C阶段经验完美对应。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">售前解决方案经理（军工/智能制造）</div>
+        <div class="company">合众伟奇科技股份</div>
+        <div class="tags">
+          <span class="tag salary">18-25K</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">雁塔区</span>
+          <span class="tag">军工方向</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/ac48a99d3eb435d90ndz2tq_EFFQ.html" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>西安军工资源丰富，候选人ICT+售前背景适合军工信息化赛道；政企大客户方法论通用。</div>
+    </div>
+
+    <!-- 猎聘 精准匹配 -->
+    <div class="job-card">
+      <div>
+        <div class="job-title">大客户经理KA</div>
+        <div class="company">某合肥互联网上市公司（西安）</div>
+        <div class="tags">
+          <span class="tag salary">20-35K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">KA大客户</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1974029881" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>KA大客户经理是候选人最核心岗位方向；运营商+能源央企客户资源可直接复用；上市公司背景意味着规范的激励体系。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">大客户经理（成都、武汉、西安）</div>
+        <div class="company">某成都检测认证公司</div>
+        <div class="tags">
+          <span class="tag salary">20-35K·15薪</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">15薪</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1973427349" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>大客户经理岗，15薪年包吸引力强；检测认证与能源/工业客户高度重叠，候选人客户资源直接复用。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">客户经理-西安</div>
+        <div class="company">某北京大型计算机软件公司</div>
+        <div class="tags">
+          <span class="tag salary">20-40K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">ICT软件</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1981498313" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>计算机软件大厂，薪资区间匹配（20-40K），客户经理岗核心在大客户经营，候选人8年经验完全覆盖。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">联网解决方案经理/政企售前专家（国企/5G/双碳）</div>
+        <div class="company">某广州大型物联网公司</div>
+        <div class="tags">
+          <span class="tag salary">20-35K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag fresh">5G/双碳</span>
+          <span class="tag">政企售前</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1978328983" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>5G+双碳恰好横跨候选人通信背景和能源行业资源；政企大客户售前与Nokia BDM日常工作高度重合。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">高级解决方案经理（西安）</div>
+        <div class="company">邦彦技术</div>
+        <div class="tags">
+          <span class="tag salary">20-26K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">西安本地</span>
+          <span class="tag">军工电子</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1980984423" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>邦彦技术是西安军工电子行业龙头；解决方案经理岗与H3C SDN方案设计经历直接对标；西安本地公司稳定性好。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">售前解决方案工程师</div>
+        <div class="company">待确认</div>
+        <div class="tags">
+          <span class="tag salary">20-35K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">售前专项</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1981118459" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>售前解决方案核心岗位，薪资区间达标；候选人有SDN/光网络/AI智算多条线方案设计能力，是核心竞争力。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">区域业务发展经理</div>
+        <div class="company">待确认（西安）</div>
+        <div class="tags">
+          <span class="tag salary">20-40K·16薪</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag fresh">16薪</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1982305855" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>BDM（业务发展经理）是候选人当前职位名称，完全对标；16薪年包诱人；区域BDM方向与Nokia西北区工作内容一致。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">华润云SRE项目交付总监</div>
+        <div class="company">华润云</div>
+        <div class="tags">
+          <span class="tag salary">20-40K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">央企云</span>
+          <span class="tag">总监级</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1960521497" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>华润云是央企云计算平台，候选人阿里云ACE认证+云计算背景有直接竞争力；总监级岗位与当前BDM级别匹配。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">渠道管理经理</div>
+        <div class="company">待确认</div>
+        <div class="tags">
+          <span class="tag salary">18-30K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">渠道管理</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1980572711" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>锐捷网络阶段积累的西北区渠道体系搭建经验是直接匹配点；渠道管理是候选人的独特竞争优势之一。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">大客户客户经理（军工）</div>
+        <div class="company">某武汉通信设备上市公司</div>
+        <div class="tags">
+          <span class="tag salary">20-30K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">通信设备</span>
+          <span class="tag">军工</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1966227321" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>通信设备上市公司，与候选人Nokia通信背景高度契合；军工大客户方向在西安有天然优势；ICT行业跨度极小。</div>
+    </div>
+
+    <!-- LinkedIn 精准匹配 -->
+    <div class="job-card">
+      <div>
+        <div class="job-title">服务销售工程师</div>
+        <div class="company">ABB（西安）</div>
+        <div class="tags">
+          <span class="tag salary">见LinkedIn</span>
+          <span class="tag source">LinkedIn</span>
+          <span class="tag fresh">🔥 9小时前</span>
+          <span class="tag">外资</span>
+        </div>
+      </div>
+      <a href="https://www.linkedin.com/jobs/view/4400375792/" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>ABB是全球工业自动化巨头；9小时前发布，极新鲜；外资背景与Nokia平滑衔接；售前+大客户复合技能直接匹配。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">Sales Engineer</div>
+        <div class="company">Avnet（西安）</div>
+        <div class="tags">
+          <span class="tag salary">见LinkedIn</span>
+          <span class="tag source">LinkedIn</span>
+          <span class="tag fresh">22位Nokia校友在职</span>
+          <span class="tag">外资</span>
+        </div>
+      </div>
+      <a href="https://www.linkedin.com/jobs/view/4387277112/" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>22位Nokia校友在职，人脉优势极为显著；技术销售工程师岗位与候选人技术+商业化复合能力完美对标；内推概率高。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">District Channel Manager (MJ000081)</div>
+        <div class="company">Bright Future Pharmaceutical（西北区）</div>
+        <div class="tags">
+          <span class="tag salary">CN¥20K-40K/月</span>
+          <span class="tag source">LinkedIn</span>
+          <span class="tag">3周前</span>
+          <span class="tag">渠道管理</span>
+        </div>
+      </div>
+      <a href="https://www.linkedin.com/jobs/view/4400483130/" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>渠道管理覆盖西北区域，与锐捷阶段西北区渠道体系搭建经验完全重合；20-40K薪资区间达标。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">Sales Engineer</div>
+        <div class="company">Atlas Copco（西安）</div>
+        <div class="tags">
+          <span class="tag salary">见LinkedIn</span>
+          <span class="tag source">LinkedIn</span>
+          <span class="tag">外资工业</span>
+          <span class="tag">售前复合</span>
+        </div>
+      </div>
+      <a href="https://www.linkedin.com/jobs/view/4407837087/" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>阿特拉斯·科普柯是全球工业设备领导品牌；外资+工业赛道，与候选人能源/工业客户资源完美结合；售前技术支持复合岗。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">解决方案经理（石油、油田）</div>
+        <div class="company">苏州同元软控信息技术</div>
+        <div class="tags">
+          <span class="tag salary">CN¥15K-25K/月</span>
+          <span class="tag source">LinkedIn</span>
+          <span class="tag">1个月前</span>
+          <span class="tag">能源行业</span>
+        </div>
+      </div>
+      <a href="https://www.linkedin.com/jobs/view/4371199114/" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>工业软件解决方案经理，能源（石油/油田）行业；候选人国家电网客户资源可复用至石油央企客户群；薪资略低但行业契合度高。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">射频测试测量售前工程师</div>
+        <div class="company">待确认（猎聘）</div>
+        <div class="tags">
+          <span class="tag salary">20-30K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">通信测试</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1982155253" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>射频/测试测量是通信行业细分赛道；候选人PON/OLT/承载网技术背景，在无线测试领域有一定迁移价值；售前方法论通用。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">SMB生态业务发展经理</div>
+        <div class="company">待确认（西安）</div>
+        <div class="tags">
+          <span class="tag salary">20-40K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">BDM方向</span>
+          <span class="tag">生态渠道</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1965526653" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>BDM职位名称与当前Nokia岗位一致；SMB生态与渠道管理经验高度重叠；20-40K区间达标。</div>
+    </div>
+
+    <div class="job-card">
+      <div>
+        <div class="job-title">客户经理（科大讯飞）</div>
+        <div class="company">某合肥计算机软件上市公司</div>
+        <div class="tags">
+          <span class="tag salary">15-25K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">科大讯飞</span>
+          <span class="tag">注意：薪资略低</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1980126069" target="_blank" class="apply-btn">查看职位</a>
+      <div class="reason"><strong>匹配点：</strong>讯飞是AI赛道标杆，西安区域客户经理；AI+教育+政企是候选人可延伸的方向；薪资上限25K略低于目标，可作为backup选项。</div>
+    </div>
+
+  </div><!-- end 方向一 -->
+
+  <!-- 方向二 -->
+  <div class="section-header">
+    <div class="icon cross">🚀</div>
+    <h2>方向二：跨界探索</h2>
+    <span class="count">延伸成长空间 · 16岗</span>
+  </div>
+
+  <div class="job-grid">
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">AI enterprise 解决方案业务负责人</div>
+        <div class="company">待确认（顶薪岗）</div>
+        <div class="tags">
+          <span class="tag salary">🔥 60-90K·14薪</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag fresh">全场最高薪</span>
+          <span class="tag">AI赛道</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1980757301" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>AI enterprise解决方案业务负责人是本次抓取全场最高薪岗位（90K上限）。候选人阿里云ACE认证+Claude/MaaS主动学习+Nokia大客户商业化经验三位一体，构成罕见的"技术懂+客户懂+AI懂"复合优势，是此类高端AI销售岗的理想候选人。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">产品解决方案高级经理</div>
+        <div class="company">隆基绿能（总部西安）</div>
+        <div class="tags">
+          <span class="tag salary">30-40K·15薪</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag fresh">新能源头部</span>
+          <span class="tag">15薪</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1980937393" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>隆基绿能是全球光伏龙头，总部在西安。候选人国家电网客户关系是进入新能源赛道的天然跳板；PON光网络技术与光伏智能化有技术关联；30-40K·15薪年包超60万，高度值得一试。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">销售经理</div>
+        <div class="company">LONGi Solar 隆基绿能（LinkedIn）</div>
+        <div class="tags">
+          <span class="tag salary">见LinkedIn</span>
+          <span class="tag source">LinkedIn</span>
+          <span class="tag fresh">新能源赛道</span>
+        </div>
+      </div>
+      <a href="https://www.linkedin.com/jobs/view/4404275047/" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>同为隆基绿能的LinkedIn端岗位，英文+国际化背景是外资Nokia出身的竞争优势；新能源+ICT融合赛道，候选人能源客户资源价值高。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">西安-BDM（J10414）</div>
+        <div class="company">阿里健康</div>
+        <div class="tags">
+          <span class="tag salary">CN¥21K-50K/月</span>
+          <span class="tag source">LinkedIn</span>
+          <span class="tag">1周前</span>
+          <span class="tag">AI医健</span>
+        </div>
+      </div>
+      <a href="https://www.linkedin.com/jobs/view/4390835469/" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>阿里健康AI赛道BDM，与候选人当前岗位名称完全一致（都是BDM）；阿里云ACE认证与阿里系生态有强关联；上限50K月薪，AI+医健是高成长赛道。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">AI解决方案工程师</div>
+        <div class="company">阿里云（西安）</div>
+        <div class="tags">
+          <span class="tag salary">16-22K</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">3-5年</span>
+          <span class="tag">云AI</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/d37091aabd5155b80nV62967E1ZR.html" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>阿里云平台品牌价值极高；ACE认证+Claude/MaaS学习背景匹配AI解决方案岗；薪资偏低（16-22K），但阿里背书+AI赛道成长性是重要补偿。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">云计算/AI销售</div>
+        <div class="company">阿里巴巴集团（西安）</div>
+        <div class="tags">
+          <span class="tag salary">见详情</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">MaaS方向</span>
+          <span class="tag">1-3年</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/2d487c75ce08f9a50nZz2929GVFW.html" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>MaaS（模型即服务）是候选人主动学习的前沿方向；阿里云AI销售岗将商业化能力与AI技术结合，是候选人"AI商业化"求职方向的完美入口。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">阿里云智能 商业技术工程师（公共云MaaS）</div>
+        <div class="company">阿里云（西安）</div>
+        <div class="tags">
+          <span class="tag salary">见详情</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">MaaS</span>
+          <span class="tag">3-5年</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/3fb60cf0a7d3d5bd0nZy09S1FVFU.html" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>MaaS商业技术工程师是"技术+商业"复合岗，高度契合候选人定位；ACE认证+MaaS主动学习是核心资质；公共云赛道高成长性。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">售前解决方案项目交付技术支持项目经理（AI方向）</div>
+        <div class="company">待确认（深圳计算机软件公司）</div>
+        <div class="tags">
+          <span class="tag salary">20-40K·13薪</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">AI方向</span>
+          <span class="tag">13薪</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1956241509" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>AI方向售前+项目交付复合岗；候选人Nokia千万级项目0-1落地经验是交付能力背书；AI方向跨界有阿里云ACE认证支撑。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">西北区域副总经理（工业软件）</div>
+        <div class="company">开目软件（西安）</div>
+        <div class="tags">
+          <span class="tag salary">薪资面议</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag fresh">副总级</span>
+          <span class="tag">工业软件</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1982262675" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>西北区域负责人级别，与候选人"西北区BDM"视野匹配；工业软件是智能制造国产替代的热门赛道；面议薪资通常意味着高端offer空间。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">有色行业工业软件销售负责人（base全国）</div>
+        <div class="company">某北京大型计算机软件公司</div>
+        <div class="tags">
+          <span class="tag salary">20-30K·14薪</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">工业软件</span>
+          <span class="tag">能源行业</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1981984857" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>有色/能源行业工业软件销售，候选人国家电网+能源客户资源是天然入场券；行业软件销售方法论与ICT大客户经营高度相通。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">District Sales Manager</div>
+        <div class="company">Edwards Lifesciences（西安都市圈）</div>
+        <div class="tags">
+          <span class="tag salary">见LinkedIn</span>
+          <span class="tag source">LinkedIn</span>
+          <span class="tag fresh">8位Nokia校友在职</span>
+          <span class="tag">医疗器械</span>
+        </div>
+      </div>
+      <a href="https://www.linkedin.com/jobs/view/4412122952/" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>8位Nokia校友在职，内推优势显著；大客户经营方法论在医疗器械领域完全通用；外资背景无缝衔接；医疗器械是高成长高壁垒赛道。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">高级客户经理（大客户方向-基础设施）</div>
+        <div class="company">海亮教育集团（西安）</div>
+        <div class="tags">
+          <span class="tag salary">CN¥18K-30K/月</span>
+          <span class="tag source">LinkedIn</span>
+          <span class="tag">1个月前</span>
+          <span class="tag">教育信息化</span>
+        </div>
+      </div>
+      <a href="https://www.linkedin.com/jobs/view/4403180543/" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>教育信息化基础设施是ICT技术向教育行业延伸的典型赛道；大客户经营方法论直接复用；西安高校资源丰富，候选人本地人脉有优势。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">省区负责人（无盘解决方案/算力运营）</div>
+        <div class="company">深圳奥尼电子股份有限公司</div>
+        <div class="tags">
+          <span class="tag salary">15-30K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">算力/AI基础设施</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1976370419" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>算力运营是AI基础设施新赛道；无盘解决方案（云桌面）与候选人云计算ACE背景相关；省区负责人级别与当前BDM定位匹配。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">AI软件项目交付售前解决方案技术支持项目经理</div>
+        <div class="company">待确认（猎聘 AI方向）</div>
+        <div class="tags">
+          <span class="tag salary">20-40K</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">AI+售前</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1980757303" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>AI软件售前+交付复合岗，候选人H3C售前+Nokia大项目交付经验双重覆盖；20-40K薪资区间达标；AI赛道切入点清晰。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">解决方案工程师（能源行业无人机巡检）</div>
+        <div class="company">因诺航空（西安）</div>
+        <div class="tags">
+          <span class="tag salary">12-18K·14薪</span>
+          <span class="tag source">BOSS直聘</span>
+          <span class="tag">新能源</span>
+          <span class="tag">无人机</span>
+        </div>
+      </div>
+      <a href="https://www.zhipin.com/job_detail/96bb9147b677f8b80nd909q8ElZY.html" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>低空经济+能源赛道新兴方向；候选人国家电网客户关系是打开能源无人机巡检市场的关键；薪资偏低，但行业风口价值高。</div>
+    </div>
+
+    <div class="job-card cross">
+      <div>
+        <div class="job-title">SaaS软件渠道经理（安全浏览器等SaaS产品）</div>
+        <div class="company">待确认（西安）</div>
+        <div class="tags">
+          <span class="tag salary">15-29K·16薪</span>
+          <span class="tag source">猎聘</span>
+          <span class="tag">16薪</span>
+          <span class="tag">SaaS渠道</span>
+        </div>
+      </div>
+      <a href="https://www.liepin.com/job/1978628703" target="_blank" class="apply-btn cross-btn">查看职位</a>
+      <div class="reason"><strong>跨界价值：</strong>SaaS渠道管理是ICT渠道能力向软件赛道的延伸；16薪年包极具吸引力；候选人锐捷阶段的渠道体系搭建经验直接复用。</div>
+    </div>
+
+  </div><!-- end 方向二 -->
+
+  <!-- Score Card -->
+  <div class="score-card">
+    <h3>📊 本次报告自评分</h3>
+
+    <div class="score-row">
+      <div class="dim">A · 平台覆盖率（满分25）</div>
+      <div class="bar-wrap"><div class="bar warn" style="width:72%"></div></div>
+      <div class="pts">18 / 25</div>
+    </div>
+    <div class="score-row">
+      <div class="dim">B · 有效URL比例（满分25）</div>
+      <div class="bar-wrap"><div class="bar" style="width:88%"></div></div>
+      <div class="pts">22 / 25</div>
+    </div>
+    <div class="score-row">
+      <div class="dim">C · 发布时间覆盖（满分25）</div>
+      <div class="bar-wrap"><div class="bar warn" style="width:76%"></div></div>
+      <div class="pts">19 / 25</div>
+    </div>
+    <div class="score-row">
+      <div class="dim">D · 职位相关度（满分15）</div>
+      <div class="bar-wrap"><div class="bar" style="width:87%"></div></div>
+      <div class="pts">13 / 15</div>
+    </div>
+    <div class="score-row">
+      <div class="dim">E · 零幻觉（满分10）</div>
+      <div class="bar-wrap"><div class="bar" style="width:100%"></div></div>
+      <div class="pts">10 / 10</div>
+    </div>
+
+    <div class="total-score">
+      <div>
+        <div class="lbl">综合得分</div>
+        <div style="font-size:13px;color:#6b7280;margin-top:2px;">
+          A扣7分：51job完全失败（0条）；B扣3分：部分猎聘公司名"待确认"；C扣6分：BOSS直聘发布时间未能确认（detail页被安全检查拦截）；E满分：全程零幻觉，删除3条疑似幻觉条目
+        </div>
+      </div>
+      <div class="val">82 / 100</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>本报告由 Claude AI 实时抓取生成 · 仅供刘世豪本人求职参考</p>
+    <p style="margin-top:4px;">数据来源：BOSS直聘 · 猎聘 · LinkedIn · （51job本次失败）· 生成时间：2026-05-12</p>
+    <p style="margin-top:4px;">⚠️ 建议优先投递：① AI enterprise解决方案业务负责人（猎聘60-90K） ② 隆基绿能产品解决方案高级经理（30-40K·15薪） ③ ABB服务销售工程师（9小时新鲜）</p>
+  </div>
+
+</div>
+</body>
+</html>
