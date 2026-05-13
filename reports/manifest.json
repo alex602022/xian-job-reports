@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-05-13",
+      "jobCount": 13,
+      "freshCount": 10,
+      "stretchCount": 5,
+      "hasForeign": true,
+      "topSalary": "30-35K·13薪（阿里云MaaS商业技术工程师）"
+    },
+    {
       "date": "2026-05-12",
       "jobCount": 44,
       "freshCount": 36,
