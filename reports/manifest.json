@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-05-14",
+      "jobCount": 14,
+      "freshCount": 12,
+      "stretchCount": 6,
+      "hasForeign": true,
+      "topSalary": "20-40K·14薪（中兴金篆信科/和利时/红壹科技）"
+    },
+    {
       "date": "2026-05-13",
       "jobCount": 13,
       "freshCount": 10,
@@ -87,38 +95,6 @@
       "stretchCount": 9,
       "hasForeign": true,
       "topSalary": "30-60K·14薪"
-    },
-    {
-      "date": "2026-04-21",
-      "jobCount": 12,
-      "freshCount": 7,
-      "stretchCount": 5,
-      "hasForeign": true,
-      "topSalary": "20k"
-    },
-    {
-      "date": "2026-04-19",
-      "jobCount": 14,
-      "freshCount": 8,
-      "stretchCount": 6,
-      "hasForeign": true,
-      "topSalary": "20K+/月"
-    },
-    {
-      "date": "2026-04-18",
-      "jobCount": 0,
-      "freshCount": 0,
-      "stretchCount": 0,
-      "hasForeign": true,
-      "topSalary": "50K"
-    },
-    {
-      "date": "2026-04-17",
-      "jobCount": 5,
-      "freshCount": 3,
-      "stretchCount": 2,
-      "hasForeign": true,
-      "topSalary": "15k-22k/月"
     }
   ]
 }
