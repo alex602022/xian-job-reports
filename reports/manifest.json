@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-05-18",
+      "jobCount": 12,
+      "freshCount": 11,
+      "stretchCount": 3,
+      "hasForeign": false,
+      "topSalary": "21-50K（掌上先机BDM/诺君安AI售前/思安云创）"
+    },
+    {
       "date": "2026-05-14",
       "jobCount": 14,
       "freshCount": 12,
