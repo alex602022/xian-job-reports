@@ -26,6 +26,19 @@
       "status": "待投递",
       "notes": "",
       "updatedAt": "2026-04-21T02:26:00.682Z"
+    },
+    "job_416610973": {
+      "id": "job_416610973",
+      "title": "AI产品经理",
+      "company": "Thoughtworks（思特沃克）",
+      "salary": "30-50K·14薪",
+      "url": "https://www.zhipin.com/job_detail/2eaf1da85dd0f2b10nB43dm9FlBS.html",
+      "source": "BOSS直聘",
+      "direction": "stretch",
+      "dateReported": "2026-05-21",
+      "starredAt": "2026-05-21T04:50:06.945Z",
+      "status": "待投递",
+      "notes": ""
     }
   }
 }
