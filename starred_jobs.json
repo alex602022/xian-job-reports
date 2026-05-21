@@ -10,8 +10,9 @@
       "direction": "match",
       "dateReported": "2026-04-21",
       "starredAt": "2026-04-21T02:25:35.686Z",
-      "status": "待投递",
-      "notes": ""
+      "status": "已放弃",
+      "notes": "",
+      "updatedAt": "2026-05-21T04:50:48.528Z"
     },
     "job_1663259352": {
       "id": "job_1663259352",
