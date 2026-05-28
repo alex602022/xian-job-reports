@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-05-28",
+      "jobCount": 20,
+      "freshCount": 8,
+      "stretchCount": 5,
+      "hasForeign": true,
+      "topSalary": "40-60k·18薪（AI大客户）"
+    },
+    {
       "date": "2026-05-25",
       "jobCount": 16,
       "freshCount": 9,
