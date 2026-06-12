@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-06-12",
+      "jobCount": 14,
+      "freshCount": 3,
+      "stretchCount": 6,
+      "hasForeign": true,
+      "topSalary": "35-50K·14薪（西部航天）"
+    },
+    {
       "date": "2026-06-02",
       "jobCount": 19,
       "freshCount": 6,
@@ -22,255 +30,15 @@
       "freshCount": 9,
       "stretchCount": 7,
       "hasForeign": true,
-      "topSalary": "30-40K·15薪"
-    },
-    {
-      "date": "2026-05-21",
-      "jobCount": 16,
-      "freshCount": 9,
-      "stretchCount": 7,
-      "hasForeign": true,
-      "topSalary": "30-50K·14薪（Thoughtworks）"
-    },
-    {
-      "date": "2026-05-18",
-      "jobCount": 12,
-      "freshCount": 9,
-      "stretchCount": 3,
-      "hasForeign": true,
-      "topSalary": "21-50K"
+      "topSalary": "35-50K·14薪（西部航天）"
     },
     {
       "date": "2026-05-14",
       "jobCount": 14,
-      "freshCount": 9,
-      "stretchCount": 5,
-      "hasForeign": true,
-      "topSalary": "21-50K"
-    },
-    {
-      "date": "2026-05-13",
-      "jobCount": 13,
-      "freshCount": 9,
-      "stretchCount": 4,
-      "hasForeign": true,
-      "topSalary": "21-50K"
-    },
-    {
-      "date": "2026-05-12",
-      "jobCount": 15,
-      "freshCount": 10,
-      "stretchCount": 5,
-      "hasForeign": true,
-      "topSalary": "30-50K"
-    },
-    {
-      "date": "2026-05-07",
-      "jobCount": 16,
-      "freshCount": 11,
-      "stretchCount": 5,
-      "hasForeign": true,
-      "topSalary": "30-60K"
-    },
-    {
-      "date": "2026-05-06",
-      "jobCount": 18,
-      "freshCount": 12,
-      "stretchCount": 6,
-      "hasForeign": true,
-      "topSalary": "28-55K"
-    },
-    {
-      "date": "2026-04-30",
-      "jobCount": 15,
-      "freshCount": 10,
-      "stretchCount": 5,
-      "hasForeign": true,
-      "topSalary": "20-40K·14薪"
-    },
-    {
-      "date": "2026-04-29",
-      "jobCount": 14,
-      "freshCount": 9,
-      "stretchCount": 5,
-      "hasForeign": true,
-      "topSalary": "20-35K"
-    },
-    {
-      "date": "2026-04-28",
-      "jobCount": 14,
-      "freshCount": 9,
-      "stretchCount": 5,
-      "hasForeign": true,
-      "topSalary": "25-40K"
-    },
-    {
-      "date": "2026-04-27",
-      "jobCount": 14,
-      "freshCount": 8,
-      "stretchCount": 6,
-      "hasForeign": true,
-      "topSalary": "25-45K"
-    },
-    {
-      "date": "2026-04-24",
-      "jobCount": 14,
-      "freshCount": 10,
-      "stretchCount": 4,
-      "hasForeign": true,
-      "topSalary": "25-50K"
-    },
-    {
-      "date": "2026-04-23",
-      "jobCount": 16,
-      "freshCount": 12,
-      "stretchCount": 4,
-      "hasForeign": true,
-      "topSalary": "25-50K"
-    },
-    {
-      "date": "2026-04-22",
-      "jobCount": 17,
-      "freshCount": 8,
-      "stretchCount": 9,
-      "hasForeign": true,
-      "topSalary": "50K"
-    },
-    {
-      "date": "2026-04-21",
-      "jobCount": 12,
-      "freshCount": 8,
-      "stretchCount": 4,
-      "hasForeign": true,
-      "topSalary": "25-50K"
-    },
-    {
-      "date": "2026-04-19",
-      "jobCount": 14,
-      "freshCount": 8,
-      "stretchCount": 6,
-      "hasForeign": true,
-      "topSalary": "20K"
-    },
-    {
-      "date": "2026-04-18",
-      "jobCount": 8,
-      "freshCount": 5,
-      "stretchCount": 3,
-      "hasForeign": true,
-      "topSalary": "50K"
-    },
-    {
-      "date": "2026-04-17",
-      "jobCount": 5,
-      "freshCount": 3,
-      "stretchCount": 2,
-      "hasForeign": true,
-      "topSalary": "15K"
-    },
-    {
-      "date": "2026-04-16",
-      "jobCount": 8,
-      "freshCount": 5,
-      "stretchCount": 3,
-      "hasForeign": false,
-      "topSalary": "20K"
-    },
-    {
-      "date": "2026-04-15",
-      "jobCount": 21,
-      "freshCount": 12,
-      "stretchCount": 9,
-      "hasForeign": true,
-      "topSalary": "30-45K"
-    },
-    {
-      "date": "2026-04-14",
-      "jobCount": 8,
-      "freshCount": 5,
-      "stretchCount": 3,
-      "hasForeign": false,
-      "topSalary": "20-50K"
-    },
-    {
-      "date": "2026-04-13",
-      "jobCount": 9,
-      "freshCount": 5,
-      "stretchCount": 4,
-      "hasForeign": false,
-      "topSalary": "40-50K"
-    },
-    {
-      "date": "2026-04-11",
-      "jobCount": 26,
-      "freshCount": 12,
-      "stretchCount": 8,
-      "hasForeign": true,
-      "topSalary": "25-45K"
-    },
-    {
-      "date": "2026-04-10",
-      "jobCount": 15,
-      "freshCount": 6,
-      "stretchCount": 3,
-      "hasForeign": true,
-      "topSalary": "30-40K"
-    },
-    {
-      "date": "2026-04-08",
-      "jobCount": 13,
-      "freshCount": 8,
-      "stretchCount": 5,
-      "hasForeign": true,
-      "topSalary": "30-40K"
-    },
-    {
-      "date": "2026-04-07",
-      "jobCount": 13,
-      "freshCount": 8,
-      "stretchCount": 5,
-      "hasForeign": true,
-      "topSalary": "30-40K"
-    },
-    {
-      "date": "2026-04-06",
-      "jobCount": 12,
-      "freshCount": 8,
-      "stretchCount": 4,
-      "hasForeign": true,
-      "topSalary": "30-40K"
-    },
-    {
-      "date": "2026-04-05",
-      "jobCount": 10,
       "freshCount": 7,
-      "stretchCount": 3,
-      "hasForeign": true,
-      "topSalary": "25-50K"
-    },
-    {
-      "date": "2026-04-04",
-      "jobCount": 13,
-      "freshCount": 9,
       "stretchCount": 4,
       "hasForeign": true,
-      "topSalary": "30-40K"
-    },
-    {
-      "date": "2026-04-03",
-      "jobCount": 10,
-      "freshCount": 7,
-      "stretchCount": 3,
-      "hasForeign": true,
-      "topSalary": "30-45K"
-    },
-    {
-      "date": "2026-04-02",
-      "jobCount": 12,
-      "freshCount": 8,
-      "stretchCount": 4,
-      "hasForeign": true,
-      "topSalary": "25-50K"
+      "topSalary": "30-50K（商汤科技）"
     }
   ]
 }
