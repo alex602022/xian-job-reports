@@ -1,1 +1,236 @@
-
+{
+  "reports": [
+    {
+      "date": "2026-06-17",
+      "jobCount": 13,
+      "freshCount": 2,
+      "stretchCount": 6,
+      "hasForeign": true,
+      "topSalary": "25-50K（阿里巴巴售前）"
+    },
+    {
+      "date": "2026-06-15",
+      "jobCount": 13,
+      "freshCount": 4,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "35-50K·14薪（西部航天）"
+    },
+    {
+      "date": "2026-06-12",
+      "jobCount": 14,
+      "freshCount": 3,
+      "stretchCount": 6,
+      "hasForeign": true,
+      "topSalary": "35-50K·14薪（西部航天）"
+    },
+    {
+      "date": "2026-06-02",
+      "jobCount": 19,
+      "freshCount": 6,
+      "stretchCount": 7,
+      "hasForeign": true,
+      "topSalary": "20-40K·16薪（字节跳动）"
+    },
+    {
+      "date": "2026-05-28",
+      "jobCount": 20,
+      "freshCount": 8,
+      "stretchCount": 5,
+      "hasForeign": true,
+      "topSalary": "40-60k·18薪（AI大客户）"
+    },
+    {
+      "date": "2026-05-25",
+      "jobCount": 16,
+      "freshCount": 9,
+      "stretchCount": 7,
+      "hasForeign": true,
+      "topSalary": "25-50K·15薪（海能达/科大讯飞）"
+    },
+    {
+      "date": "2026-05-21",
+      "jobCount": 15,
+      "freshCount": 5,
+      "stretchCount": 6,
+      "hasForeign": true,
+      "topSalary": "30-35K·13薪（阿里云MaaS）"
+    },
+    {
+      "date": "2026-05-18",
+      "jobCount": 16,
+      "freshCount": 6,
+      "stretchCount": 6,
+      "hasForeign": true,
+      "topSalary": "25-40K（华为云BDM）"
+    },
+    {
+      "date": "2026-05-14",
+      "jobCount": 14,
+      "freshCount": 8,
+      "stretchCount": 5,
+      "hasForeign": true,
+      "topSalary": "25-50K（ABB）"
+    },
+    {
+      "date": "2026-05-13",
+      "jobCount": 12,
+      "freshCount": 5,
+      "stretchCount": 5,
+      "hasForeign": false,
+      "topSalary": "20-30K·14薪（科大讯飞）"
+    },
+    {
+      "date": "2026-05-12",
+      "jobCount": 11,
+      "freshCount": 4,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "20-30K·14薪（科大讯飞）"
+    },
+    {
+      "date": "2026-05-07",
+      "jobCount": 13,
+      "freshCount": 5,
+      "stretchCount": 5,
+      "hasForeign": true,
+      "topSalary": "25-40K（华为云）"
+    },
+    {
+      "date": "2026-05-06",
+      "jobCount": 10,
+      "freshCount": 3,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "20-35K（国网电科院）"
+    },
+    {
+      "date": "2026-04-30",
+      "jobCount": 12,
+      "freshCount": 6,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "30-35K·13薪（阿里云）"
+    },
+    {
+      "date": "2026-04-29",
+      "jobCount": 11,
+      "freshCount": 5,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "25-50K（阿里巴巴）"
+    },
+    {
+      "date": "2026-04-28",
+      "jobCount": 12,
+      "freshCount": 5,
+      "stretchCount": 5,
+      "hasForeign": true,
+      "topSalary": "25-50K（阿里巴巴）"
+    },
+    {
+      "date": "2026-04-27",
+      "jobCount": 11,
+      "freshCount": 5,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "25-50K（阿里巴巴）"
+    },
+    {
+      "date": "2026-04-24",
+      "jobCount": 10,
+      "freshCount": 4,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "20-40K（和利时）"
+    },
+    {
+      "date": "2026-04-23",
+      "jobCount": 11,
+      "freshCount": 5,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "20-40K（阿里云）"
+    },
+    {
+      "date": "2026-04-22",
+      "jobCount": 10,
+      "freshCount": 4,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "20-40K（阿里云）"
+    },
+    {
+      "date": "2026-04-21",
+      "jobCount": 11,
+      "freshCount": 5,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "20-40K（阿里云）"
+    },
+    {
+      "date": "2026-04-19",
+      "jobCount": 10,
+      "freshCount": 4,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "25-50K（阿里巴巴）"
+    },
+    {
+      "date": "2026-04-18",
+      "jobCount": 11,
+      "freshCount": 5,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "25-50K（阿里巴巴）"
+    },
+    {
+      "date": "2026-04-17",
+      "jobCount": 12,
+      "freshCount": 6,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "25-50K（阿里巴巴）"
+    },
+    {
+      "date": "2026-04-16",
+      "jobCount": 10,
+      "freshCount": 4,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "20-40K（阿里云）"
+    },
+    {
+      "date": "2026-04-15",
+      "jobCount": 10,
+      "freshCount": 4,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "20-40K（阿里云）"
+    },
+    {
+      "date": "2026-04-14",
+      "jobCount": 10,
+      "freshCount": 4,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "20-40K（阿里云）"
+    },
+    {
+      "date": "2026-04-13",
+      "jobCount": 9,
+      "freshCount": 4,
+      "stretchCount": 3,
+      "hasForeign": true,
+      "topSalary": "20-40K（华为云）"
+    },
+    {
+      "date": "2026-04-11",
+      "jobCount": 8,
+      "freshCount": 3,
+      "stretchCount": 3,
+      "hasForeign": true,
+      "topSalary": "20-35K（阿里云）"
+    }
+  ]
+}
