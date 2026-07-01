@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-07-01",
+      "jobCount": 12,
+      "freshCount": 5,
+      "stretchCount": 7,
+      "hasForeign": true,
+      "topSalary": "25-50K·15薪（字节跳动飞书解决方案专家）"
+    },
+    {
       "date": "2026-06-22",
       "jobCount": 17,
       "freshCount": 1,

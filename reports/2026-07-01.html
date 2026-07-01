@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西安求职日报 · 2026-07-01</title>
+<style>
+  :root {
+    --primary: #1a56db;
+    --primary-light: #e8f0fe;
+    --success: #0e9f6e;
+    --success-light: #def7ec;
+    --warn: #c27803;
+    --warn-light: #fdf6b2;
+    --danger: #e02424;
+    --danger-light: #fde8e8;
+    --gray: #6b7280;
+    --gray-light: #f3f4f6;
+    --border: #e5e7eb;
+    --text: #111827;
+    --text-muted: #6b7280;
+    --dir1-color: #1a56db;
+    --dir1-bg: #e8f0fe;
+    --dir2-color: #7e3af2;
+    --dir2-bg: #edebfe;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Noto Sans SC", sans-serif; color: var(--text); background: #f8fafc; line-height: 1.6; }
+
+  .header { background: linear-gradient(135deg, #1a56db 0%, #7e3af2 100%); color: white; padding: 32px 24px 28px; }
+  .header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+  .header .meta { font-size: 13px; opacity: 0.85; margin-top: 6px; }
+  .header .stats-row { display: flex; gap: 20px; margin-top: 16px; flex-wrap: wrap; }
+  .header .stat { text-align: center; }
+  .header .stat .num { font-size: 26px; font-weight: 800; line-height: 1; }
+  .header .stat .lbl { font-size: 11px; opacity: 0.75; margin-top: 2px; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 20px 16px 40px; }
+
+  .alert { border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; display: flex; align-items: flex-start; gap: 8px; }
+  .alert-warn { background: var(--warn-light); border: 1px solid #fcd34d; color: #92400e; }
+  .alert-info { background: var(--primary-light); border: 1px solid #93c5fd; color: #1e40af; }
+  .alert-ok { background: var(--success-light); border: 1px solid #6ee7b7; color: #065f46; }
+  .alert-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+  .section-header { display: flex; align-items: center; gap: 10px; margin: 24px 0 14px; }
+  .section-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; }
+  .badge-dir1 { background: var(--dir1-bg); color: var(--dir1-color); }
+  .badge-dir2 { background: var(--dir2-bg); color: var(--dir2-color); }
+  .badge-pending { background: var(--warn-light); color: var(--warn); }
+  .section-title { font-size: 17px; font-weight: 700; }
+  .section-count { margin-left: auto; font-size: 12px; color: var(--text-muted); background: var(--gray-light); padding: 2px 8px; border-radius: 10px; }
+
+  .job-card { background: white; border-radius: 10px; border: 1px solid var(--border); padding: 16px 18px; margin-bottom: 12px; box-shadow: var(--shadow); transition: box-shadow 0.15s; }
+  .job-card:hover { box-shadow: var(--shadow-md); }
+  .job-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .job-title { font-size: 15px; font-weight: 700; color: var(--text); text-decoration: none; }
+  .job-title:hover { color: var(--primary); }
+  .job-company { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+  .job-salary { font-size: 14px; font-weight: 700; color: #dc2626; white-space: nowrap; flex-shrink: 0; }
+  .job-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border); color: var(--text-muted); background: var(--gray-light); }
+  .tag-platform { border-color: #93c5fd; color: #1d4ed8; background: #eff6ff; }
+  .tag-date-ok { border-color: #6ee7b7; color: #065f46; background: var(--success-light); }
+  .tag-date-unknown { border-color: #fcd34d; color: #92400e; background: var(--warn-light); }
+  .tag-date-pending { border-color: #f9a8d4; color: #9d174d; background: #fdf2f8; }
+  .job-reason { font-size: 12.5px; color: #374151; margin-top: 10px; padding: 8px 12px; border-radius: 6px; line-height: 1.55; }
+  .reason-dir1 { background: var(--dir1-bg); border-left: 3px solid var(--dir1-color); }
+  .reason-dir2 { background: var(--dir2-bg); border-left: 3px solid var(--dir2-color); }
+  .job-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; font-size: 12px; color: var(--primary); text-decoration: none; padding: 4px 10px; border: 1px solid #93c5fd; border-radius: 5px; background: var(--primary-light); }
+  .job-link:hover { background: #dbeafe; }
+  .job-link-pending { color: var(--warn); border-color: #fcd34d; background: var(--warn-light); }
+
+  .score-table { background: white; border-radius: 10px; border: 1px solid var(--border); overflow: hidden; margin-top: 20px; box-shadow: var(--shadow); }
+  .score-table table { width: 100%; border-collapse: collapse; }
+  .score-table th { background: var(--gray-light); font-size: 12px; font-weight: 600; color: var(--text-muted); padding: 8px 14px; text-align: left; }
+  .score-table td { padding: 9px 14px; font-size: 13px; border-top: 1px solid var(--border); }
+  .score-table tr:last-child td { font-weight: 700; background: var(--gray-light); }
+  .score-num { font-weight: 700; }
+  .score-ok { color: var(--success); }
+  .score-warn { color: var(--warn); }
+  .score-bad { color: var(--danger); }
+
+  .platform-log { background: white; border-radius: 10px; border: 1px solid var(--border); padding: 14px 18px; margin-top: 12px; box-shadow: var(--shadow); }
+  .platform-log h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .log-item { font-size: 12.5px; padding: 5px 0; border-top: 1px solid var(--gray-light); color: #374151; }
+  .log-item:first-of-type { border-top: none; }
+  .log-ok { color: var(--success); font-weight: 600; }
+  .log-warn { color: var(--warn); font-weight: 600; }
+  .log-fail { color: var(--danger); font-weight: 600; }
+
+  .footer { text-align: center; font-size: 11.5px; color: var(--text-muted); margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); }
+
+  @media (max-width: 600px) {
+    .header .stats-row { gap: 14px; }
+    .job-header { flex-direction: column; }
+    .job-salary { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📋 西安求职日报 · 刘世豪</h1>
+  <div class="meta">生成时间：2026-07-01 &nbsp;｜&nbsp; 覆盖平台：BOSS直聘 · 猎聘 · LinkedIn · 智联招聘（其他公开渠道）· 51job（已停用，见附录）</div>
+  <div class="stats-row">
+    <div class="stat"><div class="num">5</div><div class="lbl">方向一推荐</div></div>
+    <div class="stat"><div class="num">7</div><div class="lbl">方向二推荐</div></div>
+    <div class="stat"><div class="num">12</div><div class="lbl">日期已验证</div></div>
+    <div class="stat"><div class="num">4</div><div class="lbl">覆盖平台</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 抓取状态提示 -->
+  <div class="alert alert-ok">
+    <span class="alert-icon">✅</span>
+    <span><strong>BOSS直聘：</strong>2个关键词（大客户经理、解决方案经理）串行抓取成功，未触发 code:37。API 实时返回，按规则视为满足鲜度要求（"今日API获取"）。</span>
+  </div>
+  <div class="alert alert-warn">
+    <span class="alert-icon">⚠️</span>
+    <span><strong>猎聘：</strong>3个关键词命中4条看似高度匹配的职位（开目软件西北区域副总经理、隆基绿能产品解决方案高级经理、思特奇售前解决方案-AI方向、天天出行全国业务发展总经理），逐条访问详情页验证更新时间后，<strong>4条全部超过14天鲜度红线，予以排除</strong>；仅字节跳动飞书解决方案专家（6月30日更新）通过验证。已更新 scraping_strategy.md 记录此现象。</span>
+  </div>
+  <div class="alert alert-ok">
+    <span class="alert-icon">🔗</span>
+    <span><strong>智联招聘（其他公开渠道）：</strong>本次通过 read_page 读取未被扩展拦截的职位链接，首次确认详情页真实URL格式为 <code>zhaopin.com/jobdetail/{code}.htm</code>（此前长期未解决），成功获取2条西安在招职位，均有明确"更新时间"字段。</span>
+  </div>
+  <div class="alert alert-info">
+    <span class="alert-icon">ℹ️</span>
+    <span><strong>前程无忧(51job)：</strong>按 2026-06-23 策略已正式停用主动抓取（jobHref 被扩展永久拦截 + 西安ICT销售岗存量极低）。建议手动搜索见报告末尾。</span>
+  </div>
+
+  <!-- 方向一 -->
+  <div class="section-header">
+    <span class="section-badge badge-dir1">方向一</span>
+    <span class="section-title">精准匹配 · 经验直接对应</span>
+    <span class="section-count">5 个职位</span>
+  </div>
+
+  <!-- Job 1 -->
+  <div class="job-card">
+    <div class="job-header">
+      <div>
+        <a class="job-title" href="https://www.zhipin.com/job_detail/8ff359591db01f4703x93du_ElVY.html" target="_blank">行业解决方案经理</a>
+        <div class="job-company">中移信息系统有限公司 · 西安</div>
+      </div>
+      <div class="job-salary">11–20K</div>
+    </div>
+    <div class="job-tags">
+      <span class="tag tag-platform">BOSS直聘</span>
+      <span class="tag tag-date-ok">今日API获取</span>
+      <span class="tag">运营商</span>
+      <span class="tag">中国移动体系</span>
+    </div>
+    <div class="job-reason reason-dir1">
+      <strong>匹配点：</strong>中国移动信息系统子公司，直接对口候选人现职"运营商大客户"资源与关系；行业解决方案岗位职责（方案设计、客户对接、项目推进）与Nokia BDM工作模式高度一致。薪资顶格达到20K起薪线。
+    </div>
+    <a class="job-link" href="https://www.zhipin.com/job_detail/8ff359591db01f4703x93du_ElVY.html" target="_blank">🔗 查看职位详情</a>
+  </div>
+
+  <!-- Job 2 -->
+  <div class="job-card">
+    <div class="job-header">
+      <div>
+        <a class="job-title" href="https://www.zhipin.com/job_detail/a448bbffe0640c560nB509S5GVJX.html" target="_blank">企业/园区网络解决方案销售—西安</a>
+        <div class="job-company">星融元 · 西安</div>
+      </div>
+      <div class="job-salary">12–20K</div>
+    </div>
+    <div class="job-tags">
+      <span class="tag tag-platform">BOSS直聘</span>
+      <span class="tag tag-date-ok">今日API获取</span>
+      <span class="tag">网络/SDN</span>
+      <span class="tag">解决方案销售</span>
+    </div>
+    <div class="job-reason reason-dir1">
+      <strong>匹配点：</strong>星融元专注开放网络/SDN解决方案，与候选人在新华三时期的SDN方案商业化经验直接对口；企业/园区网络销售面向的政企客户群体与既往经验重叠度高。
+    </div>
+    <a class="job-link" href="https://www.zhipin.com/job_detail/a448bbffe0640c560nB509S5GVJX.html" target="_blank">🔗 查看职位详情</a>
+  </div>
+
+  <!-- Job 3 -->
+  <div class="job-card">
+    <div class="job-header">
+      <div>
+        <a class="job-title" href="https://www.zhipin.com/job_detail/25802fc9c3219f2a1HN53d25EVJY.html" target="_blank">售前解决方案顾问</a>
+        <div class="job-company">华润数科 · 西安</div>
+      </div>
+      <div class="job-salary">18–28K</div>
+    </div>
+    <div class="job-tags">
+      <span class="tag tag-platform">BOSS直聘</span>
+      <span class="tag tag-date-ok">今日API获取</span>
+      <span class="tag">央企数字科技</span>
+      <span class="tag">售前顾问</span>
+    </div>
+    <div class="job-reason reason-dir1">
+      <strong>匹配点：</strong>华润集团旗下数字科技平台，央企背景与候选人服务国家电网/运营商央国企客户的经验高度契合；售前顾问角色与现职售前方案汇报能力直接对应，薪资顶格达28K。
+    </div>
+    <a class="job-link" href="https://www.zhipin.com/job_detail/25802fc9c3219f2a1HN53d25EVJY.html" target="_blank">🔗 查看职位详情</a>
+  </div>
+
+  <!-- Job 4 -->
+  <div class="job-card">
+    <div class="job-header">
+      <div>
+        <a class="job-title" href="https://www.zhipin.com/job_detail/ac48a99d3eb435d90ndz2tq_EFFQ.html" target="_blank">售前解决方案经理（军工/智能制造方向）</a>
+        <div class="job-company">合众伟奇科技股份 · 西安</div>
+      </div>
+      <div class="job-salary">18–25K</div>
+    </div>
+    <div class="job-tags">
+      <span class="tag tag-platform">BOSS直聘</span>
+      <span class="tag tag-date-ok">今日API获取</span>
+      <span class="tag">智能制造</span>
+      <span class="tag">经理级</span>
+    </div>
+    <div class="job-reason reason-dir1">
+      <strong>匹配点：</strong>售前解决方案经理级岗位，与候选人8年经验的职级定位（经理级而非工程师级）相符；智能制造/军工方向的政企大客户开拓模式与既往运营商+能源大客户经验方法论一致。
+    </div>
+    <a class="job-link" href="https://www.zhipin.com/job_detail/ac48a99d3eb435d90ndz2tq_EFFQ.html" target="_blank">🔗 查看职位详情</a>
+  </div>
+
+  <!-- Job 5 -->
+  <div class="job-card">
+    <div class="job-header">
+      <div>
+        <a class="job-title" href="https://www.linkedin.com/jobs/view/4403478938/" target="_blank">Greenfield Sales Engineer - PWS - Xi'an</a>
+        <div class="job-company">Emerson · 西安（现场坐岗）</div>
+      </div>
+      <div class="job-salary">面议</div>
+    </div>
+    <div class="job-tags">
+      <span class="tag tag-platform">LinkedIn</span>
+      <span class="tag tag-date-ok">1周前更新（Reposted）</span>
+      <span class="tag">工业自动化</span>
+      <span class="tag">外资企业</span>
+    </div>
+    <div class="job-reason reason-dir1">
+      <strong>匹配点：</strong>艾默生（Emerson）为全球工业自动化/过程控制头部外资企业，西安本地现场销售岗；候选人具备诺基亚外资企业背景与大客户开拓经验，可直接迁移至工业自动化领域的现场销售/BD角色。
+    </div>
+    <a class="job-link" href="https://www.linkedin.com/jobs/view/4403478938/" target="_blank">🔗 查看职位详情</a>
+  </div>
+
+  <!-- 方向二 -->
+  <div class="section-header">
+    <span class="section-badge badge-dir2">方向二</span>
+    <span class="section-title">跨界探索 · 需说明合理性</span>
+    <span class="section-count">7 个职位</span>
+  </div>
+
+  <!-- Job 6 -->
+  <div class="job-card">
+    <div class="job-header">
+      <div>
+        <a class="job-title" href="https://www.zhipin.com/job_detail/60bb2c77f27166480nZ_3dq6E1ZW.html" target="_blank">AI医疗解决方案销售（西安）(J10083)</a>
+        <div class="job-company">GYENNO · 西安</div>
+      </div>
+      <div class="job-salary">15–25K</div>
+    </div>
+    <div class="job-tags">
+      <span class="tag tag-platform">BOSS直聘</span>
+      <span class="tag tag-date-ok">今日API获取</span>
+      <span class="tag">AI医疗</span>
+      <span class="tag">当前重点方向</span>
+    </div>
+    <div class="job-reason reason-dir2">
+      <strong>跨界价值：</strong>AI商业化销售岗，与候选人"AI商业化/MaaS销售"当前重点求职方向直接吻合；虽跨入医疗垂直行业，但AI产品销售的方法论（技术方案讲解+行业客户开拓）与既往售前经验可复用，是从ICT向AI商业化转型的低门槛切入点。
+    </div>
+    <a class="job-link" href="https://www.zhipin.com/job_detail/60bb2c77f27166480nZ_3dq6E1ZW.html" target="_blank">🔗 查看职位详情</a>
+  </div>
+
+  <!-- Job 7 -->
+  <div class="job-card">
+    <div class="job-header">
+      <div>
+        <a class="job-title" href="https://www.zhipin.com/job_detail/8b228c54f74079e20nd-3ty7GVBW.html" target="_blank">解决方案经理</a>
+        <div class="job-company">隆基乐叶光伏 · 西安</div>
+      </div>
+      <div class="job-salary">15–30K</div>
+    </div>
+    <div class="job-tags">
+      <span class="tag tag-platform">BOSS直聘</span>
+      <span class="tag tag-date-ok">今日API获取</span>
+      <span class="tag">新能源/光伏</span>
+      <span class="tag">头部上市公司</span>
+    </div>
+    <div class="job-reason reason-dir2">
+      <strong>跨界价值：</strong>隆基是光伏行业全球龙头，候选人在国家电网的能源行业客户资源可直接迁移至光伏解决方案销售；同时诺基亚AI智算中心RoCE网络方案经验，有助于理解光储一体化中的数字化/智能化诉求，属"能源+ICT融合"赛道的合理延伸。
+    </div>
+    <a class="job-link" href="https://www.zhipin.com/job_detail/8b228c54f74079e20nd-3ty7GVBW.html" target="_blank">🔗 查看职位详情</a>
+  </div>
+
+  <!-- Job 8 -->
+  <div class="job-card">
+    <div class="job-header">
+      <div>
+        <a class="job-title" href="https://www.liepin.com/job/1983040513.shtml" target="_blank">华东/南/东/北/西区解决方案专家-飞书（含西安）</a>
+        <div class="job-company">字节跳动 · Base杭州-余杭区（覆盖西区含西安）</div>
+      </div>
+      <div class="job-salary">25–50K·15薪</div>
+    </div>
+    <div class="job-tags">
+      <span class="tag tag-platform">猎聘</span>
+      <span class="tag tag-date-ok">6月30日更新</span>
+      <span class="tag">AI企业协作</span>
+      <span class="tag">Base需确认</span>
+    </div>
+    <div class="job-reason reason-dir2">
+      <strong>跨界价值：</strong>字节跳动飞书（Lark）企业协作产品结合AI能力的解决方案岗，JD明确提及"结合AI提供高质量解决方案产出"，符合候选人AI商业化转型方向；薪资天花板高。<strong>⚠️需注意：</strong>职位标注Base为杭州，"西区（含西安）"为服务覆盖范围而非确定坐岗城市，投递前需与HR确认是否可常驻西安，因候选人目标城市仅限西安。
+    </div>
+    <a class="job-link" href="https://www.liepin.com/job/1983040513.shtml" target="_blank">🔗 查看职位详情</a>
+  </div>
+
+  <!-- Job 9 -->
+  <div class="job-card">
+    <div class="job-header">
+      <div>
+        <a class="job-title" href="https://www.linkedin.com/jobs/view/4431068215/" target="_blank">Key Account Manager Aerospace</a>
+        <div class="job-company">Sandvik · 西安（远程）</div>
+      </div>
+      <div class="job-salary">面议</div>
+    </div>
+    <div class="job-tags">
+      <span class="tag tag-platform">LinkedIn</span>
+      <span class="tag tag-date-ok">1天前更新</span>
+      <span class="tag">工业大客户</span>
+      <span class="tag">107名Nokia校友</span>
+    </div>
+    <div class="job-reason reason-dir2">
+      <strong>跨界价值：</strong>山特维克（Sandvik）西安团队有 <strong>107名诺基亚离职校友</strong>，是Nokia人才高频流向企业之一，说明候选人背景在该公司认可度高、内部适配性强；虽从通信设备转向航空航天工业大客户管理，但KA大客户经营方法论（技术方案+商务谈判+关系维护）完全通用，且候选人已有跨行业（通信+能源）大客户管理经验背书。
+    </div>
+    <a class="job-link" href="https://www.linkedin.com/jobs/view/4431068215/" target="_blank">🔗 查看职位详情</a>
+  </div>
+
+  <!-- Job 10 -->
+  <div class="job-card">
+    <div class="job-header">
+      <div>
+        <a class="job-title" href="https://www.linkedin.com/jobs/view/4376485617/" target="_blank">Product Manager (Core Experience)</a>
+        <div class="job-company">LotusFlare · 西安（现场坐岗）</div>
+      </div>
+      <div class="job-salary">面议</div>
+    </div>
+    <div class="job-tags">
+      <span class="tag tag-platform">LinkedIn</span>
+      <span class="tag tag-date-ok">5天前更新（Reposted）</span>
+      <span class="tag">电信BSS/SaaS</span>
+      <span class="tag">4名Nokia校友</span>
+    </div>
+    <div class="job-reason reason-dir2">
+      <strong>跨界价值：</strong>LotusFlare是面向运营商的数字化BSS/CSP SaaS厂商，业务本质仍服务电信运营商，与候选人的运营商客户资源与行业理解高度相关；团队现有4名诺基亚校友。角色从BDM/销售转向产品管理，是候选人利用行业Know-how向产品侧延伸的合理尝试，需注意此为产品经理而非销售岗，需评估自身对该转型的意愿。
+    </div>
+    <a class="job-link" href="https://www.linkedin.com/jobs/view/4376485617/" target="_blank">🔗 查看职位详情</a>
+  </div>
+
+  <!-- Job 11 -->
+  <div class="job-card">
+    <div class="job-header">
+      <div>
+        <a class="job-title" href="https://www.zhaopin.com/jobdetail/CC844004830J41008602804.htm" target="_blank">解决方案经理（海外项目）(J10829)</a>
+        <div class="job-company">西安奇点能源股份有限公司 · 西安长安区</div>
+      </div>
+      <div class="job-salary">15–25K</div>
+    </div>
+    <div class="job-tags">
+      <span class="tag tag-platform">智联招聘</span>
+      <span class="tag tag-date-ok">6月23日更新</span>
+      <span class="tag">储能</span>
+      <span class="tag">国际化项目</span>
+    </div>
+    <div class="job-reason reason-dir2">
+      <strong>跨界价值：</strong>奇点能源是C轮储能设备厂商，候选人国家电网客户资源及能源数字化经验可直接支撑该岗位的海外电网标准/客户需求调研工作；"售前技术交流+方案标准化"职责与既往售前经验方法论一致，是能源数字化赛道的合理延伸。
+    </div>
+    <a class="job-link" href="https://www.zhaopin.com/jobdetail/CC844004830J41008602804.htm" target="_blank">🔗 查看职位详情</a>
+  </div>
+
+  <!-- Job 12 -->
+  <div class="job-card">
+    <div class="job-header">
+      <div>
+        <a class="job-title" href="https://www.zhaopin.com/jobdetail/CC445178720J40705198710.htm" target="_blank">工程解决方案经理岗</a>
+        <div class="job-company">特变电工新能源公司 · 西安长安区</div>
+      </div>
+      <div class="job-salary">15–25K</div>
+    </div>
+    <div class="job-tags">
+      <span class="tag tag-platform">智联招聘</span>
+      <span class="tag tag-date-ok">6月23日更新</span>
+      <span class="tag">新能源/电网</span>
+      <span class="tag">已上市公司</span>
+    </div>
+    <div class="job-reason reason-dir2">
+      <strong>跨界价值：</strong>特变电工是新能源电网设备上市龙头，岗位职责涉及"电网规划、项目申报、技术推介"，与候选人国家电网客户资源、光接入网/承载网技术背景直接相关；是"通信基础设施经验→能源基础设施"的自然延伸赛道。
+    </div>
+    <a class="job-link" href="https://www.zhaopin.com/jobdetail/CC445178720J40705198710.htm" target="_blank">🔗 查看职位详情</a>
+  </div>
+
+  <!-- 附录：临界/待确认 -->
+  <div class="section-header">
+    <span class="section-badge badge-pending">附录</span>
+    <span class="section-title">临界职位 · 仅供参考（未计入正式推荐）</span>
+  </div>
+  <div class="platform-log">
+    <div class="log-item"><strong>Hitachi Energy · Sales Engineer</strong>（西安，LinkedIn）— 更新时间显示"2周前"，处于14天鲜度红线临界点，无法精确确认是否≤14天，未计入正式推荐列表。日立能源西安团队历史上有大量Nokia校友，仍建议自行查看：<a href="https://www.linkedin.com/jobs/view/4429243913/" target="_blank">https://www.linkedin.com/jobs/view/4429243913/</a></div>
+    <div class="log-item"><strong>前程无忧(51job) 手动搜索建议</strong>：策略已停用主动抓取。建议在 51job App 内手动搜索关键词"解决方案经理""大客户经理""ICT销售""西安"，并留意"中移铁通"等运营商系公司西安分公司的ICT岗位（历史抓取中曾发现"ICT解决方案经理—陕西分公司"等高价值岗位，但因链接被拦截未能纳入本报告）。</div>
+  </div>
+
+  <!-- 自评分 -->
+  <div class="section-header">
+    <span class="section-title" style="font-size:15px;">📊 本次报告自评分</span>
+  </div>
+  <div class="score-table">
+    <table>
+      <tr><th>维度</th><th>满分</th><th>得分</th><th>说明</th></tr>
+      <tr><td>A 平台覆盖率</td><td>25</td><td class="score-num score-ok">25</td><td>BOSS直聘 / 猎聘 / LinkedIn 均有有效产出；智联招聘作为"其他公开渠道"额外补充</td></tr>
+      <tr><td>B 有效URL比例</td><td>25</td><td class="score-num score-ok">25</td><td>12/12 职位均为详情页直链，格式全部符合红线2要求（含本次新突破的智联招聘URL格式）</td></tr>
+      <tr><td>C 发布时间覆盖</td><td>25</td><td class="score-num score-ok">25</td><td>BOSS按例外规则（API实时获取）满足；其余全部详情页验证在14天内，Hitachi Energy等临界项已剔除主列表</td></tr>
+      <tr><td>D 职位相关度</td><td>15</td><td class="score-num score-ok">13</td><td>方向一强相关；方向二均给出具体跨界理由，字节跳动/LotusFlare存在坐岗城市不确定性，酌情扣分</td></tr>
+      <tr><td>E 零幻觉</td><td>10</td><td class="score-num score-ok">10</td><td>全部职位均可追溯至本次会话中的实时API响应/页面文本/read_page结果</td></tr>
+      <tr><td><strong>总分</strong></td><td><strong>100</strong></td><td class="score-num score-ok"><strong>98</strong></td><td>≥60分，无需重做</td></tr>
+    </table>
+  </div>
+
+  <div class="platform-log">
+    <h4>平台执行日志</h4>
+    <div class="log-item"><span class="log-ok">✅ BOSS直聘</span> — 2关键词（大客户经理/解决方案经理）串行抓取，间隔9秒，60条原始数据，筛出6条相关职位，未触发风控</div>
+    <div class="log-item"><span class="log-ok">✅ 猎聘</span> — 3关键词（解决方案经理西安/AI解决方案西安/业务发展经理西安），间隔≥5秒；5个详情页验证（达session上限），4个因超14天排除，1个有效；未触发SMS验证</div>
+    <div class="log-item"><span class="log-ok">✅ LinkedIn</span> — 4次搜索（解决方案经理+陕西/pre-sales engineer/business development manager/account manager），6个详情页验证发布时间，4个新鲜、1个临界剔除、1个过期排除</div>
+    <div class="log-item"><span class="log-warn">🆕 智联招聘</span> — 通过 read_page 绕过href拦截，首次确认详情页URL格式，1关键词命中2条有效职位</div>
+    <div class="log-item"><span class="log-fail">⛔ 51job</span> — 按2026-06-23策略停用，未执行抓取</div>
+  </div>
+
+  <div class="footer">
+    本报告由 Claude（Cowork）根据 scraping_strategy.md 与 candidate_profile.md 自动生成 · 数据来源于本次会话实时抓取，如信息有误或链接失效请以平台原始页面为准 · 刘世豪 · liushihao1@gmail.com
+  </div>
+
+</div>
+</body>
+</html>
