@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-07-08",
+      "jobCount": 17,
+      "freshCount": 11,
+      "stretchCount": 6,
+      "hasForeign": true,
+      "topSalary": "30-55K·16薪（阿里云 公共云解决方案架构师）"
+    },
+    {
       "date": "2026-07-01",
       "jobCount": 12,
       "freshCount": 5,
