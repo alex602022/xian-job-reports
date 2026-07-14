@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-07-14",
+      "jobCount": 16,
+      "freshCount": 11,
+      "stretchCount": 5,
+      "hasForeign": true,
+      "topSalary": "20K"
+    },
+    {
       "date": "2026-07-08",
       "jobCount": 17,
       "freshCount": 11,
@@ -55,6 +63,206 @@
       "stretchCount": 7,
       "hasForeign": true,
       "topSalary": "20-40K·16薪（字节跳动）"
+    },
+    {
+      "date": "2026-05-28",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20k"
+    },
+    {
+      "date": "2026-05-25",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "35K·14薪"
+    },
+    {
+      "date": "2026-05-21",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "35K·14薪"
+    },
+    {
+      "date": "2026-05-18",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "35K"
+    },
+    {
+      "date": "2026-05-14",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20K"
+    },
+    {
+      "date": "2026-05-13",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20K"
+    },
+    {
+      "date": "2026-05-12",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20k"
+    },
+    {
+      "date": "2026-05-07",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20K"
+    },
+    {
+      "date": "2026-05-06",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20k"
+    },
+    {
+      "date": "2026-04-30",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20K"
+    },
+    {
+      "date": "2026-04-29",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20k"
+    },
+    {
+      "date": "2026-04-28",
+      "jobCount": 15,
+      "freshCount": 9,
+      "stretchCount": 6,
+      "hasForeign": true,
+      "topSalary": "40K"
+    },
+    {
+      "date": "2026-04-27",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "45K"
+    },
+    {
+      "date": "2026-04-24",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": false,
+      "topSalary": "50K"
+    },
+    {
+      "date": "2026-04-23",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "50K"
+    },
+    {
+      "date": "2026-04-22",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "50K"
+    },
+    {
+      "date": "2026-04-21",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20k"
+    },
+    {
+      "date": "2026-04-19",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20K"
+    },
+    {
+      "date": "2026-04-18",
+      "jobCount": 19,
+      "freshCount": 14,
+      "stretchCount": 5,
+      "hasForeign": true,
+      "topSalary": "50K"
+    },
+    {
+      "date": "2026-04-17",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "15k"
+    },
+    {
+      "date": "2026-04-16",
+      "jobCount": 33,
+      "freshCount": 20,
+      "stretchCount": 13,
+      "hasForeign": false,
+      "topSalary": "20k"
+    },
+    {
+      "date": "2026-04-15",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20k"
+    },
+    {
+      "date": "2026-04-14",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": false,
+      "topSalary": "20k"
+    },
+    {
+      "date": "2026-04-13",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": false,
+      "topSalary": "40k"
+    },
+    {
+      "date": "2026-04-11",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "28K"
     }
   ]
 }
