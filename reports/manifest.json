@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-07-23",
+      "jobCount": 14,
+      "freshCount": 11,
+      "stretchCount": 3,
+      "hasForeign": true,
+      "topSalary": "30-45K（隆基绿能 产品解决方案总监）"
+    },
+    {
       "date": "2026-07-21",
       "jobCount": 18,
       "freshCount": 11,
