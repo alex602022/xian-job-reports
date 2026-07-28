@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-07-28",
+      "jobCount": 15,
+      "freshCount": 10,
+      "stretchCount": 6,
+      "hasForeign": true,
+      "topSalary": "20-40K·14薪（科大讯飞 解决方案市场经理）"
+    },
+    {
       "date": "2026-07-23",
       "jobCount": 14,
       "freshCount": 11,
