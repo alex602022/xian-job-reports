@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-08-05",
+      "jobCount": 17,
+      "freshCount": 10,
+      "stretchCount": 7,
+      "hasForeign": true,
+      "topSalary": "20-40K·14薪（科大讯飞 城市军团解决方案市场经理）"
+    },
+    {
       "date": "2026-08-03",
       "jobCount": 13,
       "freshCount": 9,
