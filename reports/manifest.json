@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-08-13",
+      "jobCount": 6,
+      "freshCount": 2,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "28-55K·20薪（京东科技 AI产品销售经理）"
+    },
+    {
       "date": "2026-08-11",
       "jobCount": 11,
       "freshCount": 5,
