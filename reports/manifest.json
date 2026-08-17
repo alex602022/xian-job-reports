@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-08-17",
+      "jobCount": 15,
+      "freshCount": 9,
+      "stretchCount": 6,
+      "hasForeign": true,
+      "topSalary": "25-35K·16薪（中国移动 人工智能解决方案经理）"
+    },
+    {
       "date": "2026-08-13",
       "jobCount": 6,
       "freshCount": 2,
