@@ -1,6 +1,22 @@
 {
   "reports": [
     {
+      "date": "2026-09-14",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20k"
+    },
+    {
+      "date": "2026-09-11",
+      "jobCount": 0,
+      "freshCount": 0,
+      "stretchCount": 0,
+      "hasForeign": true,
+      "topSalary": "20k"
+    },
+    {
       "date": "2026-09-07",
       "jobCount": 16,
       "freshCount": 8,
