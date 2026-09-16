@@ -1,6 +1,14 @@
 {
   "reports": [
     {
+      "date": "2026-09-16",
+      "jobCount": 13,
+      "freshCount": 9,
+      "stretchCount": 4,
+      "hasForeign": true,
+      "topSalary": "45-60K·15薪（IT解决方案西北区域销售经理）"
+    },
+    {
       "date": "2026-09-14",
       "jobCount": 19,
       "freshCount": 13,
